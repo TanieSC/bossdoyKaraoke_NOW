@@ -1,0 +1,543 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="bossdoyKaraoke_NOW.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">none</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band0" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band3" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3385876</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band4" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.260</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band5" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band6" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band7" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band8" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band9" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band10" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4466759</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band11" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5252185</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band12" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band13" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band14" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band15" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4376181</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band16" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4447622</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band17" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band18" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band19" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band20" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band21" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band22" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3751354</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band23" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5067465</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band24" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band25" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band26" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band27" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.393088</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band28" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.6503009</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band29" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band30" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band31" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band32" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band33" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band34" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3146504</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band35" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4860965</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band36" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band37" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band38" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band39" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4376181</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band40" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.7712674</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band41" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band42" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band43" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band44" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band45" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band46" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.2971976</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band47" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.1460275</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band48" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band49" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band50" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.260</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band51" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.6666667</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band52" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band53" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band54" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.9653146</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band55" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.6666667</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band56" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band57" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band58" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band59" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3333333</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band60" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3545569</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band61" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5252185</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band62" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band63" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band64" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band65" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band66" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band67" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band68" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.2</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band69" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ1band70" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp0" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3162278</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp3" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3162278</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp4" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.1</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp5" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3444445</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp6" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.2357953</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp7" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp8" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.25</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp9" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp10" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp11" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp12" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp13" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp14" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp15" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp16" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1Comp17" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band0" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band3" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.563</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band4" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.278</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band5" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band6" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band7" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band8" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band9" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band10" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4466759</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band11" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5252185</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band12" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band13" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band14" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band15" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.563</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band16" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.361</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band17" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band18" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band19" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band20" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band21" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band22" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3751354</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band23" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5067465</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band24" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band25" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band26" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band27" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.563</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band28" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.63883</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band29" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band30" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band31" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band32" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band33" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band34" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3146504</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band35" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4860965</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band36" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band37" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band38" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band39" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.563</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band40" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.7712674</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band41" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band42" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band43" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band44" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band45" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band46" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.2971976</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band47" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.1460275</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band48" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band49" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band50" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.04888627</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band51" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.6666667</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band52" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band53" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band54" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.9653146</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band55" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.6666667</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band56" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band57" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band58" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band59" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3333333</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band60" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3545569</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band61" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5252185</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band62" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band63" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band64" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band65" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band66" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band67" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band68" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.2</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band69" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.0</Value>
+    </Setting>
+    <Setting Name="DEFCH1EQ4band70" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser0" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.2288729</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3162278</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser3" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.4728708</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser4" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.1</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser5" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.1713131</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser6" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.3978892</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser7" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser8" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.25</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser9" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser10" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser11" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser12" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser13" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser14" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser15" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser16" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DEFCH1DeEsser17" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
