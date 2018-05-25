@@ -58,7 +58,7 @@ namespace bossdoyKaraoke_NOW.Models
             m_media_list = m_factory.CreateMediaList<IMediaList>();
             m_media_list_preview = m_factory.CreateMediaList<IMediaList>();
 
-            //Background Video
+            //Background Video ==========
             m_list_player = m_factory.CreateMediaListPlayer<IMediaListPlayer>(m_media_list);
 
             m_memRender = m_list_player.InnerPlayer.CustomRenderer;
@@ -75,7 +75,7 @@ namespace bossdoyKaraoke_NOW.Models
             m_list_player.InnerPlayer.Mute = true;
             //Background Video
 
-            //Preview Background video
+            //Preview Background video ==========
             m_list_preview_player = m_factory.CreateMediaListPlayer<IMediaListPlayer>(m_media_list_preview);
             m_list_preview_player.PlaybackMode = PlaybackMode.Loop;
             m_list_preview_player.InnerPlayer.Mute = true;
