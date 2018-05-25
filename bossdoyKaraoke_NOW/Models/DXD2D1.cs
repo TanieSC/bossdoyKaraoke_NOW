@@ -9,7 +9,7 @@ namespace bossdoyKaraoke_NOW.Models
 {
     public class DXD2D1 : IDisposable
     {
-
+        
         D3D11.Device _d3d11Device;
         DXGI.Device _dxgiDevice;
         DXGI.Surface _backBuffer;
