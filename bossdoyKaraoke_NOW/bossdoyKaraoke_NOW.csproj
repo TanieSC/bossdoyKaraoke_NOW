@@ -662,8 +662,6 @@
     <Content Include="bin\Debug\vst_plugins\TDR Nova_1_1.dll" />
     <Content Include="bin\Debug\vst_plugins\TDR Nova_2_0.dll" />
     <Content Include="bin\Debug\vst_plugins\TDR Nova_2_1.dll" />
-    <Content Include="bin\Debug\x64\bassasio.dll" />
-    <Content Include="bin\Debug\x86\bassasio.dll" />
     <Content Include="bkn7.ico" />
     <None Include="Resources\ic_skip_previous_black_24dp_1x.png" />
     <None Include="Resources\bkn.png" />
