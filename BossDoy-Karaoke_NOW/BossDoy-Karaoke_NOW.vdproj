@@ -513,12 +513,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3751D6F47AE242E69EFF20256FB26638"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_37D57600D34B4F6DAF4318879BF59837"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -724,25 +718,7 @@
         "Entry"
         {
         "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
-        "OwnerKey" = "8:_D8A88B37F499F2DF42F0B2200580D44C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
-        "OwnerKey" = "8:_89995D0F4529B2AB2773097A0A7D5D49"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
-        "OwnerKey" = "8:_451CB88683560A108CACC6FB8F2A405D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
-        "OwnerKey" = "8:_8B81795842BD70076069FDEE84B353A6"
+        "OwnerKey" = "8:_CC2C1FFE3432F7096BB368BD43C501EB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -754,7 +730,25 @@
         "Entry"
         {
         "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
-        "OwnerKey" = "8:_CC2C1FFE3432F7096BB368BD43C501EB"
+        "OwnerKey" = "8:_8B81795842BD70076069FDEE84B353A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
+        "OwnerKey" = "8:_451CB88683560A108CACC6FB8F2A405D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
+        "OwnerKey" = "8:_89995D0F4529B2AB2773097A0A7D5D49"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_50D4E39DB28F1739083E9309706A2656"
+        "OwnerKey" = "8:_D8A88B37F499F2DF42F0B2200580D44C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -892,6 +886,12 @@
         "Entry"
         {
         "MsmKey" = "8:_614996AB162E493480EBEF6940095A78"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_62033C563F22490AB6A1940542AD7C0A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1042,6 +1042,12 @@
         "Entry"
         {
         "MsmKey" = "8:_7303CBA9CDFA48ECB43AC0245482F2D8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_75D2245EA78E4BC79ECE574BC4C0F3A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1210,7 +1216,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8B81795842BD70076069FDEE84B353A6"
-        "OwnerKey" = "8:_DE4CC9C7863B4A51813B0F0CB7733AB6"
+        "OwnerKey" = "8:_451CB88683560A108CACC6FB8F2A405D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1222,7 +1228,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8B81795842BD70076069FDEE84B353A6"
-        "OwnerKey" = "8:_451CB88683560A108CACC6FB8F2A405D"
+        "OwnerKey" = "8:_DE4CC9C7863B4A51813B0F0CB7733AB6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1294,6 +1300,12 @@
         "Entry"
         {
         "MsmKey" = "8:_92D29C0B7A8A4FD6BAB2133A68EDA0AA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_936DA749664440AF9A5C3E9388BABB54"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1497,12 +1509,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A32FE03881844D2C8747605032A8B4C4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A3BF6F0EE71D4EEBAB367DF8CDED9392"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1564,12 +1570,6 @@
         "Entry"
         {
         "MsmKey" = "8:_ABFCE4AEB8F64E478E3B9B24D7ABE0CF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ACA54C397D2A47FAA65FA00B085414F5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2295,12 +2295,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FF082659661B471F9FCC743C2DF2FEDF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_FFB1464C951446EA98E3FAD473943B77"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2314,61 +2308,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B09EE04D4EB01007E5BD0638FED7CD1B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D8A88B37F499F2DF42F0B2200580D44C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_89995D0F4529B2AB2773097A0A7D5D49"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_451CB88683560A108CACC6FB8F2A405D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EB9D37B021516EB083B4B3AAABE24B01"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8B81795842BD70076069FDEE84B353A6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC2C1FFE3432F7096BB368BD43C501EB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_50D4E39DB28F1739083E9309706A2656"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CA458AB52AC71023850F5206D81AFEE8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AAF6292088D8729E5116384E94FECC9A"
+        "OwnerKey" = "8:_459FC128F7FE0CC3C0AF6802D193E6DA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2380,7 +2320,61 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_459FC128F7FE0CC3C0AF6802D193E6DA"
+        "OwnerKey" = "8:_AAF6292088D8729E5116384E94FECC9A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CA458AB52AC71023850F5206D81AFEE8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_50D4E39DB28F1739083E9309706A2656"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CC2C1FFE3432F7096BB368BD43C501EB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8B81795842BD70076069FDEE84B353A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EB9D37B021516EB083B4B3AAABE24B01"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_451CB88683560A108CACC6FB8F2A405D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_89995D0F4529B2AB2773097A0A7D5D49"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8A88B37F499F2DF42F0B2200580D44C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B09EE04D4EB01007E5BD0638FED7CD1B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -4138,26 +4132,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3751D6F47AE242E69EFF20256FB26638"
-            {
-            "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\VIDEO_MTV\\001.mp4"
-            "TargetName" = "8:001.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_72383FCBC3EE42FF848E71172993B29B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37D57600D34B4F6DAF4318879BF59837"
             {
             "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\vst_plugins\\MCompressor_2_D-Es.dll"
@@ -4525,11 +4499,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX.Direct3D10, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_451CB88683560A108CACC6FB8F2A405D"
-                    {
-                    "Name" = "8:SharpDX.Direct3D10.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.Direct3D10.dll"
             "TargetName" = "8:"
@@ -4576,11 +4545,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_459FC128F7FE0CC3C0AF6802D193E6DA"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -4847,11 +4811,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_50D4E39DB28F1739083E9309706A2656"
-                    {
-                    "Name" = "8:SharpDX.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.dll"
             "TargetName" = "8:"
@@ -5317,6 +5276,26 @@
             "TargetName" = "8:libmjpeg_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_2C94D5A9B0F04AB886856E85F131A6A9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62033C563F22490AB6A1940542AD7C0A"
+            {
+            "SourcePath" = "8:D:\\tanie\\VIDEO_NATURE\\3.VOB"
+            "TargetName" = "8:3.VOB"
+            "Tag" = "8:"
+            "Folder" = "8:_26763B2351A3453AB96855D544D343D9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5831,6 +5810,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75D2245EA78E4BC79ECE574BC4C0F3A6"
+            {
+            "SourcePath" = "8:D:\\tanie\\VIDEO_NATURE\\2.VOB"
+            "TargetName" = "8:2.VOB"
+            "Tag" = "8:"
+            "Folder" = "8:_26763B2351A3453AB96855D544D343D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7619C0C23F3A495C9FAF40B56D61313A"
             {
             "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\plugins\\stream_out\\libstream_out_display_plugin.dll"
@@ -6298,11 +6297,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_89995D0F4529B2AB2773097A0A7D5D49"
-                    {
-                    "Name" = "8:SharpDX.Direct3D11.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.Direct3D11.dll"
             "TargetName" = "8:"
@@ -6369,11 +6363,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_8B81795842BD70076069FDEE84B353A6"
-                    {
-                    "Name" = "8:SharpDX.DXGI.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.DXGI.dll"
             "TargetName" = "8:"
@@ -6619,6 +6608,26 @@
             "TargetName" = "8:libstream_out_es_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_A10F84D658B4422BB800DDD6B1FF3D1F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_936DA749664440AF9A5C3E9388BABB54"
+            {
+            "SourcePath" = "8:D:\\tanie\\VIDEO_NATURE\\1.VOB"
+            "TargetName" = "8:1.VOB"
+            "Tag" = "8:"
+            "Folder" = "8:_26763B2351A3453AB96855D544D343D9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7293,26 +7302,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A32FE03881844D2C8747605032A8B4C4"
-            {
-            "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\VIDEO_MTV\\004.mp4"
-            "TargetName" = "8:004.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_72383FCBC3EE42FF848E71172993B29B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3BF6F0EE71D4EEBAB367DF8CDED9392"
             {
             "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\plugins\\mux\\libmux_ogg_plugin.dll"
@@ -7420,11 +7409,6 @@
             "AssemblyAsmDisplayName" = "8:InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A8515D4A6B29C5D7AB6DC54D0D90F65C"
-                    {
-                    "Name" = "8:InTheHand.Net.Personal.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:InTheHand.Net.Personal.dll"
             "TargetName" = "8:"
@@ -7451,11 +7435,6 @@
             "AssemblyAsmDisplayName" = "8:Bass.Net, Version=2.4.12.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AAF6292088D8729E5116384E94FECC9A"
-                    {
-                    "Name" = "8:Bass.Net.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Bass.Net.dll"
             "TargetName" = "8:"
@@ -7541,26 +7520,6 @@
             "TargetName" = "8:libswscale_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_C48613814174420F978C5CC8D63E9ECB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACA54C397D2A47FAA65FA00B085414F5"
-            {
-            "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\VIDEO_MTV\\002.mp4"
-            "TargetName" = "8:002.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_72383FCBC3EE42FF848E71172993B29B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7722,11 +7681,6 @@
             "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B09EE04D4EB01007E5BD0638FED7CD1B"
-                    {
-                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
             "TargetName" = "8:"
@@ -8493,11 +8447,6 @@
             "AssemblyAsmDisplayName" = "8:nVLC, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CA458AB52AC71023850F5206D81AFEE8"
-                    {
-                    "Name" = "8:nVLC.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:nVLC.dll"
             "TargetName" = "8:"
@@ -8584,11 +8533,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX.D3DCompiler, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CC2C1FFE3432F7096BB368BD43C501EB"
-                    {
-                    "Name" = "8:SharpDX.D3DCompiler.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.D3DCompiler.dll"
             "TargetName" = "8:"
@@ -8875,11 +8819,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX.Mathematics, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D8A88B37F499F2DF42F0B2200580D44C"
-                    {
-                    "Name" = "8:SharpDX.Mathematics.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.Mathematics.dll"
             "TargetName" = "8:"
@@ -9386,11 +9325,6 @@
             "AssemblyAsmDisplayName" = "8:SharpDX.Direct2D1, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_EB9D37B021516EB083B4B3AAABE24B01"
-                    {
-                    "Name" = "8:SharpDX.Direct2D1.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpDX.Direct2D1.dll"
             "TargetName" = "8:"
@@ -9990,26 +9924,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF082659661B471F9FCC743C2DF2FEDF"
-            {
-            "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\VIDEO_MTV\\003.mp4"
-            "TargetName" = "8:003.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_72383FCBC3EE42FF848E71172993B29B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FFB1464C951446EA98E3FAD473943B77"
             {
             "SourcePath" = "8:..\\bossdoyKaraoke_NOW\\bin\\Debug\\plugins\\audio_output\\libdirectsound_plugin.dll"
@@ -10080,6 +9994,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_26763B2351A3453AB96855D544D343D9"
+                    {
+                    "Name" = "8:VIDEO_NATURE"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_6D7D3C3743424E0FA4E43395572D6DF7"
+                        "Folders"
+                        {
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_489815C31F924CCDA4E7B2E276138809"
                     {
                     "Name" = "8:plugins"
@@ -10342,17 +10267,6 @@
                                 {
                                 }
                             }
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_72383FCBC3EE42FF848E71172993B29B"
-                    {
-                    "Name" = "8:VIDEO_MTV"
-                    "AlwaysCreate" = "11:TRUE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_8CE8E7A75EFB4A6589E8F0665444AFD1"
-                        "Folders"
-                        {
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_8908863A5A1040E5A4676729B62C111B"
