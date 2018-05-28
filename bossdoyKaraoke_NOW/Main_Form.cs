@@ -119,8 +119,7 @@ namespace bossdoyKaraoke_NOW
         /// <param name="playerWindow"></param>
         public void Initialize(Control playerWindow)
         {
-
-            //  MessageBox.Show(AppSettings.Get<bool>("IsDefaultInit").ToString());      
+    
             if (!AppSettings.Get<bool>("IsDefaultInit"))
             {
                 AppSettings.Set("IsDefaultInit", "true");
