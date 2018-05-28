@@ -177,7 +177,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(820, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(804, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -397,7 +397,7 @@
             this.panelFuntions.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFuntions.Location = new System.Drawing.Point(0, 24);
             this.panelFuntions.Name = "panelFuntions";
-            this.panelFuntions.Size = new System.Drawing.Size(820, 74);
+            this.panelFuntions.Size = new System.Drawing.Size(804, 74);
             this.panelFuntions.TabIndex = 2;
             // 
             // volumePnl
@@ -521,7 +521,7 @@
             this.lblDivider1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblDivider1.Location = new System.Drawing.Point(0, 0);
             this.lblDivider1.Name = "lblDivider1";
-            this.lblDivider1.Size = new System.Drawing.Size(804, 3);
+            this.lblDivider1.Size = new System.Drawing.Size(788, 3);
             this.lblDivider1.TabIndex = 6;
             // 
             // nextBtn
@@ -554,7 +554,7 @@
             this.panelKeyTempo.Controls.Add(this.panel8);
             this.panelKeyTempo.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelKeyTempo.Enabled = false;
-            this.panelKeyTempo.Location = new System.Drawing.Point(685, 0);
+            this.panelKeyTempo.Location = new System.Drawing.Point(669, 0);
             this.panelKeyTempo.Name = "panelKeyTempo";
             this.panelKeyTempo.Size = new System.Drawing.Size(135, 74);
             this.panelKeyTempo.TabIndex = 3;
@@ -703,7 +703,7 @@
             this.panel1.Controls.Add(this.songTitleLbl);
             this.panel1.Location = new System.Drawing.Point(395, 9);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(268, 59);
+            this.panel1.Size = new System.Drawing.Size(252, 59);
             this.panel1.TabIndex = 2;
             // 
             // pictureBoxWaveForm
@@ -714,7 +714,7 @@
             this.pictureBoxWaveForm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxWaveForm.Location = new System.Drawing.Point(62, 40);
             this.pictureBoxWaveForm.Name = "pictureBoxWaveForm";
-            this.pictureBoxWaveForm.Size = new System.Drawing.Size(142, 14);
+            this.pictureBoxWaveForm.Size = new System.Drawing.Size(126, 14);
             this.pictureBoxWaveForm.TabIndex = 15;
             this.pictureBoxWaveForm.TabStop = false;
             // 
@@ -722,7 +722,7 @@
             // 
             this.labelRemain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelRemain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRemain.Location = new System.Drawing.Point(210, 39);
+            this.labelRemain.Location = new System.Drawing.Point(194, 39);
             this.labelRemain.Name = "labelRemain";
             this.labelRemain.Size = new System.Drawing.Size(53, 15);
             this.labelRemain.TabIndex = 13;
@@ -745,7 +745,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.songArtistLbl.Location = new System.Drawing.Point(3, 19);
             this.songArtistLbl.Name = "songArtistLbl";
-            this.songArtistLbl.Size = new System.Drawing.Size(260, 15);
+            this.songArtistLbl.Size = new System.Drawing.Size(244, 15);
             this.songArtistLbl.TabIndex = 1;
             this.songArtistLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -756,7 +756,7 @@
             this.songTitleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.songTitleLbl.Location = new System.Drawing.Point(3, 4);
             this.songTitleLbl.Name = "songTitleLbl";
-            this.songTitleLbl.Size = new System.Drawing.Size(260, 15);
+            this.songTitleLbl.Size = new System.Drawing.Size(244, 15);
             this.songTitleLbl.TabIndex = 0;
             this.songTitleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -777,7 +777,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel6);
             this.splitContainer1.Panel2MinSize = 300;
-            this.splitContainer1.Size = new System.Drawing.Size(820, 453);
+            this.splitContainer1.Size = new System.Drawing.Size(804, 415);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -787,7 +787,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(248, 451);
+            this.panel2.Size = new System.Drawing.Size(248, 413);
             this.panel2.TabIndex = 11;
             // 
             // treeView1
@@ -811,7 +811,7 @@
             treeNode1,
             treeNode3,
             treeNode5});
-            this.treeView1.Size = new System.Drawing.Size(248, 451);
+            this.treeView1.Size = new System.Drawing.Size(248, 413);
             this.treeView1.TabIndex = 12;
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -828,7 +828,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(564, 451);
+            this.panel6.Size = new System.Drawing.Size(548, 413);
             this.panel6.TabIndex = 0;
             // 
             // panelListview
@@ -837,7 +837,7 @@
             this.panelListview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelListview.Location = new System.Drawing.Point(0, 268);
             this.panelListview.Name = "panelListview";
-            this.panelListview.Size = new System.Drawing.Size(564, 183);
+            this.panelListview.Size = new System.Drawing.Size(548, 145);
             this.panelListview.TabIndex = 1;
             // 
             // songListView
@@ -855,7 +855,7 @@
             this.songListView.Location = new System.Drawing.Point(0, 0);
             this.songListView.MultiSelect = false;
             this.songListView.Name = "songListView";
-            this.songListView.Size = new System.Drawing.Size(564, 183);
+            this.songListView.Size = new System.Drawing.Size(548, 145);
             this.songListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.songListView.TabIndex = 1;
             this.songListView.UseCompatibleStateImageBehavior = false;
@@ -898,7 +898,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 218);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(564, 50);
+            this.panel3.Size = new System.Drawing.Size(548, 50);
             this.panel3.TabIndex = 2;
             // 
             // panel5
@@ -907,13 +907,13 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(564, 29);
+            this.panel5.Size = new System.Drawing.Size(548, 29);
             this.panel5.TabIndex = 2;
             // 
             // textBoxSearch
             // 
             this.textBoxSearch.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.textBoxSearch.Location = new System.Drawing.Point(342, 5);
+            this.textBoxSearch.Location = new System.Drawing.Point(326, 5);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(195, 20);
             this.textBoxSearch.TabIndex = 0;
@@ -925,7 +925,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 29);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(564, 21);
+            this.panel4.Size = new System.Drawing.Size(548, 21);
             this.panel4.TabIndex = 1;
             // 
             // panelPlayer
@@ -934,7 +934,7 @@
             this.panelPlayer.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelPlayer.Location = new System.Drawing.Point(0, 0);
             this.panelPlayer.Name = "panelPlayer";
-            this.panelPlayer.Size = new System.Drawing.Size(564, 218);
+            this.panelPlayer.Size = new System.Drawing.Size(548, 218);
             this.panelPlayer.TabIndex = 0;
             // 
             // songListViewMenuStrip
@@ -1172,7 +1172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(820, 551);
+            this.ClientSize = new System.Drawing.Size(804, 513);
             this.Controls.Add(this.volumePnlPopUp);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panelFuntions);
