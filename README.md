@@ -6,8 +6,8 @@ Download sample background video and extract/copy to where the bossdoyKaraoke_NO
 Credits:
 This application uses Open Source components. You can find the source code of their open source projects along with license information below. I acknowledge and is grateful to these developers for their contributions to open source.
 
-SHARPDX: http://sharpdx.org/\n
-NVLC: https://www.codeproject.com/Articles/109639/nVLC
-BASS.NET: http://www.un4seen.com/
-CDG + MP3: http://www.codeproject.com/KB/audio-video/karaokedotnet.aspx
-ShARPZIPLIB: https://github.com/icsharpcode/SharpZipLib
+SHARPDX: http://sharpdx.org/  
+NVLC: https://www.codeproject.com/Articles/109639/nVLC  
+BASS.NET: http://www.un4seen.com/  
+CDG + MP3: http://www.codeproject.com/KB/audio-video/karaokedotnet.aspx  
+ShARPZIPLIB: https://github.com/icsharpcode/SharpZipLib  
