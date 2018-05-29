@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -1021,10 +1023,30 @@ namespace bossdoyKaraoke_NOW
                 return;
             }
 
+            DirectoryInfo directoryInfo;
+            DirectorySecurity directorySecurity;
+            AccessRule accessRule;
+            SecurityIdentifier securityIdentifier = new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null);
 
             try
             {
-                Directory.CreateDirectory(m_filePath); //Karaoke now main diretory in "ProgramData"
+                directoryInfo = Directory.CreateDirectory(m_filePath); //Karaoke now main diretory in "ProgramData"
+
+                if (Directory.Exists(m_filePath))
+                {
+                    directoryInfo = Directory.CreateDirectory(m_filePath);
+                    bool modified;
+                    directorySecurity = directoryInfo.GetAccessControl();
+                    accessRule = new FileSystemAccessRule(
+                            securityIdentifier,
+                            FileSystemRights.Write |
+                            FileSystemRights.ReadAndExecute |
+                            FileSystemRights.Modify,
+                            AccessControlType.Allow);
+                    directorySecurity.ModifyAccessRule(AccessControlModification.Add, accessRule, out modified);
+                    directoryInfo.SetAccessControl(directorySecurity);
+                }
+
                 Directory.CreateDirectory(m_favoritesPath);
                 Directory.CreateDirectory(m_songsPath);
 
