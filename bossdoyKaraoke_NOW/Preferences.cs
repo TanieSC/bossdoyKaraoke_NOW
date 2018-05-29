@@ -39,7 +39,6 @@ namespace bossdoyKaraoke_NOW
 
         private void Preferences_Load(object sender, EventArgs e)
         {
-
             PrefTabControl.SelectTab(PlayerControl.PRefsTabIndex);
             m_tooltip.SetToolTip(chkBoxRefreshAsio, "Enable this option when noise artifact is present in audio.");
 
@@ -52,6 +51,8 @@ namespace bossdoyKaraoke_NOW
             PlayerControl.GetVideoBG(videoDir);
 
             PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
+
+            SetBandGain();
 
             if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Bass)
             {
@@ -152,10 +153,11 @@ namespace bossdoyKaraoke_NOW
 
         private void RefreshEffects()
         {
-           // PlayerControl.ShowEffectsChannel1();
+            // PlayerControl.ShowEffectsChannel1();
             //PlayerControl.ShowEffectsChannel2();
             //PlayerControl.ShowEffectsChannel3();
             // PlayerControl.ShowEffectsChannel4();
+
             Channel1Fx.ShowInterface();
             Channel2Fx.ShowInterface();
             Channel3Fx.ShowInterface();
@@ -480,6 +482,81 @@ namespace bossdoyKaraoke_NOW
         }
 
         public IntPtr VideoHandle { get { return panelPlayer.Handle; } }
+
+        private void SetBandGain()
+        {         
+            trackBarEQ0.Value = (int)Equalizer.bandValue[0].Gain;
+            trackBarEQ1.Value = (int)Equalizer.bandValue[1].Gain;
+            trackBarEQ2.Value = (int)Equalizer.bandValue[2].Gain;
+            trackBarEQ3.Value = (int)Equalizer.bandValue[3].Gain;
+            trackBarEQ4.Value = (int)Equalizer.bandValue[4].Gain;
+            trackBarEQ5.Value = (int)Equalizer.bandValue[5].Gain;
+            trackBarEQ6.Value = (int)Equalizer.bandValue[6].Gain;
+            trackBarEQ7.Value = (int)Equalizer.bandValue[7].Gain;
+            trackBarEQ8.Value = (int)Equalizer.bandValue[8].Gain;
+            trackBarEQ9.Value = (int)Equalizer.bandValue[9].Gain;
+        }
+
+
+        private void trackBarEQ0_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(0, trackBarEQ0.Value);
+            label16.Text = trackBarEQ0.Value.ToString();
+        }
+
+        private void trackBarEQ1_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(1, trackBarEQ1.Value);
+            label16.Text = trackBarEQ1.Value.ToString();
+        }
+
+        private void trackBarEQ2_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(2, trackBarEQ2.Value);
+            label16.Text = trackBarEQ2.Value.ToString();
+        }
+
+        private void trackBarEQ3_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(3, trackBarEQ3.Value);
+            label16.Text = trackBarEQ3.Value.ToString();
+        }
+
+        private void trackBarEQ4_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(4, trackBarEQ4.Value);
+            label16.Text = trackBarEQ4.Value.ToString();
+        }
+
+        private void trackBarEQ5_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(5, trackBarEQ5.Value);
+            label16.Text = trackBarEQ5.Value.ToString();
+        }
+
+        private void trackBarEQ6_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(6, trackBarEQ6.Value);
+            label16.Text = trackBarEQ6.Value.ToString();
+        }
+
+        private void trackBarEQ7_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(7, trackBarEQ7.Value);
+            label16.Text = trackBarEQ7.Value.ToString();
+        }
+
+        private void trackBarEQ8_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(8, trackBarEQ8.Value);
+            label16.Text = trackBarEQ8.Value.ToString();
+        }
+
+        private void trackBarEQ9_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(9, trackBarEQ9.Value);
+            label16.Text = trackBarEQ9.Value.ToString();
+        }
     }
 
     class DeviceInfo

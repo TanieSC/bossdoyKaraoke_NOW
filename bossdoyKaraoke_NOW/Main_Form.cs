@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using bossdoyKaraoke_NOW.BluetoothService;
 using bossdoyKaraoke_NOW.CDG;
 using bossdoyKaraoke_NOW.Enums;
+using bossdoyKaraoke_NOW.Misc;
 using bossdoyKaraoke_NOW.Models;
 using bossdoyKaraoke_NOW.Nlog;
 using bossdoyKaraoke_NOW.Properties;
@@ -104,6 +105,7 @@ namespace bossdoyKaraoke_NOW
         private bool m_isFullScreenPlayer;
         public static FullScreenPlayer fullScreenPlayer = new FullScreenPlayer();
         private Preferences m_prefs = new Preferences();
+        private Equalizer m_equalizer;
 
         private Control m_thisControl;
         private Timer m_timerUpdate;
@@ -127,6 +129,7 @@ namespace bossdoyKaraoke_NOW
                 AppSettings.Set("IsDefaultInit", "true");
                 AppSettings.Set("DefaultAudioOutput", PlayerControl.DefaultAudioOutput.ToString());
                 AppSettings.Set("IsAsioAutoRestart", "false");
+                AppSettings.SetFxDefaultSettings("DEFAudioEQBand");
                 AppSettings.SetFxDefaultSettings("DEFCH1EQ1band");
                 AppSettings.SetFxDefaultSettings("DEFCH1Comp");
                 AppSettings.SetFxDefaultSettings("DEFCH1EQ4band");
@@ -143,10 +146,24 @@ namespace bossdoyKaraoke_NOW
             bt = new BlueToothConnect();
             bt.StartBlueTooth();
 
+            m_equalizer = new Equalizer();
+
             //UpdateRemoteDeviceSong();
 
             if (!File.Exists(iniFileHelper.FilePath))
+            {
                 iniFileHelper.Write("Video", "Video Path", string.Empty);
+                iniFileHelper.Write("Equalizer", "Band0", "0.0");
+                iniFileHelper.Write("Equalizer", "Band1", "0.0");
+                iniFileHelper.Write("Equalizer", "Band2", "0.0");
+                iniFileHelper.Write("Equalizer", "Band3", "0.0");
+                iniFileHelper.Write("Equalizer", "Band4", "0.0");
+                iniFileHelper.Write("Equalizer", "Band5", "0.0");
+                iniFileHelper.Write("Equalizer", "Band6", "0.0");
+                iniFileHelper.Write("Equalizer", "Band7", "0.0");
+                iniFileHelper.Write("Equalizer", "Band8", "0.0");
+                iniFileHelper.Write("Equalizer", "Band9", "0.0");
+            }
              
             PlayerControl.ChannelSelected = ChannelSelected.Right;
 
@@ -818,6 +835,16 @@ namespace bossdoyKaraoke_NOW
                 Logger.LogFile(ex.Message, "", "tempoMinusBtn", ex.LineNumber(), this.m_thisControl.Name);
 
             }
+        }
+
+        /// <summary>
+        /// Update Equlizer Gain
+        /// </summary>
+        /// <param name="band">The band number tp update gain</param>
+        /// <param name="gain">The gain value</param>
+        public void UpdateEQ(int band, float gain)
+        {
+            m_equalizer.UpdateEQ(band, gain);
         }
 
         /// <summary>
@@ -2483,6 +2510,9 @@ process.WaitForExit();*/
                             m_IsPlayingVideo = false;
 
                             InitControls();
+
+                            m_equalizer.Init(m_currentTrack.Channel);
+                          
                             m_currentTrack.Volume = m_Volume;
 
                             m_currentTrack.Play();

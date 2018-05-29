@@ -22,6 +22,11 @@ namespace bossdoyKaraoke_NOW.Models
             main_form.Initialize(playerWindow);
         }
 
+        public static void UpdateEQ(int band, float gain)
+        {
+            main_form.UpdateEQ(band, gain);
+        }
+
         public static void TreeView_AfterSelect(TreeViewEventArgs e)
         {
             main_form.treeView1_AfterSelect(e);

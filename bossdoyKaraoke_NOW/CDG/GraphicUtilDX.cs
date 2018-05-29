@@ -226,7 +226,8 @@ namespace bossdoyKaraoke_NOW.CDG
                     m_affineTransformEffect.TransformMatrix = Matrix3x2.Translation(0,0);
                     
                     // Create composite effect
-                    m_compositeEffect.InputCount = 2;
+                   // m_compositeEffect.InputCount = 2;
+                    m_compositeEffect.SetInputCount(2);
                     m_compositeEffect.SetInputEffect(0, m_ShadowFullScreen);
                     m_compositeEffect.SetInputEffect(1, m_affineTransformEffect);
                     m_compositeEffect.SetInput(2, m_Bitmap1FullScreen, true);
@@ -437,8 +438,10 @@ namespace bossdoyKaraoke_NOW.CDG
             roundedRecInColor = new D2D1.SolidColorBrush(m_D2DContext.d2dContext2, new SharpDX.Color(234, 137, 6));
             m_textFormat15 = new TextFormat(m_D2DContext.dw_Factory, "Arial", FontWeight.UltraBold, FontStyle.Normal, fontSize15);
             m_textFormat10 = new TextFormat(m_D2DContext.dw_Factory, "Arial", FontWeight.Bold, FontStyle.Normal, fontSize10);
-            m_textFormat10.ParagraphAlignment = ParagraphAlignment.Center;
-            m_textFormat10.TextAlignment = TextAlignment.Center;
+            //m_textFormat10.ParagraphAlignment = ParagraphAlignment.Center;
+            //m_textFormat10.TextAlignment = TextAlignment.Center;
+            m_textFormat10.SetParagraphAlignment(ParagraphAlignment.Center);
+            m_textFormat10.SetTextAlignment(TextAlignment.Center);
             fontFamily = new System.Drawing.FontFamily("Arial");
             m_Bitmap1 = new D2D1.Bitmap1(m_D2DContext.d2dContextCdgText, new Size2(SurfaceW, SurfaceH), BitmapProps1);
             m_Bitmap1FullScreen = new D2D1.Bitmap1(m_D2DContext.d2dContextCdgText2, new Size2(SurfaceW2, SurfaceH2), BitmapProps1);

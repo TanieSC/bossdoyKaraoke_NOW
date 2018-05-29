@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace bossdoyKaraoke_NOW
+namespace bossdoyKaraoke_NOW.Misc
 {
     static class ControlExtensions
     {

@@ -45,11 +45,13 @@ namespace bossdoyKaraoke_NOW.Models
         IAudioRenderer m_audioRender;
         IMemoryInputMedia m_renderMedia;
         IAudioPlayer m_renderPlayer;
+
         private int bassStreamHandle;
         private bool m_cdg;
         private bool m_video;
         private bool m_paused;
         private bool m_isVbcableInstalled = false;
+        Implementation.Equalizer eq = new Implementation.Equalizer();
 
         public VlcPlayer()
         {
@@ -57,7 +59,7 @@ namespace bossdoyKaraoke_NOW.Models
             m_player = m_factory.CreatePlayer<IVideoPlayer>();
             m_media_list = m_factory.CreateMediaList<IMediaList>();
             m_media_list_preview = m_factory.CreateMediaList<IMediaList>();
-
+            
             //Background Video ==========
             m_list_player = m_factory.CreateMediaListPlayer<IMediaListPlayer>(m_media_list);
 

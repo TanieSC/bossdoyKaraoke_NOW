@@ -74,6 +74,7 @@ namespace bossdoyKaraoke_NOW.Models
             BassNet.Registration("tanie_calacar@yahoo.com", "2X183372334322");
             Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_BUFFER, 200);
             Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_UPDATEPERIOD, 20);
+            Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_FLOATDSP, true);
 
             BASS_DEVICEINFO info = new BASS_DEVICEINFO();
             for (int n = 0; Bass.BASS_GetDeviceInfo(n, info); n++)
@@ -89,7 +90,7 @@ namespace bossdoyKaraoke_NOW.Models
                     m_defaultdevice = n;
                 }
 
-                if (!Bass.BASS_Init(n, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
+                if (!Bass.BASS_Init(n, 44100, BASSInit.BASS_DEVICE_DEFAULT, PlayerControl.MainFormControl.Handle))
                 {
                     var error = Bass.BASS_ErrorGetCode();
                     MessageBox.Show(error.ToString(), "Bass_Init error!");

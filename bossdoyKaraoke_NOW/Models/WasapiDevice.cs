@@ -75,7 +75,7 @@ namespace bossdoyKaraoke_NOW.Models
 
                 Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_UPDATEPERIOD, 0);
                 Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_FLOATDSP, true);
-                Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
+                Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, PlayerControl.MainFormControl.Handle);
 
                 Player.Mixer = MixerStreamCreate(outputdeviceinfo.mixfreq);
 
