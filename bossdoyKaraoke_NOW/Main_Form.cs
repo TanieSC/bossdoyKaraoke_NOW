@@ -871,7 +871,7 @@ namespace bossdoyKaraoke_NOW
         }
 
         /// <summary>
-        /// Remove left/right vocals on audio track with seperate vocal truck  
+        /// Remove left/right vocals on audio track with seperate vocal track  
         /// </summary>
         public void RemoveVocalLeftOrRight()
         {
