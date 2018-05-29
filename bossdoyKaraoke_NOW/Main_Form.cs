@@ -3243,7 +3243,7 @@ process.WaitForExit();*/
 
 
     
-        //Temporary Solution for Android kfn remote app so we can still use kfn remote on karafun
+        //Temporary Solution for Android remote app
 
         public string GetNowPlaying()
         {
