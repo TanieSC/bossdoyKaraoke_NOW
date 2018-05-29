@@ -1039,9 +1039,6 @@ namespace bossdoyKaraoke_NOW
                     directorySecurity = directoryInfo.GetAccessControl();
                     accessRule = new FileSystemAccessRule(
                             securityIdentifier,
-                            //FileSystemRights.Write |
-                            //FileSystemRights.ReadAndExecute |
-                            //FileSystemRights.Modify,
                             FileSystemRights.FullControl,
                             AccessControlType.Allow);
                     directorySecurity.ModifyAccessRule(AccessControlModification.Add, accessRule, out modified);
