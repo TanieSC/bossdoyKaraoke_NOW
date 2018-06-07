@@ -238,6 +238,7 @@ namespace bossdoyKaraoke_NOW
                 {
                     //A cache miss, so create a new ListViewItem and pass it back. 
                     e.Item = new ListViewItem();
+
                 }
             }
             catch (Exception ex)

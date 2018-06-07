@@ -146,14 +146,12 @@ namespace bossdoyKaraoke_NOW
             bt = new BlueToothConnect();
             bt.StartBlueTooth();
 
-            m_equalizer = new Equalizer();
-
             //UpdateRemoteDeviceSong();
 
             if (!File.Exists(iniFileHelper.FilePath))
             {
                 iniFileHelper.Write("Video", "Video Path", string.Empty);
-                iniFileHelper.Write("Equalizer", "Band0", "0.0");
+                /*iniFileHelper.Write("Equalizer", "Band0", "0.0");
                 iniFileHelper.Write("Equalizer", "Band1", "0.0");
                 iniFileHelper.Write("Equalizer", "Band2", "0.0");
                 iniFileHelper.Write("Equalizer", "Band3", "0.0");
@@ -162,7 +160,7 @@ namespace bossdoyKaraoke_NOW
                 iniFileHelper.Write("Equalizer", "Band6", "0.0");
                 iniFileHelper.Write("Equalizer", "Band7", "0.0");
                 iniFileHelper.Write("Equalizer", "Band8", "0.0");
-                iniFileHelper.Write("Equalizer", "Band9", "0.0");
+                iniFileHelper.Write("Equalizer", "Band9", "0.0");*/
             }
              
             PlayerControl.ChannelSelected = ChannelSelected.Right;
@@ -175,6 +173,8 @@ namespace bossdoyKaraoke_NOW
              else
                  targetPath = Path.Combine(Application.StartupPath, "x86");*/
             InitTimer();
+
+            m_equalizer = new Equalizer();
 
             if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Bass)
                 InitBass();
@@ -844,7 +844,13 @@ namespace bossdoyKaraoke_NOW
         /// <param name="gain">The gain value</param>
         public void UpdateEQ(int band, float gain)
         {
-            m_equalizer.UpdateEQ(band, gain);
+            
+            if (m_IsPlayingCdg)
+                m_equalizer.UpdateEQBass(band, gain);
+            //  m_currentTrack.UpdateEQ(band, gain);
+
+            if (m_IsPlayingVideo)
+                m_vlc.UpdateEQ(band, gain);
         }
 
         /// <summary>
@@ -2511,7 +2517,7 @@ process.WaitForExit();*/
 
                             InitControls();
 
-                            m_equalizer.Init(m_currentTrack.Channel);
+                            //m_equalizer.Init(m_currentTrack.Channel);
                           
                             m_currentTrack.Volume = m_Volume;
 
@@ -2535,6 +2541,8 @@ process.WaitForExit();*/
                                 m_timerVideo.Stop();
                             }
 
+
+                            //m_equalizer.Init(-1);
                             m_IsPlayingVideo = m_vlc.PlayVideo(m_MediaFileName);
 
                             /* if (Player.IsAsioInitialized)
@@ -3008,11 +3016,60 @@ process.WaitForExit();*/
 
                // if (getSEARCHDIRorTEXTState != SearchAndLoad.WRITE_TO_QUEUE_LIST)
                // {
-                    PlayerControl.AllSongs = new List<ListViewItem>();
-                    PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
-               // }
+                   // PlayerControl.AllSongs = new List<ListViewItem>();
+                  //  PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
+                // }
+                switch (getSEARCHDIRorTEXTState) {
+                    case SearchAndLoad.SEARCH_DIRECTORY:
 
-                if (getSEARCHDIRorTEXTState == SearchAndLoad.SEARCH_DIRECTORY)
+                        PlayerControl.AllSongs = new List<ListViewItem>();
+                        PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
+
+                        string fPath = m_filePath + @"songs\";
+                        string filename = Path.GetFileName(m_fbd.SelectedPath);
+                        var items = PlayerControl.AllSongs.OfType<ListViewItem>().Select(i => i.SubItems[4].Text).ToList();
+                        items.Insert(0, m_fbd.SelectedPath);
+                        string[] filePathArray = items.ToArray<string>();
+                        Directory.CreateDirectory(fPath);
+                        File.WriteAllLines(fPath + filename + ".bkN", filePathArray);
+
+                        m_bgws.Remove(bgw);
+                        bgw.Dispose();
+
+                        if (m_bgws.Count == 0 && m_IsSearchingListView && PlayerControl.AllSongs != null)
+                        {
+                            PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
+                            PlayerControl.SongListView.Refresh();
+                        }
+                        break;
+                    case SearchAndLoad.SEARCH_TEXTFILE:
+                    case SearchAndLoad.LOAD_QUEUE_SONGS:
+                    case SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE:
+                    case SearchAndLoad.SEARCH_LISTVIEW:
+                    case SearchAndLoad.SHUFFLE_SONGS:
+                    case SearchAndLoad.SORT_SONGS:
+                    case SearchAndLoad.LOAD_FAVORITES:
+                    case SearchAndLoad.LOAD_ADDED_SONGS:
+                   // case SearchAndLoad.ADD_SELECTED_SONG_TO_QUEUE:
+
+                        PlayerControl.AllSongs = new List<ListViewItem>();
+                        PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
+
+                        m_bgws.Remove(bgw);
+                        bgw.Dispose();
+
+                        if (m_bgws.Count == 0 && m_IsSearchingListView && PlayerControl.AllSongs != null)
+                        {
+                            PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
+                            PlayerControl.SongListView.Refresh();
+                        }
+                        break;
+                    case SearchAndLoad.WRITE_TO_QUEUE_LIST:
+
+                        break;
+
+                }
+              /*  if (getSEARCHDIRorTEXTState == SearchAndLoad.SEARCH_DIRECTORY)
                 {
                     string fPath = m_filePath + @"songs\";
                     string filename = Path.GetFileName(m_fbd.SelectedPath);
@@ -3021,16 +3078,16 @@ process.WaitForExit();*/
                     string[] filePathArray = items.ToArray<string>();
                     Directory.CreateDirectory(fPath);
                     File.WriteAllLines(fPath + filename + ".bkN", filePathArray);
-                }
+                }*/
 
-                m_bgws.Remove(bgw);
+               /* m_bgws.Remove(bgw);
                 bgw.Dispose();
 
                 if (m_bgws.Count == 0 && m_IsSearchingListView && PlayerControl.AllSongs != null)
                 {
                     PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
                     PlayerControl.SongListView.Refresh();
-                }
+                }*/
                 // MessageBox.Show("All workers complete");
             }
             catch (Exception ex)

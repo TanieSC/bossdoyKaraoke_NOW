@@ -104,6 +104,7 @@
             this.microphone_setting = new System.Windows.Forms.GroupBox();
             this.comboBoxInputDevice = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxEQPresets = new System.Windows.Forms.ComboBox();
             this.PrefTabControl.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             this.eq_settings.SuspendLayout();
@@ -155,6 +156,7 @@
             // 
             // eq_settings
             // 
+            this.eq_settings.Controls.Add(this.comboBoxEQPresets);
             this.eq_settings.Controls.Add(this.label16);
             this.eq_settings.Controls.Add(this.label15);
             this.eq_settings.Controls.Add(this.label14);
@@ -184,7 +186,7 @@
             this.eq_settings.Controls.Add(this.neg12lbl2);
             this.eq_settings.Location = new System.Drawing.Point(6, 69);
             this.eq_settings.Name = "eq_settings";
-            this.eq_settings.Size = new System.Drawing.Size(507, 244);
+            this.eq_settings.Size = new System.Drawing.Size(507, 351);
             this.eq_settings.TabIndex = 1;
             this.eq_settings.TabStop = false;
             this.eq_settings.Text = "Graphic EQ settings";
@@ -192,7 +194,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(216, 219);
+            this.label16.Location = new System.Drawing.Point(216, 257);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(41, 13);
             this.label16.TabIndex = 59;
@@ -201,7 +203,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(441, 197);
+            this.label15.Location = new System.Drawing.Point(441, 235);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(38, 13);
             this.label15.TabIndex = 58;
@@ -210,88 +212,88 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(396, 197);
+            this.label14.Location = new System.Drawing.Point(396, 235);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(38, 13);
+            this.label14.Size = new System.Drawing.Size(32, 13);
             this.label14.TabIndex = 57;
-            this.label14.Text = "14kHz";
+            this.label14.Text = "8kHz";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(352, 197);
+            this.label13.Location = new System.Drawing.Point(352, 235);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.Size = new System.Drawing.Size(32, 13);
             this.label13.TabIndex = 56;
-            this.label13.Text = "12kHz";
+            this.label13.Text = "4kHz";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(306, 197);
+            this.label12.Location = new System.Drawing.Point(306, 235);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
             this.label12.TabIndex = 55;
-            this.label12.Text = "6kHz";
+            this.label12.Text = "2kHz";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(261, 197);
+            this.label11.Location = new System.Drawing.Point(261, 235);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 13);
             this.label11.TabIndex = 54;
-            this.label11.Text = "3kHz";
+            this.label11.Text = "1kHz";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(216, 197);
+            this.label10.Location = new System.Drawing.Point(216, 235);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(32, 13);
+            this.label10.Size = new System.Drawing.Size(38, 13);
             this.label10.TabIndex = 53;
-            this.label10.Text = "1kHz";
+            this.label10.Text = "500Hz";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(171, 197);
+            this.label9.Location = new System.Drawing.Point(171, 235);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 13);
             this.label9.TabIndex = 52;
-            this.label9.Text = "600Hz";
+            this.label9.Text = "250Hz";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(126, 197);
+            this.label8.Location = new System.Drawing.Point(126, 235);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 13);
             this.label8.TabIndex = 51;
-            this.label8.Text = "310Hz";
+            this.label8.Text = "125Hz";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(80, 197);
+            this.label7.Location = new System.Drawing.Point(80, 235);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.Size = new System.Drawing.Size(32, 13);
             this.label7.TabIndex = 50;
-            this.label7.Text = "170Hz";
+            this.label7.Text = "63Hz";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(36, 197);
+            this.label6.Location = new System.Drawing.Point(36, 235);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 49;
-            this.label6.Text = "60Hz";
+            this.label6.Text = "31Hz";
             // 
             // trackBarEQ8
             // 
             this.trackBarEQ8.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ8.Location = new System.Drawing.Point(388, 20);
+            this.trackBarEQ8.Location = new System.Drawing.Point(388, 58);
             this.trackBarEQ8.Maximum = 15;
             this.trackBarEQ8.Minimum = -15;
             this.trackBarEQ8.Name = "trackBarEQ8";
@@ -304,7 +306,7 @@
             // trackBarEQ7
             // 
             this.trackBarEQ7.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ7.Location = new System.Drawing.Point(343, 20);
+            this.trackBarEQ7.Location = new System.Drawing.Point(343, 58);
             this.trackBarEQ7.Maximum = 15;
             this.trackBarEQ7.Minimum = -15;
             this.trackBarEQ7.Name = "trackBarEQ7";
@@ -317,7 +319,7 @@
             // trackBarEQ6
             // 
             this.trackBarEQ6.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ6.Location = new System.Drawing.Point(298, 20);
+            this.trackBarEQ6.Location = new System.Drawing.Point(298, 58);
             this.trackBarEQ6.Maximum = 15;
             this.trackBarEQ6.Minimum = -15;
             this.trackBarEQ6.Name = "trackBarEQ6";
@@ -330,7 +332,7 @@
             // trackBarEQ5
             // 
             this.trackBarEQ5.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ5.Location = new System.Drawing.Point(253, 20);
+            this.trackBarEQ5.Location = new System.Drawing.Point(253, 58);
             this.trackBarEQ5.Maximum = 15;
             this.trackBarEQ5.Minimum = -15;
             this.trackBarEQ5.Name = "trackBarEQ5";
@@ -343,7 +345,7 @@
             // trackBarEQ4
             // 
             this.trackBarEQ4.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ4.Location = new System.Drawing.Point(208, 20);
+            this.trackBarEQ4.Location = new System.Drawing.Point(208, 58);
             this.trackBarEQ4.Maximum = 15;
             this.trackBarEQ4.Minimum = -15;
             this.trackBarEQ4.Name = "trackBarEQ4";
@@ -356,7 +358,7 @@
             // trackBarEQ3
             // 
             this.trackBarEQ3.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ3.Location = new System.Drawing.Point(163, 20);
+            this.trackBarEQ3.Location = new System.Drawing.Point(163, 58);
             this.trackBarEQ3.Maximum = 15;
             this.trackBarEQ3.Minimum = -15;
             this.trackBarEQ3.Name = "trackBarEQ3";
@@ -369,7 +371,7 @@
             // trackBarEQ2
             // 
             this.trackBarEQ2.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ2.Location = new System.Drawing.Point(118, 20);
+            this.trackBarEQ2.Location = new System.Drawing.Point(118, 58);
             this.trackBarEQ2.Maximum = 15;
             this.trackBarEQ2.Minimum = -15;
             this.trackBarEQ2.Name = "trackBarEQ2";
@@ -382,7 +384,7 @@
             // trackBarEQ1
             // 
             this.trackBarEQ1.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ1.Location = new System.Drawing.Point(73, 20);
+            this.trackBarEQ1.Location = new System.Drawing.Point(73, 58);
             this.trackBarEQ1.Maximum = 15;
             this.trackBarEQ1.Minimum = -15;
             this.trackBarEQ1.Name = "trackBarEQ1";
@@ -395,7 +397,7 @@
             // trackBarEQ0
             // 
             this.trackBarEQ0.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ0.Location = new System.Drawing.Point(28, 20);
+            this.trackBarEQ0.Location = new System.Drawing.Point(28, 58);
             this.trackBarEQ0.Maximum = 15;
             this.trackBarEQ0.Minimum = -15;
             this.trackBarEQ0.Name = "trackBarEQ0";
@@ -408,7 +410,7 @@
             // zerolbl2
             // 
             this.zerolbl2.AutoSize = true;
-            this.zerolbl2.Location = new System.Drawing.Point(484, 101);
+            this.zerolbl2.Location = new System.Drawing.Point(484, 139);
             this.zerolbl2.Name = "zerolbl2";
             this.zerolbl2.Size = new System.Drawing.Size(13, 13);
             this.zerolbl2.TabIndex = 38;
@@ -417,7 +419,7 @@
             // zerolbl1
             // 
             this.zerolbl1.AutoSize = true;
-            this.zerolbl1.Location = new System.Drawing.Point(9, 101);
+            this.zerolbl1.Location = new System.Drawing.Point(9, 139);
             this.zerolbl1.Name = "zerolbl1";
             this.zerolbl1.Size = new System.Drawing.Size(13, 13);
             this.zerolbl1.TabIndex = 36;
@@ -426,7 +428,7 @@
             // neg12lbl1
             // 
             this.neg12lbl1.AutoSize = true;
-            this.neg12lbl1.Location = new System.Drawing.Point(4, 174);
+            this.neg12lbl1.Location = new System.Drawing.Point(4, 212);
             this.neg12lbl1.Name = "neg12lbl1";
             this.neg12lbl1.Size = new System.Drawing.Size(25, 13);
             this.neg12lbl1.TabIndex = 35;
@@ -435,7 +437,7 @@
             // pos12lbl1
             // 
             this.pos12lbl1.AutoSize = true;
-            this.pos12lbl1.Location = new System.Drawing.Point(4, 24);
+            this.pos12lbl1.Location = new System.Drawing.Point(4, 62);
             this.pos12lbl1.Name = "pos12lbl1";
             this.pos12lbl1.Size = new System.Drawing.Size(25, 13);
             this.pos12lbl1.TabIndex = 34;
@@ -444,7 +446,7 @@
             // trackBarEQ9
             // 
             this.trackBarEQ9.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarEQ9.Location = new System.Drawing.Point(433, 20);
+            this.trackBarEQ9.Location = new System.Drawing.Point(433, 58);
             this.trackBarEQ9.Maximum = 15;
             this.trackBarEQ9.Minimum = -15;
             this.trackBarEQ9.Name = "trackBarEQ9";
@@ -457,7 +459,7 @@
             // pos12lbl2
             // 
             this.pos12lbl2.AutoSize = true;
-            this.pos12lbl2.Location = new System.Drawing.Point(477, 26);
+            this.pos12lbl2.Location = new System.Drawing.Point(477, 64);
             this.pos12lbl2.Name = "pos12lbl2";
             this.pos12lbl2.Size = new System.Drawing.Size(25, 13);
             this.pos12lbl2.TabIndex = 37;
@@ -466,7 +468,7 @@
             // neg12lbl2
             // 
             this.neg12lbl2.AutoSize = true;
-            this.neg12lbl2.Location = new System.Drawing.Point(477, 174);
+            this.neg12lbl2.Location = new System.Drawing.Point(477, 212);
             this.neg12lbl2.Name = "neg12lbl2";
             this.neg12lbl2.Size = new System.Drawing.Size(25, 13);
             this.neg12lbl2.TabIndex = 39;
@@ -942,6 +944,14 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Microphone input";
             // 
+            // comboBoxEQPresets
+            // 
+            this.comboBoxEQPresets.FormattingEnabled = true;
+            this.comboBoxEQPresets.Location = new System.Drawing.Point(367, 19);
+            this.comboBoxEQPresets.Name = "comboBoxEQPresets";
+            this.comboBoxEQPresets.Size = new System.Drawing.Size(111, 21);
+            this.comboBoxEQPresets.TabIndex = 60;
+            // 
             // Preferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1063,5 +1073,6 @@
         private System.Windows.Forms.Label pos12lbl2;
         private System.Windows.Forms.Label neg12lbl2;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBoxEQPresets;
     }
 }

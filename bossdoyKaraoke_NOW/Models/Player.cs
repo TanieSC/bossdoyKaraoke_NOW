@@ -39,7 +39,8 @@ namespace bossdoyKaraoke_NOW.Models
         public PlayState PlayState { get; private set; }
 
         public Player() {
-           
+
+          //  m_equalizer = new Equalizer();
         }
 
         public void CreateStream()
@@ -51,10 +52,9 @@ namespace bossdoyKaraoke_NOW.Models
             Tempo.Channel = this.Channel;
             this.Channel = Tempo.TempoCreate();
 
-            StreamAddChannel(this.Channel, TrackSync);
-
             if (this.Channel != 0)
             {
+                StreamAddChannel(this.Channel, TrackSync);
                 TrackLength = Bass.BASS_ChannelGetLength(Channel);
             }
 
@@ -138,7 +138,7 @@ namespace bossdoyKaraoke_NOW.Models
         }
 
         public static int BassVlcStreamHandle { get; set;}
-        public static int ChannetFreq { get; set; }
+        public static int ChannelFreq { get; set; }
         public static int Channels { get; set; }
         public static int DefaultDevice { get { return m_defaultdevice; } set { m_defaultdevice = value; } }
         public static string DefaultDeviceLongName { get { return m_defaultdevicelongname; } set { m_defaultdevicelongname = value; } }

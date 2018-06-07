@@ -60,40 +60,6 @@ namespace bossdoyKaraoke_NOW.Models
             Start();
         }
 
-        public static void CreateInputs(int CountOfInputs)
-        {
-            m_asioInputHandlers = new BassAsioHandler(true, m_asiodevice, CountOfInputs, 2, BASSASIOFormat.BASS_ASIO_FORMAT_FLOAT, m_samplerate);
-            m_asioInputHandlers.UseInput = false;
-            m_asioInputHandlers.SetFullDuplex(0, BASSFlag.BASS_STREAM_DECODE, false);
-            m_asioInputHandlers.BypassFullDuplex = false;
-            m_asioInputHandlers.Volume = PlayerControl.MicVolumeScroll.Value * 0.01f;
-            var error = Bass.BASS_ErrorGetCode();
-            Console.WriteLine("CreateIn: {0}", error);
-        }
-
-        public static void CreateOutput(int CountOfOutputs)
-        {
-           /* Player.Mixer = MixerStreamCreate((int)samplerate);
-            if (Player.Mixer == 0)
-            {
-                var error = Bass.BASS_ErrorGetCode();
-                MessageBox.Show(error.ToString(), "Could not create mixer!");
-                Bass.BASS_Free();
-                return;
-            }*/
-
-           // m_mixerChannel = Player.Mixer;
-            m_asioOutputHandlers = new BassAsioHandler(m_asiodevice, CountOfOutputs, m_mixerChannel);
-        }
-
-        public static void Connect()
-        {
-            Bass.BASS_ChannelSetPosition(m_asioInputHandlers.OutputChannel, 0.0);
-           // BassMix.BASS_Mixer_StreamAddChannel(m_asioOutputHandlers.OutputChannel, m_asioInputHandlers.OutputChannel, BASSFlag.BASS_MIXER_DOWNMIX | BASSFlag.BASS_STREAM_AUTOFREE);          
-             var error = Bass.BASS_ErrorGetCode();
-             Console.WriteLine("Start: {0}", error);
-        }
-
         public static void Stop()
         {
             BassAsio.BASS_ASIO_Stop();

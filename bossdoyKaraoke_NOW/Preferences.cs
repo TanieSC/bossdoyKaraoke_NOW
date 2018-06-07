@@ -52,6 +52,10 @@ namespace bossdoyKaraoke_NOW
 
             PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
 
+            comboBoxEQPresets.DataSource = VlcPlayer.EqPresets.Values.ToList();
+            comboBoxEQPresets.DisplayMember = "Name";
+            comboBoxEQPresets.DropDownStyle = ComboBoxStyle.DropDownList;
+
             SetBandGain();
 
             if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Bass)
@@ -485,16 +489,16 @@ namespace bossdoyKaraoke_NOW
 
         private void SetBandGain()
         {         
-            trackBarEQ0.Value = (int)Equalizer.bandValue[0].Gain;
-            trackBarEQ1.Value = (int)Equalizer.bandValue[1].Gain;
-            trackBarEQ2.Value = (int)Equalizer.bandValue[2].Gain;
-            trackBarEQ3.Value = (int)Equalizer.bandValue[3].Gain;
-            trackBarEQ4.Value = (int)Equalizer.bandValue[4].Gain;
-            trackBarEQ5.Value = (int)Equalizer.bandValue[5].Gain;
-            trackBarEQ6.Value = (int)Equalizer.bandValue[6].Gain;
-            trackBarEQ7.Value = (int)Equalizer.bandValue[7].Gain;
-            trackBarEQ8.Value = (int)Equalizer.bandValue[8].Gain;
-            trackBarEQ9.Value = (int)Equalizer.bandValue[9].Gain;
+            trackBarEQ0.Value = (int)Equalizer.ArrBandValue[0].Gain;
+            trackBarEQ1.Value = (int)Equalizer.ArrBandValue[1].Gain;
+            trackBarEQ2.Value = (int)Equalizer.ArrBandValue[2].Gain;
+            trackBarEQ3.Value = (int)Equalizer.ArrBandValue[3].Gain;
+            trackBarEQ4.Value = (int)Equalizer.ArrBandValue[4].Gain;
+            trackBarEQ5.Value = (int)Equalizer.ArrBandValue[5].Gain;
+            trackBarEQ6.Value = (int)Equalizer.ArrBandValue[6].Gain;
+            trackBarEQ7.Value = (int)Equalizer.ArrBandValue[7].Gain;
+            trackBarEQ8.Value = (int)Equalizer.ArrBandValue[8].Gain;
+            trackBarEQ9.Value = (int)Equalizer.ArrBandValue[9].Gain;
         }
 
 

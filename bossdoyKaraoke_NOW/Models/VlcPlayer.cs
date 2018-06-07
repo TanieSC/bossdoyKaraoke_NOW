@@ -45,21 +45,49 @@ namespace bossdoyKaraoke_NOW.Models
         IAudioRenderer m_audioRender;
         IMemoryInputMedia m_renderMedia;
         IAudioPlayer m_renderPlayer;
+        Implementation.Equalizer m_equalizer;
 
         private int bassStreamHandle;
         private bool m_cdg;
         private bool m_video;
         private bool m_paused;
         private bool m_isVbcableInstalled = false;
-        Implementation.Equalizer eq = new Implementation.Equalizer();
+       // private Implementation.Equalizer m_equalizer = new Implementation.Equalizer();
+        private static Dictionary<int, Preset> m_presets;
 
         public VlcPlayer()
         {
-            m_factory = new MediaPlayerFactory();
+
+            string[] args = new string[]
+             {
+                "-I",
+                "dumy",
+                "--ignore-config",
+                "--no-osd",
+                "--disable-screensaver",
+                "--plugin-path=./plugins" ,
+                "--audio-filter=equalizer",
+                "--equalizer-preamp=11.9",
+                "--equalizer-bands=0 0 0 0 0 0 0 0 0 0"
+             };
+
+            m_factory = new MediaPlayerFactory(args);
             m_player = m_factory.CreatePlayer<IVideoPlayer>();
             m_media_list = m_factory.CreateMediaList<IMediaList>();
             m_media_list_preview = m_factory.CreateMediaList<IMediaList>();
-            
+
+            m_presets = Implementation.Equalizer.Presets.ToDictionary(key => key.Index);
+
+            m_equalizer = new Implementation.Equalizer(m_presets[0]);
+
+            for (int i = 0; i < Equalizer.ArrBandValue.Count(); i++)
+            {
+                m_equalizer.Bands[i].Amplitude = Equalizer.ArrBandValue[i].Gain;
+            }
+
+            m_equalizer.Preamp = 12;
+           // m_player.SetEqualizer(m_equalizer);
+
             //Background Video ==========
             m_list_player = m_factory.CreateMediaListPlayer<IMediaListPlayer>(m_media_list);
 
@@ -113,7 +141,7 @@ namespace bossdoyKaraoke_NOW.Models
                 {
                     if (Player.IsAsioInitialized)
                     {
-                        if (s.Longname.Contains("VB -Audio Virtual"))
+                        if (s.Longname.Contains("VB-Audio Virtual"))
                         {
                             //Console.WriteLine(s.Id + " " + s.Longname);
                             m_player.SetAudioOutputModuleAndDevice(module, s);
@@ -291,6 +319,22 @@ namespace bossdoyKaraoke_NOW.Models
             return m_video;
         }
 
+        public void UpdateEQ(int band, float gain)
+        {
+            if (m_equalizer != null)
+            {
+                m_equalizer.Bands[band].Amplitude = gain;
+
+                m_player.SetEqualizer(m_equalizer);
+            }
+        }
+
+        public void LoadEQPresets()
+        {
+            if (m_equalizer != null)
+                m_player.SetEqualizer(m_equalizer);
+        }
+
         private SoundFormat SoundFormatCallback(SoundFormat sf)
         {
             var streamInfo = new StreamInfo();
@@ -319,7 +363,6 @@ namespace bossdoyKaraoke_NOW.Models
                    m_renderPlayer.Play();//play renderer
 
         }
-
 
         public bool PlayPause()
         {
@@ -424,6 +467,8 @@ namespace bossdoyKaraoke_NOW.Models
             get { return m_isVbcableInstalled; }
             set { m_isVbcableInstalled = value; }
         }
+        public static Dictionary<int, Preset> EqPresets { get { return m_presets; } private set { value = m_presets; } }
+
 
         #region IDisposable Support
         /// <summary>
@@ -454,6 +499,7 @@ namespace bossdoyKaraoke_NOW.Models
             {
                 m_factory.Dispose();
                 m_player.Dispose();
+                m_equalizer.Dispose();
                 m_media.Dispose();
                 m_media_preview.Dispose();
                 m_memRender.Dispose();
