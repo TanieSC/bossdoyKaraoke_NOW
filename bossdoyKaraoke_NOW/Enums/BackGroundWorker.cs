@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace bossdoyKaraoke_NOW.Enums
 {
-    public class Songs
+    public class BackGroundWorker
     {
         private static SearchAndLoad m_SEARCHDIRorTEXTState;
 
@@ -27,7 +27,8 @@ namespace bossdoyKaraoke_NOW.Enums
             LOAD_FAVORITES,
             LOAD_ADDED_SONGS,
             ADD_SELECTED_SONG_TO_QUEUE,
-            WRITE_TO_QUEUE_LIST
+            WRITE_TO_QUEUE_LIST,
+            UPDATE_EQ_SETTINGS
         }
 
         /// <summary>

@@ -136,7 +136,7 @@
     <Compile Include="Enums\Effects.cs" />
     <Compile Include="Enums\PlayerState.cs" />
     <Compile Include="Enums\RemoveVocal.cs" />
-    <Compile Include="Enums\Songs.cs" />
+    <Compile Include="Enums\BackGroundWorker.cs" />
     <Compile Include="Enums\SystemState.cs" />
     <Compile Include="Enums\TreviewRootNode.cs" />
     <Compile Include="Enums\VideoSize.cs" />

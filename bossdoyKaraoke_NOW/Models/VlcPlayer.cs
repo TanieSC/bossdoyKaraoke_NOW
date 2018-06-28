@@ -80,13 +80,17 @@ namespace bossdoyKaraoke_NOW.Models
 
             m_equalizer = new Implementation.Equalizer(m_presets[0]);
 
-            for (int i = 0; i < Equalizer.ArrBandValue.Count(); i++)
+            m_equalizer.Preamp = Equalizer.ArrBandValue[10].PreAmp / 10;
+            
+            for (int i = 0; i < Equalizer.ArrBandValue.Count() - 2; i++)
             {
-                m_equalizer.Bands[i].Amplitude = Equalizer.ArrBandValue[i].Gain;
+                m_equalizer.Bands[i].Amplitude = Equalizer.ArrBandValue[i].Gain / 10;
+
+                Console.WriteLine("Amplitude " + m_equalizer.Bands[i].Amplitude + " : " + m_equalizer.Preamp);
             }
 
-            m_equalizer.Preamp = 12;
-           // m_player.SetEqualizer(m_equalizer);
+            m_player.SetEqualizer(m_equalizer);
+            m_equalizer.Dispose();
 
             //Background Video ==========
             m_list_player = m_factory.CreateMediaListPlayer<IMediaListPlayer>(m_media_list);
@@ -319,13 +323,11 @@ namespace bossdoyKaraoke_NOW.Models
             return m_video;
         }
 
-        public void UpdateEQ(int band, float gain)
+        public void UpdateEQ(Implementation.Equalizer equalizer)
         {
-            if (m_equalizer != null)
+            if (equalizer != null && m_player.IsPlaying)
             {
-                m_equalizer.Bands[band].Amplitude = gain;
-
-                m_player.SetEqualizer(m_equalizer);
+                m_player.SetEqualizer(equalizer);
             }
         }
 

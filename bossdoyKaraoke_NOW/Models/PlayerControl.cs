@@ -22,9 +22,19 @@ namespace bossdoyKaraoke_NOW.Models
             main_form.Initialize(playerWindow);
         }
 
+        public static void UpdateEQPresets(int preset)
+        {
+            main_form.UpdateEQPresets(preset);
+        }
+
         public static void UpdateEQ(int band, float gain)
         {
             main_form.UpdateEQ(band, gain);
+        }
+
+        public static void UpdateEQPreamp(float gain)
+        {
+            main_form.UpdateEQPreamp(gain);
         }
 
         public static void TreeView_AfterSelect(TreeViewEventArgs e)

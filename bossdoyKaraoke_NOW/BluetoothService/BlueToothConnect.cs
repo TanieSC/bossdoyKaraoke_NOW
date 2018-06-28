@@ -77,7 +77,7 @@ namespace bossdoyKaraoke_NOW.BluetoothService
                 }
                 else
                 {
-                    MessageBox.Show("Bluetooth divice not found.");
+                  //  MessageBox.Show("Bluetooth divice not found.");
                 }
             }
             catch (Exception ex)

@@ -25,9 +25,13 @@ namespace bossdoyKaraoke_NOW
         ToolTip m_tooltip = new ToolTip();
         FolderBrowserDialog m_fbd = new FolderBrowserDialog();
 
-        private bool inputDev;
-        private bool outputDev;
+        private Implementation.Equalizer m_equalizer;
+        private bool m_inputDev;
+        private bool m_outputDev;
+        private bool m_EQdefault;
+        private bool m_customEQ;
 
+        private float m_trackBarGain;
         private int _asioDevice;
         private bool m_isRequiredPuginsInstalled;
         private string[] m_puginsInstalled = new string[] { "ASIO4ALL", "VBCABLE, The Virtual Audio Cable", "MeldaProduction Audio Plugins" };
@@ -52,9 +56,30 @@ namespace bossdoyKaraoke_NOW
 
             PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
 
-            comboBoxEQPresets.DataSource = VlcPlayer.EqPresets.Values.ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Name");
+
+            DataRow dr = dt.NewRow();
+            dr["Name"] = "";
+            dr["ID"] = 0;
+
+            dt.Rows.Add(dr);
+
+            for (int i = 0; i < VlcPlayer.EqPresets.Values.Count(); i++)
+            {
+                dr = dt.NewRow();
+                dr["Name"] = VlcPlayer.EqPresets[i].Name;
+                dr["ID"] = VlcPlayer.EqPresets[i].Index;
+
+                dt.Rows.Add(dr);
+            }
+
+            comboBoxEQPresets.DataSource = dt;// VlcPlayer.EqPresets.Values.ToList();
             comboBoxEQPresets.DisplayMember = "Name";
             comboBoxEQPresets.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            comboBoxEQPresets.SelectedIndex = Equalizer.ArrBandValue[11].PreSet;
 
             SetBandGain();
 
@@ -90,7 +115,7 @@ namespace bossdoyKaraoke_NOW
                     if (info.IsEnabled && info.IsInput)
                     {
                         defaulInputDevice = i;
-                       int index = this.comboBoxInputDevice.Items.Add(new DeviceInfo(info, defaulInputDevice)); //string.Format("{0} - {1}", i, info.name));
+                        int index = this.comboBoxInputDevice.Items.Add(new DeviceInfo(info, defaulInputDevice)); //string.Format("{0} - {1}", i, info.name));
                         if (info.IsDefault)
                             this.comboBoxInputDevice.SelectedIndex = index;
 
@@ -100,11 +125,11 @@ namespace bossdoyKaraoke_NOW
                     if (info.IsEnabled && !info.IsInput)
                     {
                         defaulOutputDevice = i;
-                        int index =  this.comboBoxOutputDevice.Items.Add(new DeviceInfo(info, defaulOutputDevice));
+                        int index = this.comboBoxOutputDevice.Items.Add(new DeviceInfo(info, defaulOutputDevice));
                         if (info.IsDefault)
                             this.comboBoxOutputDevice.SelectedIndex = index;
 
-                       // defaulOutputDevice++;
+                        // defaulOutputDevice++;
                     }
                 }
 
@@ -119,7 +144,7 @@ namespace bossdoyKaraoke_NOW
                     this.comboBoxInputDevice.SelectedIndex = BassAsioDevice.inputDevice;
 
                 this.comboBoxOutputDevice.Items.Clear();
-                this.comboBoxOutputDevice.Items.AddRange(BassAsioDevice.GetAsioOutputChannels.ToArray());
+                this.comboBoxOutputDevice.Items.AddRange(BassAsioDevice.AsioOutputChannels.ToArray());
                 if (this.comboBoxOutputDevice.Items.Count > 0)
                     this.comboBoxOutputDevice.SelectedIndex = BassAsioDevice.outputDevice;
 
@@ -137,7 +162,8 @@ namespace bossdoyKaraoke_NOW
                 RefreshEffects();
             }
 
-            if (Player.IsBassInitialized) {
+            if (Player.IsBassInitialized)
+            {
                 this.comboBoxOutputDevice.Items.Clear();
                 this.comboBoxOutputDevice.Items.AddRange(Bass.BASS_GetDeviceInfos());
 
@@ -182,7 +208,7 @@ namespace bossdoyKaraoke_NOW
                    WasapiDevice.Start();
 
                }*/
-            if (inputDev)
+            if (m_inputDev)
             {
                 if (Player.IsAsioInitialized)
                 {
@@ -195,11 +221,12 @@ namespace bossdoyKaraoke_NOW
                     Effects.GetorSetFx = Effects.Load.CHANNETSTRIP;
                     RefreshEffects();
                     // groupMicrophoneEffects.Visible = true;
-                    inputDev = false;
-                    outputDev = false;
+                    m_inputDev = false;
+                    m_outputDev = false;
                 }
 
-                if (Player.IsWasapiInitialized) {
+                if (Player.IsWasapiInitialized)
+                {
                     //Get the device index from the selected device
                     DeviceInfo info = (DeviceInfo)comboBoxInputDevice.Items[comboBoxInputDevice.SelectedIndex];
                     if (info == null) return;
@@ -207,13 +234,13 @@ namespace bossdoyKaraoke_NOW
                     WasapiDevice.Stop();
                     WasapiDevice.SetDevice(info.WasapiDeviceNum, WasapiDevice.GetOutputDefaultDevice());
                     WasapiDevice.Start();
-                }                 
+                }
             }
         }
 
         private void comboBoxOutputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (outputDev)
+            if (m_outputDev)
             {
                 if (Player.IsAsioInitialized)
                 {
@@ -225,7 +252,7 @@ namespace bossdoyKaraoke_NOW
                     BassAsioDevice.Start();
                     Effects.GetorSetFx = Effects.Load.CHANNETSTRIP;
                     RefreshEffects();
-                   // groupMicrophoneEffects.Visible = true;
+                    // groupMicrophoneEffects.Visible = true;
                 }
                 if (Player.IsWasapiInitialized)
                 {
@@ -244,8 +271,8 @@ namespace bossdoyKaraoke_NOW
                     Bass.BASS_ChannelSetDevice(Player.Mixer, comboBoxOutputDevice.SelectedIndex);
                 }
 
-                outputDev = false;
-                inputDev = false;
+                m_outputDev = false;
+                m_inputDev = false;
             }
         }
 
@@ -308,7 +335,7 @@ namespace bossdoyKaraoke_NOW
         private void DeEsser_1_Click(object sender, EventArgs e)
         {
             Effects.GetorSetFx = Effects.Load.DeEsser0_1;
-           // PlayerControl.ShowEffectsChannel2();
+            // PlayerControl.ShowEffectsChannel2();
             Channel2Fx.ShowInterface();
         }
 
@@ -350,12 +377,12 @@ namespace bossdoyKaraoke_NOW
 
         private void comboBoxInputDevice_Click(object sender, EventArgs e)
         {
-            inputDev = true;
+            m_inputDev = true;
         }
 
         private void comboBoxOutputDevice_Click(object sender, EventArgs e)
         {
-            outputDev = true;
+            m_outputDev = true;
         }
 
         private void radioBtnBass_Click(object sender, EventArgs e)
@@ -442,7 +469,7 @@ namespace bossdoyKaraoke_NOW
 
         private void Preferences_FormClosing(object sender, FormClosingEventArgs e)
         {
-          
+
         }
 
         private void chkBoxRefreshAsio_CheckedChanged(object sender, EventArgs e)
@@ -488,7 +515,8 @@ namespace bossdoyKaraoke_NOW
         public IntPtr VideoHandle { get { return panelPlayer.Handle; } }
 
         private void SetBandGain()
-        {         
+        {
+            trackBarPreamp.Value = (int)Equalizer.ArrBandValue[10].PreAmp;
             trackBarEQ0.Value = (int)Equalizer.ArrBandValue[0].Gain;
             trackBarEQ1.Value = (int)Equalizer.ArrBandValue[1].Gain;
             trackBarEQ2.Value = (int)Equalizer.ArrBandValue[2].Gain;
@@ -499,68 +527,134 @@ namespace bossdoyKaraoke_NOW
             trackBarEQ7.Value = (int)Equalizer.ArrBandValue[7].Gain;
             trackBarEQ8.Value = (int)Equalizer.ArrBandValue[8].Gain;
             trackBarEQ9.Value = (int)Equalizer.ArrBandValue[9].Gain;
-        }
 
+        }
 
         private void trackBarEQ0_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(0, trackBarEQ0.Value);
-            label16.Text = trackBarEQ0.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[0].Gain / 10;
+            lblBand1.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+            m_customEQ = false;
+        }
+
+        private void trackBarEQ0_Scroll(object sender, EventArgs e)
+        {
+            m_customEQ = true;
         }
 
         private void trackBarEQ1_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(1, trackBarEQ1.Value);
-            label16.Text = trackBarEQ1.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[1].Gain / 10;
+            lblBand2.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ2_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(2, trackBarEQ2.Value);
-            label16.Text = trackBarEQ2.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[2].Gain / 10;
+            lblBand3.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ3_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(3, trackBarEQ3.Value);
-            label16.Text = trackBarEQ3.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[3].Gain / 10;
+            lblBand4.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ4_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(4, trackBarEQ4.Value);
-            label16.Text = trackBarEQ4.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[4].Gain / 10;
+            lblBand5.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ5_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(5, trackBarEQ5.Value);
-            label16.Text = trackBarEQ5.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[5].Gain / 10;
+            lblBand6.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ6_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(6, trackBarEQ6.Value);
-            label16.Text = trackBarEQ6.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[6].Gain / 10;
+            lblBand7.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ7_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(7, trackBarEQ7.Value);
-            label16.Text = trackBarEQ7.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[7].Gain / 10;
+            lblBand8.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ8_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(8, trackBarEQ8.Value);
-            label16.Text = trackBarEQ8.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[8].Gain / 10;
+            lblBand9.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
 
         private void trackBarEQ9_ValueChanged(object sender, EventArgs e)
         {
             PlayerControl.UpdateEQ(9, trackBarEQ9.Value);
-            label16.Text = trackBarEQ9.Value.ToString();
+            m_trackBarGain = Equalizer.ArrBandValue[9].Gain / 10;
+            lblBand10.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
         }
+
+        private void trackBarPreamp_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQPreamp(trackBarPreamp.Value);
+            m_trackBarGain = Equalizer.ArrBandValue[10].PreAmp / 10;
+            lblPreampGain.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+        }
+
+        private void comboBoxEQPresets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (m_EQdefault)
+            {
+                if (m_equalizer != null) m_equalizer.Dispose();
+
+                int selectedIndex = comboBoxEQPresets.SelectedIndex;
+
+                if (comboBoxEQPresets.Items.Count > VlcPlayer.EqPresets.Values.Count() && selectedIndex > 0)
+                    m_equalizer = new Implementation.Equalizer(VlcPlayer.EqPresets[selectedIndex - 1]);
+                else
+                    m_equalizer = new Implementation.Equalizer(VlcPlayer.EqPresets[selectedIndex]);
+
+                Equalizer.ArrBandValue[10].PreAmp = (m_equalizer.Preamp * 10) > 150 ? 150 : m_equalizer.Preamp * 10;
+
+                for (int i = 0; i < Equalizer.ArrBandValue.Length - 2; i++)
+                {
+                    float amplitude = m_equalizer.Bands[i].Amplitude * 10;
+
+                    if (amplitude > 150)
+                    {
+                        amplitude = amplitude - 150;
+                        amplitude = (m_equalizer.Bands[i].Amplitude * 10) - amplitude;
+                    }
+
+                    Equalizer.ArrBandValue[i].Gain = amplitude;
+                }
+
+                PlayerControl.UpdateEQPresets(selectedIndex);
+                SetBandGain();
+
+                m_EQdefault = false;
+            }
+        }
+
+        private void comboBoxEQPresets_Click(object sender, EventArgs e)
+        {
+            m_EQdefault = true;
+        }
+
+
     }
 
     class DeviceInfo

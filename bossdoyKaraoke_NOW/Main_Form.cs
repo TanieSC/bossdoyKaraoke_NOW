@@ -31,7 +31,7 @@ using Un4seen.BassWasapi;
 using static bossdoyKaraoke_NOW.Enums.DefaultAudio;
 using static bossdoyKaraoke_NOW.Enums.PlayerState;
 using static bossdoyKaraoke_NOW.Enums.RemoveVocal;
-using static bossdoyKaraoke_NOW.Enums.Songs;
+using static bossdoyKaraoke_NOW.Enums.BackGroundWorker;
 using static bossdoyKaraoke_NOW.Enums.TreviewNode;
 
 namespace bossdoyKaraoke_NOW
@@ -123,12 +123,16 @@ namespace bossdoyKaraoke_NOW
         /// <param name="playerWindow"></param>
         public void Initialize(Control playerWindow)
         {
-    
+
+            m_equalizer = new Equalizer();
+
             if (!AppSettings.Get<bool>("IsDefaultInit"))
             {
                 AppSettings.Set("IsDefaultInit", "true");
                 AppSettings.Set("DefaultAudioOutput", PlayerControl.DefaultAudioOutput.ToString());
                 AppSettings.Set("IsAsioAutoRestart", "false");
+                AppSettings.SetFxDefaultSettings("DEFAudioEQPreset"); 
+                AppSettings.SetFxDefaultSettings("DEFAudioEQPreamp");
                 AppSettings.SetFxDefaultSettings("DEFAudioEQBand");
                 AppSettings.SetFxDefaultSettings("DEFCH1EQ1band");
                 AppSettings.SetFxDefaultSettings("DEFCH1Comp");
@@ -136,9 +140,10 @@ namespace bossdoyKaraoke_NOW
                 AppSettings.SetFxDefaultSettings("DEFCH1EQ4bandPhone");
                 AppSettings.SetFxDefaultSettings("DEFCH1DeEsser");
                 //AppSettings.SetFxDefaultSettings("DEFCH1EQ1band", "CH1", "CH2");
-               // AppSettings.SetFxDefaultSettings("DEFCH1Comp", "CH1", "CH2");
-               // AppSettings.SetFxDefaultSettings("DEFCH1EQ4band", "CH1", "CH2");
-              //  AppSettings.SetFxDefaultSettings("DEFCH1DeEsser", "CH1", "CH2"); 
+                // AppSettings.SetFxDefaultSettings("DEFCH1Comp", "CH1", "CH2");
+                // AppSettings.SetFxDefaultSettings("DEFCH1EQ4band", "CH1", "CH2");
+                //  AppSettings.SetFxDefaultSettings("DEFCH1DeEsser", "CH1", "CH2"); 
+                Equalizer.ArrBandValue[10].PreAmp = 120;
             }
 
             PlayerControl.DefaultAudioOutput = AppSettings.Get<DefaultAudioOutput>("DefaultAudioOutput");
@@ -174,8 +179,6 @@ namespace bossdoyKaraoke_NOW
                  targetPath = Path.Combine(Application.StartupPath, "x86");*/
             InitTimer();
 
-            m_equalizer = new Equalizer();
-
             if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Bass)
                 InitBass();
             if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Wasapi)
@@ -184,6 +187,7 @@ namespace bossdoyKaraoke_NOW
                 InitAsio();
 
             InitVlc();
+
             InitGraphics();
 
         }
@@ -468,6 +472,7 @@ namespace bossdoyKaraoke_NOW
                 {
                     m_timerVolume.Stop();
                     m_vlc.Volume(PlayerControl.VolumeScroll.Value);
+                    m_vlc.Stop();
                     playNextTrack();
                 }
             }
@@ -838,20 +843,37 @@ namespace bossdoyKaraoke_NOW
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateEQPresets(int preset)
+        {
+            m_equalizer.UpdateEQPresets(preset);
+        }
+
+        /// <summary>
         /// Update Equlizer Gain
         /// </summary>
         /// <param name="band">The band number tp update gain</param>
         /// <param name="gain">The gain value</param>
         public void UpdateEQ(int band, float gain)
         {
-            
-            if (m_IsPlayingCdg)
-                m_equalizer.UpdateEQBass(band, gain);
-            //  m_currentTrack.UpdateEQ(band, gain);
+            setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_SETTINGS);
 
-            if (m_IsPlayingVideo)
-                m_vlc.UpdateEQ(band, gain);
+            object arg = new object[] { band, gain };
+
+            startWorker(arg);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gain"></param>
+        public void UpdateEQPreamp(float gain)
+        {
+            m_equalizer.UpdateEQBassPreamp(gain);
+            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(gain));
+        }
+
 
         /// <summary>
         /// Mute and Unmute button
@@ -2517,7 +2539,7 @@ process.WaitForExit();*/
 
                             InitControls();
 
-                            //m_equalizer.Init(m_currentTrack.Channel);
+                            m_equalizer.Init(m_currentTrack.Channel);
                           
                             m_currentTrack.Volume = m_Volume;
 
@@ -2542,7 +2564,7 @@ process.WaitForExit();*/
                             }
 
 
-                            //m_equalizer.Init(-1);
+                            m_equalizer.Init(-1);
                             m_IsPlayingVideo = m_vlc.PlayVideo(m_MediaFileName);
 
                             /* if (Player.IsAsioInitialized)
@@ -2961,15 +2983,16 @@ process.WaitForExit();*/
         /// <param name="e"></param>
         void DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            
+            object fName = e.Argument;
 
-            string fName = (string)e.Argument;
             switch (getSEARCHDIRorTEXTState)
             {
                 case SearchAndLoad.SEARCH_DIRECTORY:
-                    e.Result = DirSearchSongs(fName);
+                    e.Result = DirSearchSongs(fName.ToString());
                     break;
                 case SearchAndLoad.SEARCH_TEXTFILE:
-                    e.Result = TextSearchSongs(fName);
+                    e.Result = TextSearchSongs(fName.ToString());
                     break;
                 case SearchAndLoad.LOAD_QUEUE_SONGS:
                     e.Result = LoadQueueSongs();
@@ -2979,13 +3002,13 @@ process.WaitForExit();*/
                     e.Result = null;
                     break;
                 case SearchAndLoad.SEARCH_LISTVIEW:
-                    e.Result = SearchListView(fName);
+                    e.Result = SearchListView(fName.ToString());
                     break;
                 case SearchAndLoad.SHUFFLE_SONGS:
                     e.Result = Shuffle();
                     break;
                 case SearchAndLoad.SORT_SONGS:
-                    e.Result = SortList(int.Parse(fName));
+                    e.Result = SortList(int.Parse(fName.ToString()));
                     break;
                 case SearchAndLoad.LOAD_FAVORITES:
                     e.Result = m_favoritesArr[m_selected_treenode];
@@ -2994,10 +3017,19 @@ process.WaitForExit();*/
                     e.Result = m_songsArr[m_selected_treenode];
                     break;
                 case SearchAndLoad.ADD_SELECTED_SONG_TO_QUEUE:
-                   // on_SongListView_Item_Selected();
+                    // on_SongListView_Item_Selected();
                     break;
                 case SearchAndLoad.WRITE_TO_QUEUE_LIST:
                     WriteToQueueList();
+                    e.Result = null;
+                    break;
+                case SearchAndLoad.UPDATE_EQ_SETTINGS:
+                    object[] obj = fName as object[];
+
+                    int band = (int)obj[0];
+                    float gain = (float)obj[1];
+                    m_equalizer.UpdateEQBass(band, gain);
+                    m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
                     e.Result = null;
                     break;
             }
@@ -3032,15 +3064,6 @@ process.WaitForExit();*/
                         string[] filePathArray = items.ToArray<string>();
                         Directory.CreateDirectory(fPath);
                         File.WriteAllLines(fPath + filename + ".bkN", filePathArray);
-
-                        m_bgws.Remove(bgw);
-                        bgw.Dispose();
-
-                        if (m_bgws.Count == 0 && m_IsSearchingListView && PlayerControl.AllSongs != null)
-                        {
-                            PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
-                            PlayerControl.SongListView.Refresh();
-                        }
                         break;
                     case SearchAndLoad.SEARCH_TEXTFILE:
                     case SearchAndLoad.LOAD_QUEUE_SONGS:
@@ -3054,19 +3077,14 @@ process.WaitForExit();*/
 
                         PlayerControl.AllSongs = new List<ListViewItem>();
                         PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
-
-                        m_bgws.Remove(bgw);
-                        bgw.Dispose();
-
-                        if (m_bgws.Count == 0 && m_IsSearchingListView && PlayerControl.AllSongs != null)
-                        {
-                            PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
-                            PlayerControl.SongListView.Refresh();
-                        }
                         break;
                     case SearchAndLoad.WRITE_TO_QUEUE_LIST:
 
                         break;
+                    case SearchAndLoad.UPDATE_EQ_SETTINGS:
+
+                        break;
+
 
                 }
               /*  if (getSEARCHDIRorTEXTState == SearchAndLoad.SEARCH_DIRECTORY)
@@ -3080,14 +3098,14 @@ process.WaitForExit();*/
                     File.WriteAllLines(fPath + filename + ".bkN", filePathArray);
                 }*/
 
-               /* m_bgws.Remove(bgw);
+                m_bgws.Remove(bgw);
                 bgw.Dispose();
 
                 if (m_bgws.Count == 0 && m_IsSearchingListView && PlayerControl.AllSongs != null)
                 {
                     PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
                     PlayerControl.SongListView.Refresh();
-                }*/
+                }
                 // MessageBox.Show("All workers complete");
             }
             catch (Exception ex)

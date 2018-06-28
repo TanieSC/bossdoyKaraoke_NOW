@@ -145,14 +145,14 @@ namespace bossdoyKaraoke_NOW.Models
                                   GetAsioInputChannels.Add(chanInfo);
 
                               if (chanInfo.name.Contains("VB-Audio Point 1"))
-                                  GetVlcAsioInputChannel = i;
+                                  VlcAsioInputChannel = i;
                           }
 
                           for (int o = 0; o < asioinfo.outputs; o += 2)
                           {
                               BASS_ASIO_CHANNELINFO chanInfo = BassAsio.BASS_ASIO_ChannelGetInfo(false, o);
                               if (chanInfo != null)
-                                  GetAsioOutputChannels.Add(chanInfo);
+                                  AsioOutputChannels.Add(chanInfo);
                           }
 
                       }
@@ -220,10 +220,10 @@ namespace bossdoyKaraoke_NOW.Models
             }
 
               //BassAsio.BASS_ASIO_ControlPanel();
-              BassAsio.BASS_ASIO_ChannelEnable(true, GetVlcAsioInputChannel, _asioProc, new IntPtr(StreamInputVlc));
-              BassAsio.BASS_ASIO_ChannelJoin(true, GetVlcAsioInputChannel + 1, GetVlcAsioInputChannel);
-              BassAsio.BASS_ASIO_ChannelSetFormat(true, GetVlcAsioInputChannel, BASSASIOFormat.BASS_ASIO_FORMAT_FLOAT);
-              BassAsio.BASS_ASIO_ChannelSetRate(true, GetVlcAsioInputChannel, samplerate);
+              BassAsio.BASS_ASIO_ChannelEnable(true, VlcAsioInputChannel, _asioProc, new IntPtr(StreamInputVlc));
+              BassAsio.BASS_ASIO_ChannelJoin(true, VlcAsioInputChannel + 1, VlcAsioInputChannel);
+              BassAsio.BASS_ASIO_ChannelSetFormat(true, VlcAsioInputChannel, BASSASIOFormat.BASS_ASIO_FORMAT_FLOAT);
+              BassAsio.BASS_ASIO_ChannelSetRate(true, VlcAsioInputChannel, samplerate);
               BassAsio.BASS_ASIO_SetRate(samplerate);
 
               BassAsio.BASS_ASIO_ChannelEnable(true, m_inputChannel, _asioProc, new IntPtr(m_streamInputMic));
@@ -330,19 +330,19 @@ namespace bossdoyKaraoke_NOW.Models
         public static List<object> GetAsioInputChannels 
         {
             get { return m_asioInputChannels;  }
-            set { m_asioInputChannels = value; }
+            private set { m_asioInputChannels = value; }
         }
 
-        public static List<object> GetAsioOutputChannels
+        public static List<object> AsioOutputChannels
         {
             get { return m_asioOutputChannels; }
-            set { m_asioOutputChannels = value; }
+            private set { m_asioOutputChannels = value; }
         }
 
-        public static int GetVlcAsioInputChannel
+        public static int VlcAsioInputChannel
         {
             get { return m_vlcAsioInputChannel; }
-            set { m_vlcAsioInputChannel = value; }
+            private set { m_vlcAsioInputChannel = value; }
         }
 
         public static int asioOuputChannel
