@@ -2374,5 +2374,14 @@ namespace bossdoyKaraoke_NOW.Properties {
                 return ((string)(this["DEFAudioEQBand9"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string DEFAudioEQPreset {
+            get {
+                return ((string)(this["DEFAudioEQPreset"]));
+            }
+        }
     }
 }

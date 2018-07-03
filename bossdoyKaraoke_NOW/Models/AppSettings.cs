@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using bossdoyKaraoke_NOW.Nlog;
 using bossdoyKaraoke_NOW.Properties;
 using Microsoft.Win32;
 
@@ -19,27 +20,49 @@ namespace bossdoyKaraoke_NOW.Models
 
         private static void AddProperty(string key, string value) {
 
-            SettingsProperty newProp = new SettingsProperty(key);
-            newProp.PropertyType = typeof(string);
+            try
+            { 
 
-            newProp.SerializeAs = SettingsSerializeAs.String;
-            newProp.DefaultValue = string.Empty;
-            newProp.Provider = Settings.Default.Providers["LocalFileSettingsProvider"];
-            newProp.Attributes.Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());  //.Add(getType(Configuration.UserScopedSettingAttribute), New Configuration.UserScopedSettingAttribute())
+              //  if (Settings.Default.Properties[key] == null)
+              //  {
+                    SettingsProperty newProp = new SettingsProperty(key)
+                    {
+                        PropertyType = typeof(string),
+                        SerializeAs = SettingsSerializeAs.String,
+                        DefaultValue = string.Empty,
+                        Provider = Settings.Default.Providers["LocalFileSettingsProvider"],
+                    };
 
-            SettingsPropertyValue newPropValue = new SettingsPropertyValue(newProp);
-            newPropValue.PropertyValue = value;
+                    newProp.Attributes.Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());  //.Add(getType(Configuration.UserScopedSettingAttribute), New Configuration.UserScopedSettingAttribute())
 
-            Settings.Default.Properties.Add(newProp);
-            Settings.Default.PropertyValues.Add(newPropValue);
-            Settings.Default.Save();
+                    SettingsPropertyValue newPropValue = new SettingsPropertyValue(newProp);
+                    newPropValue.PropertyValue = value;
+
+                    Settings.Default.Properties.Add(newProp);
+                    Settings.Default.PropertyValues.Add(newPropValue);
+                    Settings.Default.Save();
+              //  }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "AddProperty", ex.LineNumber(), "AppSettings Class");
+
+            }
         }
 
         public static void Initialize()
         {
-            m_config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            m_entry = m_config.GetSectionGroup("userSettings").Sections["bossdoyKaraoke_NOW.Properties.Settings"] as ClientSettingsSection;
+            try
+            {
+                m_config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                m_entry = m_config.GetSectionGroup("userSettings").Sections["bossdoyKaraoke_NOW.Properties.Settings"] as ClientSettingsSection;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "Initialize", ex.LineNumber(), "AppSettings Class");
 
+            }
         }
 
         /*  public static void Set(string key, string value)
@@ -72,8 +95,7 @@ namespace bossdoyKaraoke_NOW.Models
         {
             try
             {
-                SettingsProperty sp = Settings.Default.Properties[key];
-                if (sp != null)
+                if (Settings.Default.Properties[key] != null)
                 {
                     Settings.Default[key] = value;
                     Settings.Default.Save();
@@ -85,7 +107,8 @@ namespace bossdoyKaraoke_NOW.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.LogFile(ex.Message, "", "Set", ex.LineNumber(), "AppSettings Class");
+
             }
         }
 
@@ -137,24 +160,32 @@ namespace bossdoyKaraoke_NOW.Models
 
         public static void SetFxDefaultSettings(string key, string replaceOldStringPortionOfKey = null, string newStringPortionOfKey = null)
         {
-            Settings.Default.Properties.Cast<SettingsProperty>().OrderBy(s => s.Name).Select(d =>
+            try
             {
-                bool isname = d.Name.Contains(key);
-                string name = string.Empty;
-                if (isname)
+                Settings.Default.Properties.Cast<SettingsProperty>().OrderBy(s => s.Name).Select(d =>
                 {
-                    if (replaceOldStringPortionOfKey == null && newStringPortionOfKey == null)
-                        name = d.Name.Remove(0, 3);
-                    else
-                        name = d.Name.Remove(0, 3).Replace(replaceOldStringPortionOfKey, newStringPortionOfKey);
+                    bool isname = d.Name.Contains(key);
+                    string name = string.Empty;
+                    if (isname)
+                    {
+                        if (replaceOldStringPortionOfKey == null && newStringPortionOfKey == null)
+                            name = d.Name.Remove(0, 3);
+                        else
+                            name = d.Name.Remove(0, 3).Replace(replaceOldStringPortionOfKey, newStringPortionOfKey);
 
-                    Set(name, d.DefaultValue.ToString());
-                    
-                }
+                        Set(name, d.DefaultValue.ToString());
 
-                return string.Empty;
+                    }
 
-            }).ToArray();
+                    return string.Empty;
+
+                }).ToArray();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "SetFxDefaultSettings", ex.LineNumber(), "AppSettings Class");
+
+            }
         }
 
 

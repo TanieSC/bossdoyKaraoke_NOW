@@ -28,7 +28,10 @@ namespace bossdoyKaraoke_NOW.Enums
             LOAD_ADDED_SONGS,
             ADD_SELECTED_SONG_TO_QUEUE,
             WRITE_TO_QUEUE_LIST,
-            UPDATE_EQ_SETTINGS
+            SAVE_EQ_SETTINGS,
+            UPDATE_EQ_SETTINGS,
+            UPDATE_EQ_PRESET,
+            UPDATE_EQ_PREAMP
         }
 
         /// <summary>

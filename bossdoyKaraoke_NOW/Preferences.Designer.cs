@@ -244,7 +244,7 @@
             // 
             this.lblPreampGain.Location = new System.Drawing.Point(33, 258);
             this.lblPreampGain.Name = "lblPreampGain";
-            this.lblPreampGain.Size = new System.Drawing.Size(29, 13);
+            this.lblPreampGain.Size = new System.Drawing.Size(31, 13);
             this.lblPreampGain.TabIndex = 72;
             this.lblPreampGain.Text = "0";
             this.lblPreampGain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -272,7 +272,9 @@
             this.trackBarPreamp.TabIndex = 70;
             this.trackBarPreamp.TickFrequency = 50;
             this.trackBarPreamp.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarPreamp.Scroll += new System.EventHandler(this.trackBarPreamp_Scroll);
             this.trackBarPreamp.ValueChanged += new System.EventHandler(this.trackBarPreamp_ValueChanged);
+            this.trackBarPreamp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarPreamp_MouseUp);
             // 
             // trackBarEQ0
             // 
@@ -289,6 +291,7 @@
             this.trackBarEQ0.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trackBarEQ0.Scroll += new System.EventHandler(this.trackBarEQ0_Scroll);
             this.trackBarEQ0.ValueChanged += new System.EventHandler(this.trackBarEQ0_ValueChanged);
+            this.trackBarEQ0.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ0_MouseUp);
             // 
             // trackBarEQ1
             // 
@@ -303,7 +306,9 @@
             this.trackBarEQ1.TabIndex = 41;
             this.trackBarEQ1.TickFrequency = 50;
             this.trackBarEQ1.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ1.Scroll += new System.EventHandler(this.trackBarEQ1_Scroll);
             this.trackBarEQ1.ValueChanged += new System.EventHandler(this.trackBarEQ1_ValueChanged);
+            this.trackBarEQ1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ1_MouseUp);
             // 
             // trackBarEQ2
             // 
@@ -318,7 +323,9 @@
             this.trackBarEQ2.TabIndex = 42;
             this.trackBarEQ2.TickFrequency = 50;
             this.trackBarEQ2.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ2.Scroll += new System.EventHandler(this.trackBarEQ2_Scroll);
             this.trackBarEQ2.ValueChanged += new System.EventHandler(this.trackBarEQ2_ValueChanged);
+            this.trackBarEQ2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ2_MouseUp);
             // 
             // trackBarEQ3
             // 
@@ -333,7 +340,9 @@
             this.trackBarEQ3.TabIndex = 43;
             this.trackBarEQ3.TickFrequency = 50;
             this.trackBarEQ3.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ3.Scroll += new System.EventHandler(this.trackBarEQ3_Scroll);
             this.trackBarEQ3.ValueChanged += new System.EventHandler(this.trackBarEQ3_ValueChanged);
+            this.trackBarEQ3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ3_MouseUp);
             // 
             // trackBarEQ4
             // 
@@ -348,7 +357,9 @@
             this.trackBarEQ4.TabIndex = 44;
             this.trackBarEQ4.TickFrequency = 50;
             this.trackBarEQ4.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ4.Scroll += new System.EventHandler(this.trackBarEQ4_Scroll);
             this.trackBarEQ4.ValueChanged += new System.EventHandler(this.trackBarEQ4_ValueChanged);
+            this.trackBarEQ4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ4_MouseUp);
             // 
             // trackBarEQ5
             // 
@@ -363,7 +374,9 @@
             this.trackBarEQ5.TabIndex = 45;
             this.trackBarEQ5.TickFrequency = 50;
             this.trackBarEQ5.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ5.Scroll += new System.EventHandler(this.trackBarEQ5_Scroll);
             this.trackBarEQ5.ValueChanged += new System.EventHandler(this.trackBarEQ5_ValueChanged);
+            this.trackBarEQ5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ5_MouseUp);
             // 
             // trackBarEQ6
             // 
@@ -378,7 +391,9 @@
             this.trackBarEQ6.TabIndex = 46;
             this.trackBarEQ6.TickFrequency = 50;
             this.trackBarEQ6.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ6.Scroll += new System.EventHandler(this.trackBarEQ6_Scroll);
             this.trackBarEQ6.ValueChanged += new System.EventHandler(this.trackBarEQ6_ValueChanged);
+            this.trackBarEQ6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ6_MouseUp);
             // 
             // trackBarEQ7
             // 
@@ -393,85 +408,87 @@
             this.trackBarEQ7.TabIndex = 47;
             this.trackBarEQ7.TickFrequency = 50;
             this.trackBarEQ7.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ7.Scroll += new System.EventHandler(this.trackBarEQ7_Scroll);
             this.trackBarEQ7.ValueChanged += new System.EventHandler(this.trackBarEQ7_ValueChanged);
+            this.trackBarEQ7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ7_MouseUp);
             // 
             // lblBand10
             // 
-            this.lblBand10.Location = new System.Drawing.Point(440, 258);
+            this.lblBand10.Location = new System.Drawing.Point(439, 258);
             this.lblBand10.Name = "lblBand10";
-            this.lblBand10.Size = new System.Drawing.Size(29, 13);
+            this.lblBand10.Size = new System.Drawing.Size(31, 13);
             this.lblBand10.TabIndex = 69;
             this.lblBand10.Text = "0";
             this.lblBand10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand9
             // 
-            this.lblBand9.Location = new System.Drawing.Point(403, 258);
+            this.lblBand9.Location = new System.Drawing.Point(402, 258);
             this.lblBand9.Name = "lblBand9";
-            this.lblBand9.Size = new System.Drawing.Size(29, 13);
+            this.lblBand9.Size = new System.Drawing.Size(31, 13);
             this.lblBand9.TabIndex = 68;
             this.lblBand9.Text = "0";
             this.lblBand9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand8
             // 
-            this.lblBand8.Location = new System.Drawing.Point(367, 258);
+            this.lblBand8.Location = new System.Drawing.Point(366, 258);
             this.lblBand8.Name = "lblBand8";
-            this.lblBand8.Size = new System.Drawing.Size(29, 13);
+            this.lblBand8.Size = new System.Drawing.Size(31, 13);
             this.lblBand8.TabIndex = 67;
             this.lblBand8.Text = "0";
             this.lblBand8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand7
             // 
-            this.lblBand7.Location = new System.Drawing.Point(331, 258);
+            this.lblBand7.Location = new System.Drawing.Point(330, 258);
             this.lblBand7.Name = "lblBand7";
-            this.lblBand7.Size = new System.Drawing.Size(29, 13);
+            this.lblBand7.Size = new System.Drawing.Size(31, 13);
             this.lblBand7.TabIndex = 66;
             this.lblBand7.Text = "0";
             this.lblBand7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand6
             // 
-            this.lblBand6.Location = new System.Drawing.Point(295, 258);
+            this.lblBand6.Location = new System.Drawing.Point(294, 258);
             this.lblBand6.Name = "lblBand6";
-            this.lblBand6.Size = new System.Drawing.Size(29, 13);
+            this.lblBand6.Size = new System.Drawing.Size(31, 13);
             this.lblBand6.TabIndex = 65;
             this.lblBand6.Text = "0";
             this.lblBand6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand5
             // 
-            this.lblBand5.Location = new System.Drawing.Point(258, 258);
+            this.lblBand5.Location = new System.Drawing.Point(257, 258);
             this.lblBand5.Name = "lblBand5";
-            this.lblBand5.Size = new System.Drawing.Size(29, 13);
+            this.lblBand5.Size = new System.Drawing.Size(31, 13);
             this.lblBand5.TabIndex = 64;
             this.lblBand5.Text = "0";
             this.lblBand5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand4
             // 
-            this.lblBand4.Location = new System.Drawing.Point(223, 258);
+            this.lblBand4.Location = new System.Drawing.Point(222, 258);
             this.lblBand4.Name = "lblBand4";
-            this.lblBand4.Size = new System.Drawing.Size(29, 13);
+            this.lblBand4.Size = new System.Drawing.Size(31, 13);
             this.lblBand4.TabIndex = 63;
             this.lblBand4.Text = "0";
             this.lblBand4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand3
             // 
-            this.lblBand3.Location = new System.Drawing.Point(186, 258);
+            this.lblBand3.Location = new System.Drawing.Point(185, 258);
             this.lblBand3.Name = "lblBand3";
-            this.lblBand3.Size = new System.Drawing.Size(29, 13);
+            this.lblBand3.Size = new System.Drawing.Size(31, 13);
             this.lblBand3.TabIndex = 62;
             this.lblBand3.Text = "0";
             this.lblBand3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBand2
             // 
-            this.lblBand2.Location = new System.Drawing.Point(150, 258);
+            this.lblBand2.Location = new System.Drawing.Point(149, 258);
             this.lblBand2.Name = "lblBand2";
-            this.lblBand2.Size = new System.Drawing.Size(29, 13);
+            this.lblBand2.Size = new System.Drawing.Size(31, 13);
             this.lblBand2.TabIndex = 61;
             this.lblBand2.Text = "0";
             this.lblBand2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -488,9 +505,9 @@
             // 
             // lblBand1
             // 
-            this.lblBand1.Location = new System.Drawing.Point(114, 258);
+            this.lblBand1.Location = new System.Drawing.Point(113, 258);
             this.lblBand1.Name = "lblBand1";
-            this.lblBand1.Size = new System.Drawing.Size(29, 13);
+            this.lblBand1.Size = new System.Drawing.Size(31, 13);
             this.lblBand1.TabIndex = 59;
             this.lblBand1.Text = "0";
             this.lblBand1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -608,7 +625,9 @@
             this.trackBarEQ8.TabIndex = 48;
             this.trackBarEQ8.TickFrequency = 50;
             this.trackBarEQ8.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ8.Scroll += new System.EventHandler(this.trackBarEQ8_Scroll);
             this.trackBarEQ8.ValueChanged += new System.EventHandler(this.trackBarEQ8_ValueChanged);
+            this.trackBarEQ8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ8_MouseUp);
             // 
             // zerolbl2
             // 
@@ -659,7 +678,9 @@
             this.trackBarEQ9.TabIndex = 33;
             this.trackBarEQ9.TickFrequency = 50;
             this.trackBarEQ9.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarEQ9.Scroll += new System.EventHandler(this.trackBarEQ9_Scroll);
             this.trackBarEQ9.ValueChanged += new System.EventHandler(this.trackBarEQ9_ValueChanged);
+            this.trackBarEQ9.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarEQ9_MouseUp);
             // 
             // pos12lbl2
             // 

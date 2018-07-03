@@ -785,5 +785,8 @@
     <Setting Name="DEFAudioEQBand9" Type="System.String" Scope="Application">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="DEFAudioEQPreset" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

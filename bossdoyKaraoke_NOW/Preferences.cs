@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using bossdoyKaraoke_NOW.Enums;
 using bossdoyKaraoke_NOW.Models;
 using bossdoyKaraoke_NOW.Models.VocalEffects;
+using bossdoyKaraoke_NOW.Nlog;
 using Un4seen.Bass;
 using Un4seen.BassAsio;
 using Un4seen.BassWasapi;
@@ -26,6 +27,7 @@ namespace bossdoyKaraoke_NOW
         FolderBrowserDialog m_fbd = new FolderBrowserDialog();
 
         private Implementation.Equalizer m_equalizer;
+        private Equalizer.BandValue[] defBandValue = new Equalizer.BandValue[12];
         private bool m_inputDev;
         private bool m_outputDev;
         private bool m_EQdefault;
@@ -43,136 +45,152 @@ namespace bossdoyKaraoke_NOW
 
         private void Preferences_Load(object sender, EventArgs e)
         {
-            PrefTabControl.SelectTab(PlayerControl.PRefsTabIndex);
-            m_tooltip.SetToolTip(chkBoxRefreshAsio, "Enable this option when noise artifact is present in audio.");
-
-            string videoDir = Main_Form.iniFileHelper.Read("Video", "Video Path");
-
-            videoLbl.Text = videoDir == string.Empty ? "Video: Default" : "Video: " + videoDir;
-
-            if (videoDir == string.Empty) videoDir = VlcPlayer.BGVideoPath + @"VIDEO_NATURE\";
-
-            PlayerControl.GetVideoBG(videoDir);
-
-            PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Name");
-
-            DataRow dr = dt.NewRow();
-            dr["Name"] = "";
-            dr["ID"] = 0;
-
-            dt.Rows.Add(dr);
-
-            for (int i = 0; i < VlcPlayer.EqPresets.Values.Count(); i++)
+            try
             {
-                dr = dt.NewRow();
-                dr["Name"] = VlcPlayer.EqPresets[i].Name;
-                dr["ID"] = VlcPlayer.EqPresets[i].Index;
 
-                dt.Rows.Add(dr);
-            }
+                PrefTabControl.SelectTab(PlayerControl.PRefsTabIndex);
+                m_tooltip.SetToolTip(chkBoxRefreshAsio, "Enable this option when noise artifact is present in audio.");
 
-            comboBoxEQPresets.DataSource = dt;// VlcPlayer.EqPresets.Values.ToList();
-            comboBoxEQPresets.DisplayMember = "Name";
-            comboBoxEQPresets.DropDownStyle = ComboBoxStyle.DropDownList;
+                string videoDir = Main_Form.iniFileHelper.Read("Video", "Video Path");
 
-            comboBoxEQPresets.SelectedIndex = Equalizer.ArrBandValue[11].PreSet;
+                videoLbl.Text = videoDir == string.Empty ? "Video: Default" : "Video: " + videoDir;
 
-            SetBandGain();
+                if (videoDir == string.Empty) videoDir = VlcPlayer.BGVideoPath + @"VIDEO_NATURE\";
 
-            if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Bass)
-            {
-                radioBtnBass.Checked = true;
-                asio_control_btn.Enabled = false;
-            }
+                PlayerControl.GetVideoBG(videoDir);
 
-            if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Wasapi)
-            {
-                radioBtnWasapi.Checked = true;
-                asio_control_btn.Enabled = false;
-            }
+                PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
 
-            if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Asio)
-            {
-                radioBtnAsio.Checked = true;
-                asio_control_btn.Enabled = true;
-            }
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ID", typeof(int));
+                dt.Columns.Add("Name");
 
-            if (Player.IsWasapiInitialized)
-            {
-                int defaulInputDevice = 0;
-                int defaulOutputDevice = 0;
-                this.comboBoxInputDevice.Items.Clear();
-                this.comboBoxOutputDevice.Items.Clear();
-                BASS_WASAPI_DEVICEINFO[] wasapiDevices = BassWasapi.BASS_WASAPI_GetDeviceInfos();
-                for (int i = 0; i < wasapiDevices.Length; i++)
+                DataRow dr = dt.NewRow();
+
+                if (Equalizer.ArrBandValue[11].PreSet == -1)
                 {
-                    BASS_WASAPI_DEVICEINFO info = wasapiDevices[i];
+                    dr["Name"] = "";
+                    dr["ID"] = 0;
 
-                    if (info.IsEnabled && info.IsInput)
-                    {
-                        defaulInputDevice = i;
-                        int index = this.comboBoxInputDevice.Items.Add(new DeviceInfo(info, defaulInputDevice)); //string.Format("{0} - {1}", i, info.name));
-                        if (info.IsDefault)
-                            this.comboBoxInputDevice.SelectedIndex = index;
+                    dt.Rows.Add(dr);
 
-                        //defaulInputDevice++;
-                    }
+                    defBandValue = Equalizer.ArrBandValue;
 
-                    if (info.IsEnabled && !info.IsInput)
-                    {
-                        defaulOutputDevice = i;
-                        int index = this.comboBoxOutputDevice.Items.Add(new DeviceInfo(info, defaulOutputDevice));
-                        if (info.IsDefault)
-                            this.comboBoxOutputDevice.SelectedIndex = index;
-
-                        // defaulOutputDevice++;
-                    }
                 }
 
-                RefreshEffects();
+                for (int i = 0; i < VlcPlayer.EqPresets.Values.Count(); i++)
+                {
+                    dr = dt.NewRow();
+                    dr["Name"] = VlcPlayer.EqPresets[i].Name;
+                    dr["ID"] = VlcPlayer.EqPresets[i].Index;
+
+                    dt.Rows.Add(dr);
+                }
+
+                comboBoxEQPresets.DataSource = dt;// VlcPlayer.EqPresets.Values.ToList();
+                comboBoxEQPresets.DisplayMember = "Name";
+                comboBoxEQPresets.DropDownStyle = ComboBoxStyle.DropDownList;
+
+                comboBoxEQPresets.SelectedIndex = Equalizer.ArrBandValue[11].PreSet;
+
+                SetBandGain();
+
+                if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Bass)
+                {
+                    radioBtnBass.Checked = true;
+                    asio_control_btn.Enabled = false;
+                }
+
+                if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Wasapi)
+                {
+                    radioBtnWasapi.Checked = true;
+                    asio_control_btn.Enabled = false;
+                }
+
+                if (PlayerControl.DefaultAudioOutput == DefaultAudioOutput.Asio)
+                {
+                    radioBtnAsio.Checked = true;
+                    asio_control_btn.Enabled = true;
+                }
+
+                if (Player.IsWasapiInitialized)
+                {
+                    int defaulInputDevice = 0;
+                    int defaulOutputDevice = 0;
+                    this.comboBoxInputDevice.Items.Clear();
+                    this.comboBoxOutputDevice.Items.Clear();
+                    BASS_WASAPI_DEVICEINFO[] wasapiDevices = BassWasapi.BASS_WASAPI_GetDeviceInfos();
+                    for (int i = 0; i < wasapiDevices.Length; i++)
+                    {
+                        BASS_WASAPI_DEVICEINFO info = wasapiDevices[i];
+
+                        if (info.IsEnabled && info.IsInput)
+                        {
+                            defaulInputDevice = i;
+                            int index = this.comboBoxInputDevice.Items.Add(new DeviceInfo(info, defaulInputDevice)); //string.Format("{0} - {1}", i, info.name));
+                            if (info.IsDefault)
+                                this.comboBoxInputDevice.SelectedIndex = index;
+
+                            //defaulInputDevice++;
+                        }
+
+                        if (info.IsEnabled && !info.IsInput)
+                        {
+                            defaulOutputDevice = i;
+                            int index = this.comboBoxOutputDevice.Items.Add(new DeviceInfo(info, defaulOutputDevice));
+                            if (info.IsDefault)
+                                this.comboBoxOutputDevice.SelectedIndex = index;
+
+                            // defaulOutputDevice++;
+                        }
+                    }
+
+                    RefreshEffects();
+                }
+
+                if (Player.IsAsioInitialized)
+                {
+                    this.comboBoxInputDevice.Items.Clear();
+                    this.comboBoxInputDevice.Items.AddRange(BassAsioDevice.GetAsioInputChannels.ToArray());
+                    if (this.comboBoxInputDevice.Items.Count > 0)
+                        this.comboBoxInputDevice.SelectedIndex = BassAsioDevice.inputDevice;
+
+                    this.comboBoxOutputDevice.Items.Clear();
+                    this.comboBoxOutputDevice.Items.AddRange(BassAsioDevice.AsioOutputChannels.ToArray());
+                    if (this.comboBoxOutputDevice.Items.Count > 0)
+                        this.comboBoxOutputDevice.SelectedIndex = BassAsioDevice.outputDevice;
+
+                    microphone_setting.Enabled = true;
+
+                    if (AppSettings.Get<bool>("IsAsioAutoRestart"))
+                        chkBoxRefreshAsio.Checked = true;
+                    else
+                        chkBoxRefreshAsio.Checked = false;
+
+                    chkBoxRefreshAsio.Enabled = true;
+
+                    groupMicrophoneEffects.Enabled = true;
+
+                    RefreshEffects();
+                }
+
+                if (Player.IsBassInitialized)
+                {
+                    this.comboBoxOutputDevice.Items.Clear();
+                    this.comboBoxOutputDevice.Items.AddRange(Bass.BASS_GetDeviceInfos());
+
+                    if (this.comboBoxOutputDevice.Items.Count > 0)
+                        this.comboBoxOutputDevice.SelectedIndex = Player.DefaultDevice;
+
+                    microphone_setting.Enabled = false;
+                    chkBoxRefreshAsio.Enabled = false;
+                    groupMicrophoneEffects.Enabled = false;
+                }
             }
-
-            if (Player.IsAsioInitialized)
+            catch (Exception ex)
             {
-                this.comboBoxInputDevice.Items.Clear();
-                this.comboBoxInputDevice.Items.AddRange(BassAsioDevice.GetAsioInputChannels.ToArray());
-                if (this.comboBoxInputDevice.Items.Count > 0)
-                    this.comboBoxInputDevice.SelectedIndex = BassAsioDevice.inputDevice;
+                Logger.LogFile(ex.Message, "", "Preferences_Load", ex.LineNumber(), this.Name);
 
-                this.comboBoxOutputDevice.Items.Clear();
-                this.comboBoxOutputDevice.Items.AddRange(BassAsioDevice.AsioOutputChannels.ToArray());
-                if (this.comboBoxOutputDevice.Items.Count > 0)
-                    this.comboBoxOutputDevice.SelectedIndex = BassAsioDevice.outputDevice;
-
-                microphone_setting.Enabled = true;
-
-                if (AppSettings.Get<bool>("IsAsioAutoRestart"))
-                    chkBoxRefreshAsio.Checked = true;
-                else
-                    chkBoxRefreshAsio.Checked = false;
-
-                chkBoxRefreshAsio.Enabled = true;
-
-                groupMicrophoneEffects.Enabled = true;
-
-                RefreshEffects();
-            }
-
-            if (Player.IsBassInitialized)
-            {
-                this.comboBoxOutputDevice.Items.Clear();
-                this.comboBoxOutputDevice.Items.AddRange(Bass.BASS_GetDeviceInfos());
-
-                if (this.comboBoxOutputDevice.Items.Count > 0)
-                    this.comboBoxOutputDevice.SelectedIndex = Player.DefaultDevice;
-
-                microphone_setting.Enabled = false;
-                chkBoxRefreshAsio.Enabled = false;
-                groupMicrophoneEffects.Enabled = false;
             }
         }
 
@@ -208,71 +226,87 @@ namespace bossdoyKaraoke_NOW
                    WasapiDevice.Start();
 
                }*/
-            if (m_inputDev)
+            try
             {
-                if (Player.IsAsioInitialized)
+                if (m_inputDev)
                 {
-                    BassAsioDevice.inputDevice = comboBoxInputDevice.SelectedIndex;
-                    //groupMicrophoneEffects.Visible = false;
-                    BASS_ASIO_CHANNELINFO chanInfo = BassAsio.BASS_ASIO_ChannelGetInfo(true, comboBoxInputDevice.SelectedIndex * 2);
-                    BassAsioDevice.Stop();
-                    BassAsioDevice.SetDevice(comboBoxInputDevice.SelectedIndex * 2, comboBoxOutputDevice.SelectedIndex * 2);
-                    BassAsioDevice.Start();
-                    Effects.GetorSetFx = Effects.Load.CHANNETSTRIP;
-                    RefreshEffects();
-                    // groupMicrophoneEffects.Visible = true;
-                    m_inputDev = false;
-                    m_outputDev = false;
-                }
+                    if (Player.IsAsioInitialized)
+                    {
+                        BassAsioDevice.inputDevice = comboBoxInputDevice.SelectedIndex;
+                        //groupMicrophoneEffects.Visible = false;
+                        BASS_ASIO_CHANNELINFO chanInfo = BassAsio.BASS_ASIO_ChannelGetInfo(true, comboBoxInputDevice.SelectedIndex * 2);
+                        BassAsioDevice.Stop();
+                        BassAsioDevice.SetDevice(comboBoxInputDevice.SelectedIndex * 2, comboBoxOutputDevice.SelectedIndex * 2);
+                        BassAsioDevice.Start();
+                        Effects.GetorSetFx = Effects.Load.CHANNETSTRIP;
+                        RefreshEffects();
+                        // groupMicrophoneEffects.Visible = true;
+                        m_inputDev = false;
+                        m_outputDev = false;
+                    }
 
-                if (Player.IsWasapiInitialized)
-                {
-                    //Get the device index from the selected device
-                    DeviceInfo info = (DeviceInfo)comboBoxInputDevice.Items[comboBoxInputDevice.SelectedIndex];
-                    if (info == null) return;
+                    if (Player.IsWasapiInitialized)
+                    {
+                        //Get the device index from the selected device
+                        DeviceInfo info = (DeviceInfo)comboBoxInputDevice.Items[comboBoxInputDevice.SelectedIndex];
+                        if (info == null) return;
 
-                    WasapiDevice.Stop();
-                    WasapiDevice.SetDevice(info.WasapiDeviceNum, WasapiDevice.GetOutputDefaultDevice());
-                    WasapiDevice.Start();
+                        WasapiDevice.Stop();
+                        WasapiDevice.SetDevice(info.WasapiDeviceNum, WasapiDevice.GetOutputDefaultDevice());
+                        WasapiDevice.Start();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "comboBoxInputDevice_SelectedIndexChanged", ex.LineNumber(), this.Name);
+
             }
         }
 
         private void comboBoxOutputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (m_outputDev)
+            try
             {
-                if (Player.IsAsioInitialized)
+                if (m_outputDev)
                 {
-                    BassAsioDevice.outputDevice = comboBoxOutputDevice.SelectedIndex;
-                    //groupMicrophoneEffects.Visible = false;
-                    BASS_ASIO_CHANNELINFO chanInfo = BassAsio.BASS_ASIO_ChannelGetInfo(false, comboBoxOutputDevice.SelectedIndex * 2);
-                    BassAsioDevice.Stop();
-                    BassAsioDevice.SetDevice(comboBoxInputDevice.SelectedIndex * 2, comboBoxOutputDevice.SelectedIndex * 2);
-                    BassAsioDevice.Start();
-                    Effects.GetorSetFx = Effects.Load.CHANNETSTRIP;
-                    RefreshEffects();
-                    // groupMicrophoneEffects.Visible = true;
-                }
-                if (Player.IsWasapiInitialized)
-                {
-                    //Get the device index from the selected device
-                    DeviceInfo info = (DeviceInfo)comboBoxOutputDevice.Items[comboBoxOutputDevice.SelectedIndex];
-                    if (info == null) return;
+                    if (Player.IsAsioInitialized)
+                    {
+                        BassAsioDevice.outputDevice = comboBoxOutputDevice.SelectedIndex;
+                        //groupMicrophoneEffects.Visible = false;
+                        BASS_ASIO_CHANNELINFO chanInfo = BassAsio.BASS_ASIO_ChannelGetInfo(false, comboBoxOutputDevice.SelectedIndex * 2);
+                        BassAsioDevice.Stop();
+                        BassAsioDevice.SetDevice(comboBoxInputDevice.SelectedIndex * 2, comboBoxOutputDevice.SelectedIndex * 2);
+                        BassAsioDevice.Start();
+                        Effects.GetorSetFx = Effects.Load.CHANNETSTRIP;
+                        RefreshEffects();
+                        // groupMicrophoneEffects.Visible = true;
+                    }
+                    if (Player.IsWasapiInitialized)
+                    {
+                        //Get the device index from the selected device
+                        DeviceInfo info = (DeviceInfo)comboBoxOutputDevice.Items[comboBoxOutputDevice.SelectedIndex];
+                        if (info == null) return;
 
-                    WasapiDevice.Stop();
+                        WasapiDevice.Stop();
 
-                    WasapiDevice.SetDevice(WasapiDevice.InputDevice, info.WasapiDeviceNum);
-                    WasapiDevice.Start();
-                }
-                if (Player.IsBassInitialized)
-                {
-                    Player.DefaultDevice = comboBoxOutputDevice.SelectedIndex;
-                    Bass.BASS_ChannelSetDevice(Player.Mixer, comboBoxOutputDevice.SelectedIndex);
-                }
+                        WasapiDevice.SetDevice(WasapiDevice.InputDevice, info.WasapiDeviceNum);
+                        WasapiDevice.Start();
+                    }
+                    if (Player.IsBassInitialized)
+                    {
+                        Player.DefaultDevice = comboBoxOutputDevice.SelectedIndex;
+                        Bass.BASS_ChannelSetDevice(Player.Mixer, comboBoxOutputDevice.SelectedIndex);
+                    }
 
-                m_outputDev = false;
-                m_inputDev = false;
+                    m_outputDev = false;
+                    m_inputDev = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "comboBoxOutputDevice_SelectedIndexChanged", ex.LineNumber(), this.Name);
+
             }
         }
 
@@ -387,28 +421,44 @@ namespace bossdoyKaraoke_NOW
 
         private void radioBtnBass_Click(object sender, EventArgs e)
         {
-            if (radioBtnBass.Checked)
+            try
             {
-                if (!m_isRequiredPuginsInstalled)
+                if (radioBtnBass.Checked)
                 {
-                    AppSettings.Set("DefaultAudioOutput", DefaultAudioOutput.Bass.ToString());
-                    this.Close();
-                    Application.Restart();
-                    Environment.Exit(0);
+                    if (!m_isRequiredPuginsInstalled)
+                    {
+                        AppSettings.Set("DefaultAudioOutput", DefaultAudioOutput.Bass.ToString());
+                        this.Close();
+                        Application.Restart();
+                        Environment.Exit(0);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "radioBtnBass_Click", ex.LineNumber(), this.Name);
+
             }
         }
 
         private void radioBtnWasapi_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Todo: Still having problem with audio, no sound.");
+            try
+            {
+                MessageBox.Show("Todo: Still having problem with audio, no sound.");
 
-            /*if (radioBtnWasapi.Checked) {
-                AppSettings.Set("DefaultAudioOutput", DefaultAudioOutput.Wasapi.ToString());
-                this.Close();
-                Application.Restart();
-                Environment.Exit(0);
-            }*/
+                /*if (radioBtnWasapi.Checked) {
+                    AppSettings.Set("DefaultAudioOutput", DefaultAudioOutput.Wasapi.ToString());
+                    this.Close();
+                    Application.Restart();
+                    Environment.Exit(0);
+                }*/
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "radioBtnWasapi_Click", ex.LineNumber(), this.Name);
+
+            }
         }
 
         private void radioBtnAsio_Click(object sender, EventArgs e)
@@ -418,47 +468,56 @@ namespace bossdoyKaraoke_NOW
             string v = string.Empty;
             string m = string.Empty;
 
-            if (radioBtnAsio.Checked)
+            try
             {
-                int count = 0;
-                for (int p = 0; p < m_puginsInstalled.Count(); p++)
+
+                if (radioBtnAsio.Checked)
                 {
-                    m_isRequiredPuginsInstalled = AppSettings.IsApplictionInstalled(m_puginsInstalled[p]); // AppSettings.CheckRequiredPluginsForBassasio("VBCABLE, The Virtual");
-                    if (!m_isRequiredPuginsInstalled)
+                    int count = 0;
+                    for (int p = 0; p < m_puginsInstalled.Count(); p++)
                     {
-                        Console.WriteLine(m_puginsInstalled[p]);
+                        m_isRequiredPuginsInstalled = AppSettings.IsApplictionInstalled(m_puginsInstalled[p]); // AppSettings.CheckRequiredPluginsForBassasio("VBCABLE, The Virtual");
+                        if (!m_isRequiredPuginsInstalled)
+                        {
+                            Console.WriteLine(m_puginsInstalled[p]);
 
-                        count += 1;
+                            count += 1;
 
-                        if (p == 0)
-                            a = "\n" + count + ". " + m_puginsInstalled[0] + " : " + "http://www.asio4all.org/";
-                        if (p == 1)
-                            v = "\n" + count + ". " + m_puginsInstalled[1] + " : " + "https://www.vb-audio.com/Cable/";
-                        if (p == 2)
-                            m = "\n" + count + ". " + m_puginsInstalled[2] + " : " + "https://www.meldaproduction.com/download/plugins";
+                            if (p == 0)
+                                a = "\n" + count + ". " + m_puginsInstalled[0] + " : " + "http://www.asio4all.org/";
+                            if (p == 1)
+                                v = "\n" + count + ". " + m_puginsInstalled[1] + " : " + "https://www.vb-audio.com/Cable/";
+                            if (p == 2)
+                                m = "\n" + count + ". " + m_puginsInstalled[2] + " : " + "https://www.meldaproduction.com/download/plugins";
 
-                        app = a + v + m;
+                            app = a + v + m;
+                        }
+
                     }
 
-                }
+                    if (count > 0)
+                        m_isRequiredPuginsInstalled = false;
 
-                if (count > 0)
-                    m_isRequiredPuginsInstalled = false;
+                    if (!m_isRequiredPuginsInstalled)
+                    {
+                        MessageBox.Show("To use Asio additional program(s) needs to be installed.\n" + app);
+                        radioBtnBass.Checked = true;
+                        radioBtnAsio.Checked = false;
+                        return;
+                    }
+                    else
+                    {
+                        AppSettings.Set("DefaultAudioOutput", DefaultAudioOutput.Asio.ToString());
+                        this.Close();
+                        Application.Restart();
+                        Environment.Exit(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "radioBtnAsio_Click", ex.LineNumber(), this.Name);
 
-                if (!m_isRequiredPuginsInstalled)
-                {
-                    MessageBox.Show("To use Asio additional program(s) needs to be installed.\n" + app);
-                    radioBtnBass.Checked = true;
-                    radioBtnAsio.Checked = false;
-                    return;
-                }
-                else
-                {
-                    AppSettings.Set("DefaultAudioOutput", DefaultAudioOutput.Asio.ToString());
-                    this.Close();
-                    Application.Restart();
-                    Environment.Exit(0);
-                }
             }
         }
 
@@ -474,25 +533,39 @@ namespace bossdoyKaraoke_NOW
 
         private void chkBoxRefreshAsio_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxRefreshAsio.Checked)
-                AppSettings.Set("IsAsioAutoRestart", "true");
-            else
-                AppSettings.Set("IsAsioAutoRestart", "false");
+            try
+            {
+                if (chkBoxRefreshAsio.Checked)
+                    AppSettings.Set("IsAsioAutoRestart", "true");
+                else
+                    AppSettings.Set("IsAsioAutoRestart", "false");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "chkBoxRefreshAsio_CheckedChanged", ex.LineNumber(), this.Name);
+            }
         }
 
         private void selectVideobtn_Click(object sender, EventArgs e)
         {
-            if (m_fbd.ShowDialog() == DialogResult.OK)
+            try
             {
-                // string[] filePath = new string[] { m_fbd.SelectedPath };
-                string folderName = Path.GetFileName(m_fbd.SelectedPath);
-                bool isVideoFound = PlayerControl.GetVideoBG(m_fbd.SelectedPath);
-                if (isVideoFound)
+                if (m_fbd.ShowDialog() == DialogResult.OK)
                 {
-                    videoLbl.Text = "Video: " + m_fbd.SelectedPath;
-                    panelPlayer.Invalidate();
-                    PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
+                    // string[] filePath = new string[] { m_fbd.SelectedPath };
+                    string folderName = Path.GetFileName(m_fbd.SelectedPath);
+                    bool isVideoFound = PlayerControl.GetVideoBG(m_fbd.SelectedPath);
+                    if (isVideoFound)
+                    {
+                        videoLbl.Text = "Video: " + m_fbd.SelectedPath;
+                        panelPlayer.Invalidate();
+                        PlayerControl.SetDefaultVideoBG(panelPlayer.Handle);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "selectVideobtn_Click", ex.LineNumber(), this.Name);
             }
         }
 
@@ -516,7 +589,6 @@ namespace bossdoyKaraoke_NOW
 
         private void SetBandGain()
         {
-            trackBarPreamp.Value = (int)Equalizer.ArrBandValue[10].PreAmp;
             trackBarEQ0.Value = (int)Equalizer.ArrBandValue[0].Gain;
             trackBarEQ1.Value = (int)Equalizer.ArrBandValue[1].Gain;
             trackBarEQ2.Value = (int)Equalizer.ArrBandValue[2].Gain;
@@ -527,125 +599,380 @@ namespace bossdoyKaraoke_NOW
             trackBarEQ7.Value = (int)Equalizer.ArrBandValue[7].Gain;
             trackBarEQ8.Value = (int)Equalizer.ArrBandValue[8].Gain;
             trackBarEQ9.Value = (int)Equalizer.ArrBandValue[9].Gain;
-
+            trackBarPreamp.Value = (int)Equalizer.ArrBandValue[10].PreAmp;
         }
 
         private void trackBarEQ0_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(0, trackBarEQ0.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[0].Gain / 10;
+
+            m_trackBarGain = (float)trackBarEQ0.Value / 10;
             lblBand1.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
-            m_customEQ = false;
+
+           // PlayerControl.UpdateEQ(0, trackBarEQ0.Value);
+            //if (!m_customEQ)
+            //{
+            //    PlayerControl.SaveEQSettings(0);
+            //}
         }
 
         private void trackBarEQ0_Scroll(object sender, EventArgs e)
         {
+            PlayerControl.UpdateEQ(0, trackBarEQ0.Value);
             m_customEQ = true;
+        }
+
+        private void trackBarEQ0_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(0);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ1_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(1, trackBarEQ1.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[1].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ1.Value / 10;
             lblBand2.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQ(1, trackBarEQ1.Value);
+           // if (!m_customEQ)
+           // {
+          //      PlayerControl.SaveEQSettings(1);
+          //  }
+        }
+
+        private void trackBarEQ1_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(1, trackBarEQ1.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(1);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ2_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(2, trackBarEQ2.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[2].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ2.Value / 10;
             lblBand3.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+            //PlayerControl.UpdateEQ(2, trackBarEQ2.Value);
+            //if (!m_customEQ)
+            //{
+           //     PlayerControl.SaveEQSettings(2);
+           // }
+        }
+
+        private void trackBarEQ2_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(2, trackBarEQ2.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; // PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(2);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ3_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(3, trackBarEQ3.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[3].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ3.Value / 10;
             lblBand4.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQ(3, trackBarEQ3.Value);
+           // if (!m_customEQ)
+           // {
+           //     PlayerControl.SaveEQSettings(3);
+           // }
+        }
+
+        private void trackBarEQ3_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(3, trackBarEQ3.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ3_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(3);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ4_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(4, trackBarEQ4.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[4].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ4.Value / 10;
             lblBand5.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+            //PlayerControl.UpdateEQ(4, trackBarEQ4.Value);
+            //if (!m_customEQ)
+           // {
+           //     PlayerControl.SaveEQSettings(4);
+           // }
         }
+
+        private void trackBarEQ4_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(4, trackBarEQ4.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ4_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(4);
+                m_customEQ = false;
+            }
+        }
+
 
         private void trackBarEQ5_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(5, trackBarEQ5.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[5].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ5.Value / 10;
             lblBand6.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQ(5, trackBarEQ5.Value);
+            //if (!m_customEQ)
+           // {
+            //    PlayerControl.SaveEQSettings(5);
+            //}
+        }
+
+        private void trackBarEQ5_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(5, trackBarEQ5.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ5_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(5);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ6_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(6, trackBarEQ6.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[6].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ6.Value / 10;
             lblBand7.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+            //PlayerControl.UpdateEQ(6, trackBarEQ6.Value);
+           // if (!m_customEQ)
+            //{
+           //     PlayerControl.SaveEQSettings(6);
+           // }
+        }
+
+
+        private void trackBarEQ6_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(6, trackBarEQ6.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ6_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(6);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ7_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(7, trackBarEQ7.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[7].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ7.Value / 10;
             lblBand8.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQ(7, trackBarEQ7.Value);
+            //if (!m_customEQ)
+           // {
+           //     PlayerControl.SaveEQSettings(7);
+           // }
+        }
+
+        private void trackBarEQ7_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(7, trackBarEQ7.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ7_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(7);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ8_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(8, trackBarEQ8.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[8].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ8.Value / 10;
             lblBand9.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQ(8, trackBarEQ8.Value);
+           // if (!m_customEQ)
+           // {
+           //     PlayerControl.SaveEQSettings(8);
+           // }
+        }
+
+        private void trackBarEQ8_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(8, trackBarEQ8.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ8_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(8);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarEQ9_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQ(9, trackBarEQ9.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[9].Gain / 10;
+            m_trackBarGain = (float)trackBarEQ9.Value / 10;
             lblBand10.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQ(9, trackBarEQ9.Value);
+           // if (!m_customEQ)
+           // {
+           //     PlayerControl.SaveEQSettings(9);
+           // }
+        }
+
+        private void trackBarEQ9_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQ(9, trackBarEQ9.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarEQ9_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                Equalizer.ArrBandValue[11].PreSet = -1; //PlayerControl.UpdateEQPresets(-1);
+                PlayerControl.SaveEQSettings(9);
+                m_customEQ = false;
+            }
         }
 
         private void trackBarPreamp_ValueChanged(object sender, EventArgs e)
         {
-            PlayerControl.UpdateEQPreamp(trackBarPreamp.Value);
-            m_trackBarGain = Equalizer.ArrBandValue[10].PreAmp / 10;
+            m_trackBarGain = (float)trackBarPreamp.Value / 10;
             lblPreampGain.Text = m_trackBarGain == 0.0f ? (0).ToString() : m_trackBarGain.ToString();
+
+           // PlayerControl.UpdateEQPreamp(trackBarPreamp.Value);
+           // if (!m_customEQ)
+          //  {
+          //      PlayerControl.SaveEQSettings(-1);
+           // }
+        }
+
+        private void trackBarPreamp_Scroll(object sender, EventArgs e)
+        {
+            PlayerControl.UpdateEQPreamp(trackBarPreamp.Value);
+            m_customEQ = true;
+        }
+
+        private void trackBarPreamp_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_customEQ)
+            {
+                //PlayerControl.UpdateEQPresets(-1);
+                Equalizer.ArrBandValue[11].PreSet = -1;
+                PlayerControl.SaveEQSettings(-1);
+                m_customEQ = false;
+            }
         }
 
         private void comboBoxEQPresets_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            if (m_EQdefault)
+            try
             {
-                if (m_equalizer != null) m_equalizer.Dispose();
-
-                int selectedIndex = comboBoxEQPresets.SelectedIndex;
-
-                if (comboBoxEQPresets.Items.Count > VlcPlayer.EqPresets.Values.Count() && selectedIndex > 0)
-                    m_equalizer = new Implementation.Equalizer(VlcPlayer.EqPresets[selectedIndex - 1]);
-                else
-                    m_equalizer = new Implementation.Equalizer(VlcPlayer.EqPresets[selectedIndex]);
-
-                Equalizer.ArrBandValue[10].PreAmp = (m_equalizer.Preamp * 10) > 150 ? 150 : m_equalizer.Preamp * 10;
-
-                for (int i = 0; i < Equalizer.ArrBandValue.Length - 2; i++)
+                if (m_EQdefault)
                 {
-                    float amplitude = m_equalizer.Bands[i].Amplitude * 10;
+                    if (m_equalizer != null) m_equalizer.Dispose();
 
-                    if (amplitude > 150)
+                    int selectedIndex = comboBoxEQPresets.SelectedIndex;
+
+                    if (comboBoxEQPresets.Items.Count > VlcPlayer.EqPresets.Count() && selectedIndex > 0)
                     {
-                        amplitude = amplitude - 150;
-                        amplitude = (m_equalizer.Bands[i].Amplitude * 10) - amplitude;
+                        selectedIndex = selectedIndex - 1;
+                        m_equalizer = new Implementation.Equalizer(VlcPlayer.EqPresets[selectedIndex]);
+                    }
+                    else if (comboBoxEQPresets.Items.Count > VlcPlayer.EqPresets.Count() && selectedIndex == 0)
+                    {
+                        m_equalizer = new Implementation.Equalizer();
+                        m_equalizer.Preamp = defBandValue[10].PreAmp / 10;
+                        for (int i = 0; i < defBandValue.Length - 2; i++)
+                        {
+                            m_equalizer.Bands[i].Amplitude = defBandValue[i].Gain / 10;
+                        }
+                        selectedIndex = -1;
+                    }
+                    else
+                    {
+                        m_equalizer = new Implementation.Equalizer(VlcPlayer.EqPresets[selectedIndex]);
                     }
 
-                    Equalizer.ArrBandValue[i].Gain = amplitude;
+                    Equalizer.ArrBandValue[10].PreAmp = (m_equalizer.Preamp * 10) > 150 ? 150 : m_equalizer.Preamp * 10;
+                    Equalizer.ArrBandValue[11].PreSet = selectedIndex;
+
+                    Console.WriteLine("m_equalizer.Preamp: " + m_equalizer.Preamp + " : " + Equalizer.ArrBandValue[10].PreAmp);
+
+                    for (int i = 0; i < Equalizer.ArrBandValue.Length - 2; i++)
+                    {
+                        float amplitude = m_equalizer.Bands[i].Amplitude * 10;
+
+                        if (amplitude > 150)
+                        {
+                            amplitude = amplitude - 150;
+                            amplitude = (m_equalizer.Bands[i].Amplitude * 10) - amplitude;
+                        }
+
+                        Equalizer.ArrBandValue[i].Gain = amplitude;
+                        PlayerControl.UpdateEQ(i, amplitude);
+                        PlayerControl.SaveEQSettings(i);
+                    }
+                    PlayerControl.SaveEQSettings(-1);
+                    SetBandGain();
+
+                    m_EQdefault = false;
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile(ex.Message, "", "comboBoxEQPresets_SelectedIndexChanged", ex.LineNumber(), this.Name);
 
-                PlayerControl.UpdateEQPresets(selectedIndex);
-                SetBandGain();
-
-                m_EQdefault = false;
             }
         }
 
@@ -654,6 +981,24 @@ namespace bossdoyKaraoke_NOW
             m_EQdefault = true;
         }
 
+        private void UpdateEQPreset()
+        {
+
+            Equalizer.ArrBandValue[10].PreAmp = (m_equalizer.Preamp * 10) > 150 ? 150 : m_equalizer.Preamp * 10;
+
+            for (int i = 0; i < Equalizer.ArrBandValue.Length - 2; i++)
+            {
+                float amplitude = m_equalizer.Bands[i].Amplitude * 10;
+
+                if (amplitude > 150)
+                {
+                    amplitude = amplitude - 150;
+                    amplitude = (m_equalizer.Bands[i].Amplitude * 10) - amplitude;
+                }
+
+                Equalizer.ArrBandValue[i].Gain = amplitude;
+            }
+        }
 
     }
 

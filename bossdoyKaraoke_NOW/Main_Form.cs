@@ -845,23 +845,41 @@ namespace bossdoyKaraoke_NOW
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="preset"></param>
+        /// <param name="band"></param>
+        /// <param name="gain"></param>
+        public void SaveEQSettings(int band)
+        {
+            setSEARCHDIRorTEXTState(SearchAndLoad.SAVE_EQ_SETTINGS);
+            startWorker(band);
+            //await startAsyncTask(SearchAndLoad.SAVE_EQ_SETTINGS, band);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateEQPresets(int preset)
         {
-            m_equalizer.UpdateEQPresets(preset);
+            setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PRESET);
+
+            startWorker(preset);
+           // await startAsyncTask(SearchAndLoad.UPDATE_EQ_PRESET, preset);
+
         }
 
         /// <summary>
         /// Update Equlizer Gain
         /// </summary>
-        /// <param name="band">The band number tp update gain</param>
+        /// <param name="band">The band number to update gain</param>
         /// <param name="gain">The gain value</param>
-        public void UpdateEQ(int band, float gain)
+        public  void UpdateEQ(int band, float gain)
         {
             setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_SETTINGS);
 
             object arg = new object[] { band, gain };
 
             startWorker(arg);
+            //await startAsyncTask(SearchAndLoad.UPDATE_EQ_SETTINGS, arg);
         }
 
         /// <summary>
@@ -870,8 +888,10 @@ namespace bossdoyKaraoke_NOW
         /// <param name="gain"></param>
         public void UpdateEQPreamp(float gain)
         {
-            m_equalizer.UpdateEQBassPreamp(gain);
-            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(gain));
+            setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PREAMP);
+
+            startWorker(gain);
+            //await startAsyncTask(SearchAndLoad.UPDATE_EQ_PREAMP, gain);
         }
 
 
@@ -1124,9 +1144,11 @@ namespace bossdoyKaraoke_NOW
                                 {
                                     m_isFromFavorites = false;
                                     startWorker(songs[0]);
+                                    //await startAsyncTask(SearchAndLoad.SEARCH_TEXTFILE, songs[0]);
 
                                     setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE);
                                     startWorker();
+                                   // await startAsyncTask(SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE);
                                 }
                                 break;
                             case RootNode.MY_FAVORITES:
@@ -1139,6 +1161,7 @@ namespace bossdoyKaraoke_NOW
                                         fileName = Path.GetFileName(songs[i]).Replace(".fav", "");
                                         node.Nodes.Insert(i, fileName, fileName);
                                         startWorker(songs[i]);
+                                       // await startAsyncTask(SearchAndLoad.SEARCH_TEXTFILE, songs[i]);
                                         m_favoritesArr.Add(PlayerControl.AllSongs);
                                     }
                                 }
@@ -1153,6 +1176,7 @@ namespace bossdoyKaraoke_NOW
                                         fileName = Path.GetFileName(songs[i]).Replace(".bkN", "");
                                         node.Nodes.Insert(i, fileName, fileName);
                                         startWorker(songs[i]);
+                                       // await startAsyncTask(SearchAndLoad.SEARCH_TEXTFILE, songs[i]);
                                         m_songsArr.Add(PlayerControl.AllSongs);
                                     }
 
@@ -1168,7 +1192,7 @@ namespace bossdoyKaraoke_NOW
                 }
 
                 PlayerControl.SongListView.FullRowSelect = true;
-                PlayerControl.SongListView.Refresh();
+                //PlayerControl.SongListView.Refresh();
                 m_IsSearchingListView = true;
             }
             catch (Exception ex)
@@ -1208,6 +1232,7 @@ namespace bossdoyKaraoke_NOW
                         }
                         setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
                         startWorker();
+                        //await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
                     });
 
                 }
@@ -1239,9 +1264,11 @@ namespace bossdoyKaraoke_NOW
             {
                 setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE);
                 startWorker();
+                //await startAsyncTask(SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE);
 
                 setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
                 startWorker();
+                //await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
 
                 this.m_treeview.SelectedNode = this.m_treeview.Nodes[0];
                 this.m_treeview.Focus();
@@ -1376,9 +1403,10 @@ namespace bossdoyKaraoke_NOW
                     }
                     setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
                     startWorker();
+                   // await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
 
-                   // setSEARCHDIRorTEXTState(SearchAndLoad.WRITE_TO_QUEUE_LIST);
-                   // startWorker();
+                    // setSEARCHDIRorTEXTState(SearchAndLoad.WRITE_TO_QUEUE_LIST);
+                    // startWorker();
                     WriteToQueueList();
                 }
             }
@@ -1425,9 +1453,11 @@ namespace bossdoyKaraoke_NOW
         /// <summary>
         /// Shuffle songs
         /// </summary>
-        public void ShuffleSongs() {
+        public  void ShuffleSongs()
+        {
             setSEARCHDIRorTEXTState(SearchAndLoad.SHUFFLE_SONGS);
             startWorker();
+           // await startAsyncTask(SearchAndLoad.SHUFFLE_SONGS);
         }
 
         /// <summary>
@@ -1438,6 +1468,7 @@ namespace bossdoyKaraoke_NOW
         {
             setSEARCHDIRorTEXTState(SearchAndLoad.SORT_SONGS);
             startWorker(column.ToString());
+            //await startAsyncTask(SearchAndLoad.SORT_SONGS);
         }
 
         /// <summary>
@@ -1536,6 +1567,7 @@ namespace bossdoyKaraoke_NOW
                             m_isSongQueueSelected = true;
                             setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
                             startWorker();
+                            //await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
                             break;
                         case RootNode.MY_FAVORITES:
                             m_isSongQueueSelected = false;
@@ -1564,6 +1596,7 @@ namespace bossdoyKaraoke_NOW
                             if (m_fbd.ShowDialog() == DialogResult.OK)
                             {
                                 startWorker(m_fbd.SelectedPath);
+                                //await startAsyncTask(SearchAndLoad.SEARCH_DIRECTORY, m_fbd.SelectedPath);
                                 string[] filePath = new string[] { m_fbd.SelectedPath };
                                 string folderName = Path.GetFileName(m_fbd.SelectedPath);
                                 this.m_treeview.SelectedNode.Parent.Nodes.Insert(0, folderName, folderName);
@@ -1593,6 +1626,7 @@ namespace bossdoyKaraoke_NOW
                                     setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_FAVORITES);
                                     sDir = m_favoritesPath + this.m_treeview.SelectedNode.Text + ".fav";
                                     isDataExist = File.Exists(sDir);
+                                   // await startAsyncTask(SearchAndLoad.LOAD_FAVORITES, sDir);
                                     m_isFromFavorites = true;
                                     break;
                                 case RootNode.MY_COMPUTER:
@@ -1600,12 +1634,13 @@ namespace bossdoyKaraoke_NOW
                                     sDir = m_songsPath + this.m_treeview.SelectedNode.Text + ".bkN";
                                     string songsPath = File.ReadLines(sDir).First();
                                     isDataExist = Directory.Exists(songsPath);
+                                    //await startAsyncTask(SearchAndLoad.LOAD_ADDED_SONGS, sDir);
                                     break;
                             }
                         }
 
-                        this.m_thisControl.ExecuteAsync(delegate
-                        {
+                       // this.m_thisControl.ExecuteAsync(delegate
+                      //  {
                             if (!isDataExist)
                             {
                                 PlayerControl.SongListView.FullRowSelect = false;
@@ -1618,9 +1653,10 @@ namespace bossdoyKaraoke_NOW
                                 PlayerControl.SongListView.BackColor = SystemColors.Window;
                                 PlayerControl.SongListView.ForeColor = SystemColors.WindowText;
                             }
-                        });
+                      //  });
 
-                        startWorker(sDir);
+                       startWorker(sDir);
+                       // await startAsyncTask(sDir);
                     }
 
                 }
@@ -2120,6 +2156,7 @@ process.WaitForExit();*/
 
                 setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_FAVORITES);
                 startWorker();
+               // await startAsyncTask(SearchAndLoad.LOAD_FAVORITES);
             }
             catch (Exception ex)
             {
@@ -2471,14 +2508,14 @@ process.WaitForExit();*/
         private void playNextTrack()
         {
 
-           /* if (this.thisControl.InvokeRequired)
-            {
-                this.thisControl.BeginInvoke(new Action(() =>
-                {
-                    playNextTrack();
-                }));
-                return;
-            }*/
+            /* if (this.thisControl.InvokeRequired)
+             {
+                 this.thisControl.BeginInvoke(new Action(() =>
+                 {
+                     playNextTrack();
+                 }));
+                 return;
+             }*/
             if (this.m_thisControl.InvokeRequired)
             {
                 this.m_thisControl.BeginInvoke(new MethodInvoker(delegate () { playNextTrack(); }));
@@ -2488,7 +2525,7 @@ process.WaitForExit();*/
             {
                 lock (m_songQueue)
                 {
-                    if (Player.IsAsioInitialized && AppSettings.Get<bool>("IsAsioAutoRestart") )
+                    if (Player.IsAsioInitialized && AppSettings.Get<bool>("IsAsioAutoRestart"))
                         BassAsioDevice.ReStart();
 
                     m_targetControl.Invalidate();
@@ -2540,7 +2577,7 @@ process.WaitForExit();*/
                             InitControls();
 
                             m_equalizer.Init(m_currentTrack.Channel);
-                          
+
                             m_currentTrack.Volume = m_Volume;
 
                             m_currentTrack.Play();
@@ -2583,12 +2620,13 @@ process.WaitForExit();*/
 
                         WriteToQueueList();
 
-                        if (m_isSongQueueSelected)
+                        /*if (m_isSongQueueSelected)
                         {
                             setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
-                            startWorker();
+                            //startWorker();
+                            startAsyncTask();
 
-                        }
+                        }*/
 
                     }
                     else
@@ -2602,6 +2640,15 @@ process.WaitForExit();*/
                         m_currentTrack = null;
                         m_previousTrack = null;
                     }
+
+                }
+
+                if (m_isSongQueueSelected)
+                {
+                    setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
+                    startWorker();
+                   // await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
+
                 }
             }
             catch (Exception ex)
@@ -2954,6 +3001,127 @@ process.WaitForExit();*/
             return PlayerControl.AllSongs;
         }
 
+
+        public async Task startAsyncTask(SearchAndLoad task, object arg = null)
+        {
+            List<ListViewItem> toDoTasks = new List<ListViewItem>();
+            ListViewItem item = new ListViewItem();
+            ListViewItem.ListViewSubItem[] subItem = new ListViewItem.ListViewSubItem[] {
+                new ListViewItem.ListViewSubItem() { Tag = arg, Text = "arg" },
+                new ListViewItem.ListViewSubItem() { Tag = task, Text = "SearchAndLoad" }};
+           
+            item.SubItems.AddRange(subItem);
+            toDoTasks.Add(item);
+
+            IEnumerable<Task<List<ListViewItem>>> taskListQuery = from theTask in toDoTasks select doTask(theTask);
+
+            List<Task<List<ListViewItem>>> taskList = taskListQuery.ToList();
+
+            while (taskList.Count > 0)
+            {
+                
+                Task<List<ListViewItem>> firstFinishedTask = await Task.WhenAny(taskList);
+                taskList.Remove(firstFinishedTask);
+
+                PlayerControl.AllSongs = await firstFinishedTask;
+
+            }
+
+            if ( m_IsSearchingListView && PlayerControl.AllSongs != null)
+            {
+                PlayerControl.SongListView.VirtualListSize = PlayerControl.AllSongs.Count;
+                PlayerControl.SongListView.Refresh();
+            }
+        }
+
+        Task<List<ListViewItem>> doTask(ListViewItem arg)
+        {
+            List<ListViewItem> item = new List<ListViewItem>();
+
+            return Task.Run(() =>
+            {
+               // setSEARCHDIRorTEXTState((SearchAndLoad)arg.SubItems[2].Tag);
+                //do your job here
+                
+                
+                switch ((SearchAndLoad)arg.SubItems[2].Tag)
+                {
+                    case SearchAndLoad.SEARCH_DIRECTORY:
+                        item = DirSearchSongs(arg.SubItems[1].Tag.ToString());
+                        break;
+                    case SearchAndLoad.SEARCH_TEXTFILE:
+                        item = TextSearchSongs(arg.SubItems[1].Tag.ToString());
+                        break;
+                    case SearchAndLoad.LOAD_QUEUE_SONGS:
+                        item = LoadQueueSongs();
+                        break;
+                    case SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE:
+                        LoadFromFileToQueue();
+                        break;
+                    case SearchAndLoad.SEARCH_LISTVIEW:
+                        item = SearchListView(arg.SubItems[1].Tag.ToString());
+                        break;
+                    case SearchAndLoad.SHUFFLE_SONGS:
+                        item = Shuffle();
+                        break;
+                    case SearchAndLoad.SORT_SONGS:
+                        item = SortList(int.Parse(arg.SubItems[1].Tag.ToString()));
+                        break;
+                    case SearchAndLoad.LOAD_FAVORITES:
+                        item = m_favoritesArr[m_selected_treenode];
+                        break;
+                    case SearchAndLoad.LOAD_ADDED_SONGS:
+                        item = m_songsArr[m_selected_treenode];
+                        break;
+                    case SearchAndLoad.UPDATE_EQ_SETTINGS:
+                        object[] objset = arg.SubItems[1].Tag as object[];
+
+                        if (objset != null)
+                        {
+                            int band = (int)objset[0];
+                            float gain = (float)objset[1];
+                            m_equalizer.UpdateEQBass(band, gain);
+                            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
+                           // item = null;
+                        }
+                        break;
+                     case SearchAndLoad.SAVE_EQ_SETTINGS:
+                         object objsave= arg.SubItems[1].Tag as object;
+
+                         if (objsave != null)
+                         {
+                             int band = (int)objsave;
+                             m_equalizer.SaveEQSettings(band);
+                             //item = null;
+                         }
+                         break;
+                   /* case SearchAndLoad.UPDATE_EQ_PRESET:
+                        object objpreset = arg.SubItems[1].Tag as object;
+
+                        if (objpreset != null)
+                        {
+                            int preset = (int)objpreset;
+                            m_equalizer.UpdateEQPresets(preset);
+                            item = null;
+                        }
+                        break;*/
+                    case SearchAndLoad.UPDATE_EQ_PREAMP:
+                        object objp_gain = arg.SubItems[1].Tag as object;
+
+                        if (objp_gain != null)
+                        {
+                            float p_gain = (float)objp_gain;
+                            m_equalizer.UpdateEQBassPreamp(p_gain);
+                            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(p_gain));
+                            //item = null;
+                        }
+                        break;
+                }
+
+                return item;
+            });
+        }
+
         /// <summary>
         /// Background worker to process task on background to avoid UI Freeze
         /// </summary>
@@ -2961,9 +3129,10 @@ process.WaitForExit();*/
         public void startWorker(object arg = null)
         {
             BackgroundWorker bgw = new BackgroundWorker();
-            bgw.DoWork += DoWork;
-            bgw.RunWorkerCompleted += Workers_Completed;
+            bgw.DoWork += new DoWorkEventHandler(DoWork);
+            bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Workers_Completed);
             m_bgws.Add(bgw);
+
             bgw.RunWorkerAsync(arg);
 
             while (bgw.IsBusy)
@@ -2999,7 +3168,7 @@ process.WaitForExit();*/
                     break;
                 case SearchAndLoad.LOAD_FROM_FILE_TO_QUEUE:
                     LoadFromFileToQueue();
-                    e.Result = null;
+                    e.Result = new List<ListViewItem>();
                     break;
                 case SearchAndLoad.SEARCH_LISTVIEW:
                     e.Result = SearchListView(fName.ToString());
@@ -3014,24 +3183,59 @@ process.WaitForExit();*/
                     e.Result = m_favoritesArr[m_selected_treenode];
                     break;
                 case SearchAndLoad.LOAD_ADDED_SONGS:
-                    e.Result = m_songsArr[m_selected_treenode];
+                   e.Result = m_songsArr[m_selected_treenode];
                     break;
                 case SearchAndLoad.ADD_SELECTED_SONG_TO_QUEUE:
-                    // on_SongListView_Item_Selected();
+                     on_SongListView_Item_Selected();
                     break;
                 case SearchAndLoad.WRITE_TO_QUEUE_LIST:
                     WriteToQueueList();
-                    e.Result = null;
+                    e.Result = new List<ListViewItem>();
                     break;
                 case SearchAndLoad.UPDATE_EQ_SETTINGS:
-                    object[] obj = fName as object[];
+                    object[] objset = fName as object[];
 
-                    int band = (int)obj[0];
-                    float gain = (float)obj[1];
-                    m_equalizer.UpdateEQBass(band, gain);
-                    m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
-                    e.Result = null;
+                    if (objset != null)
+                    {
+                        int band = (int)objset[0];
+                        float gain = (float)objset[1];
+                        m_equalizer.UpdateEQBass(band, gain);
+                        m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
+                        e.Result = new List<ListViewItem>();
+                    }
                     break;
+                case SearchAndLoad.SAVE_EQ_SETTINGS:
+                    object objsave= fName as object;
+
+                    if (objsave != null)
+                    {
+                        int band = (int)objsave;
+                        m_equalizer.SaveEQSettings(band);
+                        e.Result = new List<ListViewItem>();
+                    }
+                    break;
+                /*case SearchAndLoad.UPDATE_EQ_PRESET:
+                    object objpreset = fName as object;
+
+                    if (objpreset != null)
+                    {
+                        int preset = (int)objpreset;
+                        m_equalizer.UpdateEQPresets(preset);
+                        e.Result = null;
+                    }
+                    break;*/
+                case SearchAndLoad.UPDATE_EQ_PREAMP:
+                    object objp_gain = fName as object;
+
+                    if (objp_gain != null)
+                    {
+                        float p_gain = (float)objp_gain;
+                        m_equalizer.UpdateEQBassPreamp(p_gain);
+                        m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(p_gain));
+                        e.Result = new List<ListViewItem>();
+                    }
+                    break;
+
             }
         }
 
@@ -3054,7 +3258,7 @@ process.WaitForExit();*/
                 switch (getSEARCHDIRorTEXTState) {
                     case SearchAndLoad.SEARCH_DIRECTORY:
 
-                        PlayerControl.AllSongs = new List<ListViewItem>();
+                        //PlayerControl.AllSongs = new List<ListViewItem>();
                         PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
 
                         string fPath = m_filePath + @"songs\";
@@ -3075,28 +3279,24 @@ process.WaitForExit();*/
                     case SearchAndLoad.LOAD_ADDED_SONGS:
                    // case SearchAndLoad.ADD_SELECTED_SONG_TO_QUEUE:
 
-                        PlayerControl.AllSongs = new List<ListViewItem>();
+                       // PlayerControl.AllSongs = new List<ListViewItem>();
                         PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
                         break;
                     case SearchAndLoad.WRITE_TO_QUEUE_LIST:
 
                         break;
-                    case SearchAndLoad.UPDATE_EQ_SETTINGS:
-
-                        break;
-
 
                 }
-              /*  if (getSEARCHDIRorTEXTState == SearchAndLoad.SEARCH_DIRECTORY)
-                {
-                    string fPath = m_filePath + @"songs\";
-                    string filename = Path.GetFileName(m_fbd.SelectedPath);
-                    var items = PlayerControl.AllSongs.OfType<ListViewItem>().Select(i => i.SubItems[4].Text).ToList();
-                    items.Insert(0, m_fbd.SelectedPath);
-                    string[] filePathArray = items.ToArray<string>();
-                    Directory.CreateDirectory(fPath);
-                    File.WriteAllLines(fPath + filename + ".bkN", filePathArray);
-                }*/
+                /*  if (getSEARCHDIRorTEXTState == SearchAndLoad.SEARCH_DIRECTORY)
+                  {
+                      string fPath = m_filePath + @"songs\";
+                      string filename = Path.GetFileName(m_fbd.SelectedPath);
+                      var items = PlayerControl.AllSongs.OfType<ListViewItem>().Select(i => i.SubItems[4].Text).ToList();
+                      items.Insert(0, m_fbd.SelectedPath);
+                      string[] filePathArray = items.ToArray<string>();
+                      Directory.CreateDirectory(fPath);
+                      File.WriteAllLines(fPath + filename + ".bkN", filePathArray);
+                  }*/
 
                 m_bgws.Remove(bgw);
                 bgw.Dispose();
@@ -3382,7 +3582,8 @@ process.WaitForExit();*/
             return m_songsArr;
         }
 
-        public void AddSongToQueue(string songId) {
+        public void AddSongToQueue(string songId)
+        {
 
             if (this.m_thisControl.InvokeRequired)
             {
@@ -3426,10 +3627,11 @@ process.WaitForExit();*/
 
                     setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
                     startWorker();
+                    //await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
                 }
                 else
                 {
-                   // MessageBox.Show("Cannot find " + Path.GetFileName(MediaFileName) + " file to play.");
+                    // MessageBox.Show("Cannot find " + Path.GetFileName(MediaFileName) + " file to play.");
                     return;
 
                 }
