@@ -325,7 +325,7 @@ namespace bossdoyKaraoke_NOW.Models
 
         public void UpdateEQ(Implementation.Equalizer equalizer)
         {
-            if (equalizer != null && m_player.IsPlaying)
+            if (m_player.IsPlaying)
             {
                 m_player.SetEqualizer(equalizer);
             }

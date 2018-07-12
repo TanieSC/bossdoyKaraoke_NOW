@@ -18,7 +18,7 @@ namespace bossdoyKaraoke_NOW.Models
 
     class Player : Mixer
     {
-        public float PlayerVolume = 0.05f;
+        private float m_playerVolume = 0.05f;
         public FxTempo Tempo = null;
         public int Channel = 0;
         public TAG_INFO Tags = null;
@@ -210,7 +210,7 @@ namespace bossdoyKaraoke_NOW.Models
                 }
                 else
                 {
-                    Bass.BASS_ChannelSetAttribute(this.Channel, BASSAttribute.BASS_ATTRIB_VOL, this.PlayerVolume);
+                    Bass.BASS_ChannelSetAttribute(this.Channel, BASSAttribute.BASS_ATTRIB_VOL, m_playerVolume);
                     m_mute = false;
                 }
             }
@@ -220,11 +220,11 @@ namespace bossdoyKaraoke_NOW.Models
         {
             get
             {
-                return this.PlayerVolume;
+                return m_playerVolume;
             }
             set
             {
-                this.PlayerVolume = value;
+                m_playerVolume = value;
                 Bass.BASS_ChannelSetAttribute(this.Channel, BASSAttribute.BASS_ATTRIB_VOL, value);
             }
         }

@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bossdoyKaraoke_NOW", "bossdoyKaraoke_NOW\bossdoyKaraoke_NOW.csproj", "{DC0BD1AC-0992-4138-984E-F0598E0E23F4}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BossDoy-Karaoke_NOW", "BossDoy-Karaoke_NOW\BossDoy-Karaoke_NOW.vdproj", "{67336844-071F-45B3-8474-19712B4D032E}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BossDoy-Karaoke_NOW_installer", "BossDoy-Karaoke_NOW\BossDoy-Karaoke_NOW.vdproj", "{67336844-071F-45B3-8474-19712B4D032E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

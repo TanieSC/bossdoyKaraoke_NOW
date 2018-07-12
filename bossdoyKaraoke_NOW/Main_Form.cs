@@ -1192,7 +1192,7 @@ namespace bossdoyKaraoke_NOW
                 }
 
                 PlayerControl.SongListView.FullRowSelect = true;
-                //PlayerControl.SongListView.Refresh();
+                PlayerControl.SongListView.Refresh();
                 m_IsSearchingListView = true;
             }
             catch (Exception ex)
@@ -2566,6 +2566,7 @@ process.WaitForExit();*/
                             m_songQueue.RemoveAt(0);
 
                             m_IsPlayingCdg = m_vlc.PlayCDG();
+                            m_vlc.Volume(PlayerControl.VolumeScroll.Value);
 
                             if (!m_timerUpdate.Enabled)
                             {
@@ -2620,13 +2621,13 @@ process.WaitForExit();*/
 
                         WriteToQueueList();
 
-                        /*if (m_isSongQueueSelected)
+                        if (m_isSongQueueSelected)
                         {
                             setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
-                            //startWorker();
-                            startAsyncTask();
+                            startWorker();
+                            //startAsyncTask();
 
-                        }*/
+                        }
 
                     }
                     else
@@ -2643,13 +2644,13 @@ process.WaitForExit();*/
 
                 }
 
-                if (m_isSongQueueSelected)
-                {
-                    setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
-                    startWorker();
+               // if (m_isSongQueueSelected)
+               // {
+               //     setSEARCHDIRorTEXTState(SearchAndLoad.LOAD_QUEUE_SONGS);
+               //     startWorker();
                    // await startAsyncTask(SearchAndLoad.LOAD_QUEUE_SONGS);
 
-                }
+              //  }
             }
             catch (Exception ex)
             {
@@ -3095,16 +3096,6 @@ process.WaitForExit();*/
                              //item = null;
                          }
                          break;
-                   /* case SearchAndLoad.UPDATE_EQ_PRESET:
-                        object objpreset = arg.SubItems[1].Tag as object;
-
-                        if (objpreset != null)
-                        {
-                            int preset = (int)objpreset;
-                            m_equalizer.UpdateEQPresets(preset);
-                            item = null;
-                        }
-                        break;*/
                     case SearchAndLoad.UPDATE_EQ_PREAMP:
                         object objp_gain = arg.SubItems[1].Tag as object;
 
@@ -3214,16 +3205,6 @@ process.WaitForExit();*/
                         e.Result = new List<ListViewItem>();
                     }
                     break;
-                /*case SearchAndLoad.UPDATE_EQ_PRESET:
-                    object objpreset = fName as object;
-
-                    if (objpreset != null)
-                    {
-                        int preset = (int)objpreset;
-                        m_equalizer.UpdateEQPresets(preset);
-                        e.Result = null;
-                    }
-                    break;*/
                 case SearchAndLoad.UPDATE_EQ_PREAMP:
                     object objp_gain = fName as object;
 
@@ -3281,6 +3262,9 @@ process.WaitForExit();*/
 
                        // PlayerControl.AllSongs = new List<ListViewItem>();
                         PlayerControl.AllSongs = (List<ListViewItem>)e.Result;
+                        break;
+                    case SearchAndLoad.UPDATE_EQ_SETTINGS:
+
                         break;
                     case SearchAndLoad.WRITE_TO_QUEUE_LIST:
 
