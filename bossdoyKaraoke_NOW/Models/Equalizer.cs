@@ -93,69 +93,72 @@ namespace bossdoyKaraoke_NOW.Models
         {
             try
             {
-                if (handle != -1)
+                m_handle = handle;
+
+                if (m_isEnabled)
                 {
-
-                    BASS_BFX_PEAKEQ eq = new BASS_BFX_PEAKEQ();
-                    BASS_BFX_COMPRESSOR2 comp = new BASS_BFX_COMPRESSOR2();
-                    BASS_BFX_VOLUME preamp = new BASS_BFX_VOLUME();
-
-
-                    m_bandValue = new BandValue();
-
-                    // int compVal = Bass.BASS_ChannelSetFX(handle, BASSFXType.BASS_FX_BFX_COMPRESSOR2, 0);
-
-                    // comp.lChannel = BASSFXChan.BASS_BFX_CHANALL;
-                    //comp.fGain = 7.0f;
-                    //comp.fAttack = 24.9f;
-                    //comp.fRelease = 99.9f;
-                    //comp.fThreshold = -11.0f;
-                    //comp.fRatio = 4f;
-                    // Bass.BASS_FXSetParameters(compVal, comp);
-
-                    m_bandValue.Handle = Bass.BASS_ChannelSetFX(handle, BASSFXType.BASS_FX_BFX_PEAKEQ, 5);
-
-                    if (m_dsp_gain != null) m_dsp_gain.Dispose();
-                    m_dsp_gain = new DSP_Gain(handle, 6);
-                    m_dsp_gain.Gain_dBV = ArrBandValue[10].PreAmp / 10;
-
-                    //  m_preampHandle = Bass.BASS_ChannelSetFX(handle, BASSFXType.BASS_FX_BFX_VOLUME, 6);
-                    //  preamp.lChannel = BASSFXChan.BASS_BFX_CHANNONE;
-                    //  preamp.fVolume = (float)Math.Pow(10, (ArrBandValue[10].PreAmp / 10) / 20); //ArrBandValue[10].PreAmp;
-                    //   Bass.BASS_FXSetParameters(m_preampHandle, preamp);
-
-                    // m_handle = handle;
-
-                    eq.fQ = 0f;
-                    eq.fBandwidth = 0.6f;
-                    eq.lChannel = BASSFXChan.BASS_BFX_CHANALL;
-
-                    for (int i = 0; i < m_centers.Length; i++)
+                    if (handle != -1)
                     {
-                        eq.lBand = i;
-                        eq.fCenter = m_centers[i];
-                        Bass.BASS_FXSetParameters(m_bandValue.Handle, eq);
-                        float gain = ArrBandValue[i].Gain;
-                        UpdateEQBass(i, gain);
-                        Console.WriteLine(m_bandValue.Handle + " : " + gain + " : " + i);
+                        BASS_BFX_PEAKEQ eq = new BASS_BFX_PEAKEQ();
+                        BASS_BFX_COMPRESSOR2 comp = new BASS_BFX_COMPRESSOR2();
+                        BASS_BFX_VOLUME preamp = new BASS_BFX_VOLUME();
 
+
+                        m_bandValue = new BandValue();
+
+                        // int compVal = Bass.BASS_ChannelSetFX(handle, BASSFXType.BASS_FX_BFX_COMPRESSOR2, 0);
+
+                        // comp.lChannel = BASSFXChan.BASS_BFX_CHANALL;
+                        //comp.fGain = 7.0f;
+                        //comp.fAttack = 24.9f;
+                        //comp.fRelease = 99.9f;
+                        //comp.fThreshold = -11.0f;
+                        //comp.fRatio = 4f;
+                        // Bass.BASS_FXSetParameters(compVal, comp);
+
+                        m_bandValue.Handle = Bass.BASS_ChannelSetFX(handle, BASSFXType.BASS_FX_BFX_PEAKEQ, 5);
+
+                        if (m_dsp_gain != null) m_dsp_gain.Dispose();
+                        m_dsp_gain = new DSP_Gain(handle, 6);
+                        m_dsp_gain.Gain_dBV = ArrBandValue[10].PreAmp / 10;
+                        //  m_preampHandle = Bass.BASS_ChannelSetFX(handle, BASSFXType.BASS_FX_BFX_VOLUME, 6);
+                        //  preamp.lChannel = BASSFXChan.BASS_BFX_CHANNONE;
+                        //  preamp.fVolume = (float)Math.Pow(10, (ArrBandValue[10].PreAmp / 10) / 20); //ArrBandValue[10].PreAmp;
+                        //   Bass.BASS_FXSetParameters(m_preampHandle, preamp);
+
+                        // m_handle = handle;
+
+                        eq.fQ = 0f;
+                        eq.fBandwidth = 0.6f;
+                        eq.lChannel = BASSFXChan.BASS_BFX_CHANALL;
+
+                        for (int i = 0; i < m_centers.Length; i++)
+                        {
+                            eq.lBand = i;
+                            eq.fCenter = m_centers[i];
+                            Bass.BASS_FXSetParameters(m_bandValue.Handle, eq);
+                            float gain = ArrBandValue[i].Gain;
+                            UpdateEQBass(i, gain);
+                            Console.WriteLine(m_bandValue.Handle + " : " + gain + " : " + i);
+
+                        }
                     }
-                }
-                else
-                {
-                    if (m_equalizer != null) m_equalizer.Dispose();
-
-                    m_equalizer = new Implementation.Equalizer();
-                   // m_equalizer.Preamp = ArrBandValue[10].PreAmp / 10;
-
-                    for (int i = 0; i < m_centers.Length; i++)
+                    else
                     {
-                        float gain = ArrBandValue[i].Gain;
-                        UpdateEQVlc(i, gain);
-                    }
+                        if (m_equalizer != null) m_equalizer.Dispose();
 
-                    // m_handle = handle;
-                    m_bandValue.Handle = -1;
+                        m_equalizer = new Implementation.Equalizer();
+                        // m_equalizer.Preamp = ArrBandValue[10].PreAmp / 10;
+
+                        for (int i = 0; i < m_centers.Length; i++)
+                        {
+                            float gain = ArrBandValue[i].Gain;
+                            UpdateEQVlc(i, gain);
+                        }
+
+                        // m_handle = handle;
+                        m_bandValue.Handle = -1;
+                    }
                 }
             }
             catch (Exception ex)
@@ -164,6 +167,26 @@ namespace bossdoyKaraoke_NOW.Models
 
             }
 
+        }
+
+        public Implementation.Equalizer EnableEQ(bool enable = false)
+        {
+            m_isEnabled = enable;
+
+            if (enable)
+                Init(m_handle);
+            else
+            {
+                if (m_handle != -1)
+                {
+
+                    Bass.BASS_ChannelRemoveFX(m_handle, m_bandValue.Handle);
+                    // m_dsp_gain.Gain_dBV = 0.0;
+                    m_dsp_gain.Dispose();
+                }
+            }
+
+            return m_equalizer;
         }
 
         public void SaveEQSettings(int band)

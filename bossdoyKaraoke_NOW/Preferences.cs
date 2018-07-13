@@ -1000,6 +1000,21 @@ namespace bossdoyKaraoke_NOW
             }
         }
 
+        private void chkBoxEQ_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxEQ.Checked)
+            {
+                comboBoxEQPresets.Enabled = true;
+                EQpanel.Enabled = true;
+                PlayerControl.EnableEQ(true);
+            }
+            else
+            {
+                comboBoxEQPresets.Enabled = false;
+                EQpanel.Enabled = false;
+                PlayerControl.EnableEQ(false);
+            }
+        }
     }
 
     class DeviceInfo

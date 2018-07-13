@@ -19,21 +19,12 @@ namespace bossdoyKaraoke_NOW.Models
         public static string BGVideoPath = AppDomain.CurrentDomain.BaseDirectory;
         static HashSet<string> m_extensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".vob", ".mp4", ".flv", ".avi", ".3gp", ".mov", ".mkv", ".mpg", ".wav", ".wmv" };
 
-        // string path = @"D:\Downloads\PlatinumDVD_Vol72\New folder\VIDEO_EVENT\001.vob";
-        // string path2 = @"D:\Downloads\PlatinumDVD_Vol72\New folder\VIDEO_EVENT\002.vob";
-        // string path3 = @"D:\Downloads\PlatinumDVD_Vol72\New folder\VIDEO_EVENT\003.vob";
-
-        // string path1 = m_bgVideoPath + @"VIDEO_EVENT\001.vob";
-        //  string path2 = m_bgVideoPath + @"VIDEO_EVENT\002.vob";
-        // string path3 = m_bgVideoPath + @"VIDEO_EVENT\003.vob";
-        // string path4 = m_bgVideoPath + @"VIDEO_EVENT\004.vob";
-
         string path1 = BGVideoPath + @"VIDEO_NATURE\1.vob";
         string path2 = BGVideoPath + @"VIDEO_NATURE\2.vob";
         string path3 = BGVideoPath + @"VIDEO_NATURE\3.vob";
         // string path4 = m_bgVideoPath + @"VIDEO_MTV\004.mp4";
 
-        string[] videoPath;//
+        string[] videoPath;
         string videoDir;
 
         IMediaPlayerFactory m_factory;
@@ -329,12 +320,6 @@ namespace bossdoyKaraoke_NOW.Models
             {
                 m_player.SetEqualizer(equalizer);
             }
-        }
-
-        public void LoadEQPresets()
-        {
-            if (m_equalizer != null)
-                m_player.SetEqualizer(m_equalizer);
         }
 
         private SoundFormat SoundFormatCallback(SoundFormat sf)

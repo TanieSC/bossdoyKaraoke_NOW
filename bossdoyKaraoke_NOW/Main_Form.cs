@@ -842,6 +842,16 @@ namespace bossdoyKaraoke_NOW
             }
         }
 
+
+        public void EnableEQ(bool enable)
+        {
+            var vlceqsettings = m_equalizer.EnableEQ(enable);
+            if (enable)
+                m_vlc.UpdateEQ(vlceqsettings);
+            else
+                m_vlc.UpdateEQ(null);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -874,12 +884,15 @@ namespace bossdoyKaraoke_NOW
         /// <param name="gain">The gain value</param>
         public  void UpdateEQ(int band, float gain)
         {
-            setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_SETTINGS);
+            // setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_SETTINGS);
 
-            object arg = new object[] { band, gain };
+            // object arg = new object[] { band, gain };
 
-            startWorker(arg);
+            //  startWorker(arg);
             //await startAsyncTask(SearchAndLoad.UPDATE_EQ_SETTINGS, arg);
+
+            m_equalizer.UpdateEQBass(band, gain);
+            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
         }
 
         /// <summary>
@@ -888,10 +901,13 @@ namespace bossdoyKaraoke_NOW
         /// <param name="gain"></param>
         public void UpdateEQPreamp(float gain)
         {
-            setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PREAMP);
+            //setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PREAMP);
 
-            startWorker(gain);
+            // startWorker(gain);
             //await startAsyncTask(SearchAndLoad.UPDATE_EQ_PREAMP, gain);
+
+            m_equalizer.UpdateEQBassPreamp(gain);
+            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(gain));
         }
 
 

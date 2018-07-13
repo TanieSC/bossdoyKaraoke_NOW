@@ -27,6 +27,11 @@ namespace bossdoyKaraoke_NOW.Models
             main_form.SaveEQSettings(band);
         }
 
+        public static void EnableEQ(bool enable)
+        {
+            main_form.EnableEQ(enable);
+        }
+
         public static void UpdateEQPresets(int preset)
         {
             main_form.UpdateEQPresets(preset);

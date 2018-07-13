@@ -156,9 +156,6 @@
     <Compile Include="Main_Form.cs" />
     <Compile Include="Models\AppSettings.cs" />
     <Compile Include="Models\BassAsioDevice.cs" />
-    <Compile Include="Models\CustomWorker.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Models\DXD2D1.cs" />
     <Compile Include="Models\Equalizer.cs" />
     <Compile Include="Models\FxTempo.cs" />
