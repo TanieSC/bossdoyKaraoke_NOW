@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using bossdoyKaraoke_NOW.Adb;
 using bossdoyKaraoke_NOW.Enums;
 using bossdoyKaraoke_NOW.Models;
 using bossdoyKaraoke_NOW.Models.VocalEffects;
@@ -34,7 +35,7 @@ namespace bossdoyKaraoke_NOW
         private bool m_customEQ;
 
         private float m_trackBarGain;
-        private int _asioDevice;
+        private int m_asioDevice;
         private bool m_isRequiredPuginsInstalled;
         private string[] m_puginsInstalled = new string[] { "ASIO4ALL", "VBCABLE, The Virtual Audio Cable", "MeldaProduction Audio Plugins" };
 
@@ -1014,6 +1015,20 @@ namespace bossdoyKaraoke_NOW
                 EQpanel.Enabled = false;
                 PlayerControl.EnableEQ(false);
             }
+        }
+
+        private void installAndroidbtn_Click(object sender, EventArgs e)
+        {
+            string success;
+            int status = AdbClient.Instance.InstallApp();
+
+            if (status == 0)
+                success = "KaraokeNow successfully installed";
+            else
+                success = "Error installing karaokeNow";
+
+
+            MessageBox.Show(success, "Mobile App Install", MessageBoxButtons.OK);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,7 @@ using bossdoyKaraoke_NOW.Models;
 using bossdoyKaraoke_NOW.Nlog;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using InTheHand.Net;
 using InTheHand.Net.Bluetooth;
 using InTheHand.Net.Sockets;
 using static bossdoyKaraoke_NOW.Enums.RemoveVocal;
@@ -20,7 +22,7 @@ namespace bossdoyKaraoke_NOW.BluetoothService
 {
     public class BlueToothConnect
     {
-        BluetoothListener m_btListener;
+        //BluetoothListener m_btListener;
        // BluetoothClient remoteDevice;
         Stream m_peerStream;
         private bool m_listening = true;
@@ -43,10 +45,14 @@ namespace bossdoyKaraoke_NOW.BluetoothService
         private const int RemoveVocalRight = 11;
         private const int RemoveVocalLeft = 12;
         private const int NowPlaying = 13;
-        private const int FileNotFound = 14;
-        private const int FileFound = 15;
+        private const int UploadSongUpdate = 14;
+        private const int CheckForSongUpdate = 15;
         private const int RemoveVocal = 16;
 
+        private const int FileNotFound = 100;
+        private const int FileFound = 101;
+        private const int UpdateAvailable = 102;
+        private const int NoUpdateAvailable = 103;
 
         private const int UpdateSongDataBase = 97;
         private const int SongList = 98;
@@ -67,8 +73,15 @@ namespace bossdoyKaraoke_NOW.BluetoothService
                     }
                     else
                     {
+                       // BluetoothRadio[] allradios = BluetoothRadio.AllRadios;
                         BluetoothRadio.PrimaryRadio.Mode = RadioMode.Discoverable;
-                        m_btListener = new BluetoothListener(new Guid("{418b27b0-b144-11e6-9598-0800200c9a66}"));
+
+                       // foreach (BluetoothRadio br in allradios) {
+                       //     br.Mode = RadioMode.Discoverable;
+                      //  }
+
+                        BluetoothEndPoint endPoint = new BluetoothEndPoint(BluetoothRadio.PrimaryRadio.LocalAddress, new Guid("{418b27b0-b144-11e6-9598-0800200c9a66}"), -1);
+                        BluetoothListener m_btListener = new BluetoothListener(endPoint);
                         m_btListener.ServiceName = "KaraokeNow Bluetooth Service";
                         m_btListener.Authenticate = false;
                         m_btListener.Start(10);
@@ -91,9 +104,9 @@ namespace bossdoyKaraoke_NOW.BluetoothService
         {
             if (result.IsCompleted)
             {
-                m_btListener = (BluetoothListener)result.AsyncState;
-                m_btListener.BeginAcceptBluetoothClient(new AsyncCallback(AcceptConnection), m_btListener);
+                BluetoothListener m_btListener = (BluetoothListener)result.AsyncState;
                 BluetoothClient remoteDevice = m_btListener.EndAcceptBluetoothClient(result);
+                m_btListener.BeginAcceptBluetoothClient(new AsyncCallback(AcceptConnection), m_btListener);
                 m_peerStream = remoteDevice.GetStream();
 
                 ClientName = remoteDevice.RemoteMachineName;
@@ -116,7 +129,11 @@ namespace bossdoyKaraoke_NOW.BluetoothService
                             if (!TryToParse(command))
                             {
                                 commandToProcess = command;
-                                await ProcessCommand(AddToQueue);
+
+                                if (CheckIfDate(command))                         
+                                    await ProcessCommand(CheckForSongUpdate);
+                                else
+                                    await ProcessCommand(AddToQueue);
                             }
                             else
                             {
@@ -124,6 +141,8 @@ namespace bossdoyKaraoke_NOW.BluetoothService
                                 if (m_parseResult == EXIT_CMD)
                                 {
                                     //connection lost
+                                   // received = 0;
+                                   // m_peerStream.Dispose();
                                    // m_peerStream.Close();
                                     remoteDevice.Close();
                                     break;
@@ -187,6 +206,7 @@ namespace bossdoyKaraoke_NOW.BluetoothService
 
                         break;
                     case UpdateSongDataBase:
+                        SendData();
                         break;
                     case NowPlaying:
                         string nowPlaying = PlayerControl.GetNowPlaying();
@@ -208,6 +228,17 @@ namespace bossdoyKaraoke_NOW.BluetoothService
                     case RemoveVocal:
                         PlayerControl.RemoveVocalLeftOrRight();
                         break;
+                    case CheckForSongUpdate:
+                        if (!PlayerControl.CheckForSongUpdate(commandToProcess))
+                            SendMessage(NoUpdateAvailable.ToString());
+                        else
+                            SendMessage(UpdateAvailable.ToString());
+
+                        break;
+                    case UploadSongUpdate:
+                        PlayerControl.UploadSongUpdate(); 
+                        break;
+
                     default:
                         break;
                 }
@@ -231,6 +262,31 @@ namespace bossdoyKaraoke_NOW.BluetoothService
 
             }
         }
+
+        private void SendData() {
+
+            List<string> songs = new List<string>();
+            songs = Directory.EnumerateFiles(m_filePath, "*.bkN", SearchOption.AllDirectories).ToList();
+
+            for (int i = 0; i < songs.Count; i++)
+            {
+                using (var fileStream = new FileStream(songs[i], FileMode.Open, FileAccess.Read))
+                {
+                    try
+                    {
+                        byte[] outStream = StreamToByteArray(fileStream);
+                        m_peerStream.Write(outStream, 0, outStream.Length);
+                        m_peerStream.Flush();
+                    }
+                    catch (IOException ioe)
+                    {
+                        break; //no active android server host running
+                    }
+                }
+            }
+        }
+
+
 
         private void SendMessage(int msg)
         {
@@ -262,6 +318,21 @@ namespace bossdoyKaraoke_NOW.BluetoothService
             }
            // return false;
         }
+
+        protected bool CheckIfDate(string date)
+        {
+            try
+            {
+                DateTime dt = DateTime.Parse(date);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
 
         public void RemoveVocalLeftOrRight(ChannelSelected whatChannel) {
             switch (whatChannel) {
@@ -319,36 +390,57 @@ namespace bossdoyKaraoke_NOW.BluetoothService
             }
         }
 
-       /* private async Task<bool> Send()
+        /* private async Task<bool> Send()
+         {
+             // for not block the UI it will run in a different thread
+             var task = Task.Run(() =>
+             {
+                 try
+                 {
+                     // if all is ok to send
+                     if (remoteDevice.Connected && peerStream != null)
+                     {
+                         byte[] buffer = readByteArrayFromFile(@"C:\ProgramData\karaokeNow\JsonString\filename.json");//(@"D:\Eclipse\EXE\KaraFunDB.db");
+                         byte[] comp = Compress(@"C:\ProgramData\karaokeNow\JsonString\filename.json");
+                        // byte[] compD = CompressData();
+                        peerStream.Write(comp, 0, comp.Length);
+                        // Console.WriteLine(buffer.Length + " : " + comp.Length);
+                         return true;
+                     }
+
+
+                 }
+                 catch (Exception ex)
+                 {
+                     Logger.LogFile(ex.Message, "", "Send", ex.LineNumber(), "BlueToothConnect");
+
+                 }
+
+                 return false;
+             });
+             return await task;
+         }*/
+
+        static byte[] StreamToByteArray(Stream inputStream)
+
         {
-            // for not block the UI it will run in a different thread
-            var task = Task.Run(() =>
+            if (!inputStream.CanRead)
             {
-                try
-                {
-                    // if all is ok to send
-                    if (remoteDevice.Connected && peerStream != null)
-                    {
-                        byte[] buffer = readByteArrayFromFile(@"C:\ProgramData\karaokeNow\JsonString\filename.json");//(@"D:\Eclipse\EXE\KaraFunDB.db");
-                        byte[] comp = Compress(@"C:\ProgramData\karaokeNow\JsonString\filename.json");
-                       // byte[] compD = CompressData();
-                       peerStream.Write(comp, 0, comp.Length);
-                       // Console.WriteLine(buffer.Length + " : " + comp.Length);
-                        return true;
-                    }
+                throw new ArgumentException();
+            }
 
+            // This is optional
+            if (inputStream.CanSeek)
+            {
+                inputStream.Seek(0, SeekOrigin.Begin);
+            }
 
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogFile(ex.Message, "", "Send", ex.LineNumber(), "BlueToothConnect");
+            byte[] output = new byte[inputStream.Length];
+            int bytesRead = inputStream.Read(output, 0, output.Length);
 
-                }
+            return output;
+        }
 
-                return false;
-            });
-            return await task;
-        }*/
 
         public static byte[] readByteArrayFromFile(string fileName)
         {

@@ -34,7 +34,7 @@ namespace bossdoyKaraoke_NOW.Models
 
         public static void UpdateEQPresets(int preset)
         {
-            main_form.UpdateEQPresets(preset);
+           // main_form.UpdateEQPresets(preset);
         }
 
         public static void UpdateEQ(int band, float gain)
@@ -164,6 +164,16 @@ namespace bossdoyKaraoke_NOW.Models
         public static bool AddRemoteSongToQueue(string song)
         {
             return main_form.AddRemoteSongToQueue(song);
+        }
+
+        public static bool CheckForSongUpdate(string date)
+        {
+            return main_form.CheckForSongUpdate(date);
+        }
+
+        public static void UploadSongUpdate()
+        {
+            main_form.UploadSongUpdate();
         }
 
         public static void On_SongListView_Item_Selected()

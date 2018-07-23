@@ -163,6 +163,19 @@ namespace bossdoyKaraoke_NOW.Models
                 d2dContext2.Dispose();
                 dw_Factory.Dispose();
             }
+
+            _d3d11Device = null;
+            _dxgiDevice = null;
+            _backBuffer = null;
+            _targetBitmap = null;
+            _backBuffer2 = null;
+            _targetBitmap2 = null;
+            _d2dDevice = null;
+            swapChain = null;
+            swapChain2 = null;
+            d2dContext = null;
+            d2dContext2 = null;
+            dw_Factory = null;
         }
         #endregion
     }

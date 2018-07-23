@@ -33,6 +33,7 @@ using static bossdoyKaraoke_NOW.Enums.PlayerState;
 using static bossdoyKaraoke_NOW.Enums.RemoveVocal;
 using static bossdoyKaraoke_NOW.Enums.BackGroundWorker;
 using static bossdoyKaraoke_NOW.Enums.TreviewNode;
+using bossdoyKaraoke_NOW.Adb;
 
 namespace bossdoyKaraoke_NOW
 {
@@ -189,7 +190,6 @@ namespace bossdoyKaraoke_NOW
             InitVlc();
 
             InitGraphics();
-
         }
 
         /// <summary>
@@ -214,7 +214,8 @@ namespace bossdoyKaraoke_NOW
             // if (!Bass.BASS_Free())
             Bass.BASS_Free();
 
-            m_gdx.Dispose(true);
+            m_gdx.Dispose();
+           // m_vlc.Dispose();
 
         }
 
@@ -868,14 +869,14 @@ namespace bossdoyKaraoke_NOW
         /// <summary>
         /// 
         /// </summary>
-        public void UpdateEQPresets(int preset)
+       /* public void UpdateEQPresets(int preset)
         {
             setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PRESET);
 
             startWorker(preset);
            // await startAsyncTask(SearchAndLoad.UPDATE_EQ_PRESET, preset);
 
-        }
+        }*/
 
         /// <summary>
         /// Update Equlizer Gain
@@ -884,15 +885,15 @@ namespace bossdoyKaraoke_NOW
         /// <param name="gain">The gain value</param>
         public  void UpdateEQ(int band, float gain)
         {
-            // setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_SETTINGS);
+             setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_SETTINGS);
 
-            // object arg = new object[] { band, gain };
+             object arg = new object[] { band, gain };
 
-            //  startWorker(arg);
+             startWorker(arg);
             //await startAsyncTask(SearchAndLoad.UPDATE_EQ_SETTINGS, arg);
 
-            m_equalizer.UpdateEQBass(band, gain);
-            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
+           // m_equalizer.UpdateEQBass(band, gain);
+           // m_vlc.UpdateEQ(m_equalizer.UpdateEQVlc(band, gain));
         }
 
         /// <summary>
@@ -901,13 +902,13 @@ namespace bossdoyKaraoke_NOW
         /// <param name="gain"></param>
         public void UpdateEQPreamp(float gain)
         {
-            //setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PREAMP);
+            setSEARCHDIRorTEXTState(SearchAndLoad.UPDATE_EQ_PREAMP);
 
-            // startWorker(gain);
+             startWorker(gain);
             //await startAsyncTask(SearchAndLoad.UPDATE_EQ_PREAMP, gain);
 
-            m_equalizer.UpdateEQBassPreamp(gain);
-            m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(gain));
+            //m_equalizer.UpdateEQBassPreamp(gain);
+            //m_vlc.UpdateEQ(m_equalizer.UpdateEQVlcPreamp(gain));
         }
 
 
@@ -1495,6 +1496,26 @@ namespace bossdoyKaraoke_NOW
              return AddToQueueList(song);
         }
 
+
+        /// <summary>
+        /// Upload new song to Android phone with karaokeNow app
+        /// </summary>
+        public bool CheckForSongUpdate(string date)
+        {
+            bool isAvailbale = AdbClient.Instance.CheckForSongUpdate(date);
+
+            return isAvailbale;
+        }
+
+        /// <summary>
+        /// Upload new song to Android phone with karaokeNow app
+        /// </summary>
+        public async void UploadSongUpdate()
+        {
+            if (AdbClient.Instance.AdbStart())
+                await AdbClient.Instance.SendData();
+        }
+
         /// <summary>
         ///  Play/Add selected songs to Song Queue
         /// </summary>
@@ -1938,30 +1959,9 @@ namespace bossdoyKaraoke_NOW
         /// </summary>
         public void UpdateRemoteDeviceSong()
         {
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.FileName = "./adb.exe ";
-            //startInfo.Arguments = "forward tcp:38300 tcp:38300";
-            startInfo.Arguments = "status-window";
-            process.StartInfo = startInfo;
-            process.Start();
-            string output1 = process.StandardOutput.ReadToEnd();
-            Console.WriteLine("output1 " + output1);
-            process.WaitForExit();
+          
 
-
-            /*startInfo.FileName = "adb.exe";
-startInfo.Arguments = "-s " + textBox1.Text + " shell dumpsys battery";
-process.StartInfo = startInfo;
-process.Start();
-string output = process.StandardOutput.ReadToEnd();
-richTextBox1.Text = output;
-process.WaitForExit();*/
         }
-
 
         // Private functions ======================================================================================================    
 
@@ -2002,11 +2002,22 @@ process.WaitForExit();*/
                     }
                     else
                     {
-                        string songInfo = song.Substring(song.LastIndexOf("\\") + 1).Trim();
-                        trackInfo.ID = "0";
-                        trackInfo.Name = songInfo.Substring(songInfo.LastIndexOf(" - ") + 1).Trim();
-                        trackInfo.Artist = songInfo;
-                        trackInfo.FilePath = song;
+                       
+                        List<ListViewItem> remoteItem = new List<ListViewItem>();
+
+                        remoteItem = m_songsArr.SelectMany(s => s.Where( ss => ss.SubItems[4].Text.ToLower().Equals(song.ToLower()))).ToList();
+
+                        trackInfo.ID = remoteItem.First().SubItems[0].Text;
+                        trackInfo.Name = remoteItem.First().SubItems[1].Text;
+                        trackInfo.Artist = remoteItem.First().SubItems[2].Text;
+                        trackInfo.FilePath = remoteItem.First().SubItems[4].Text;
+
+                        /* string songInfo = song.Substring(song.LastIndexOf("\\") + 1).Trim();
+
+                         trackInfo.ID = "0";
+                         trackInfo.Name = songInfo.Substring(songInfo.LastIndexOf(" - ") + 1).Trim();
+                         trackInfo.Artist = songInfo;
+                         trackInfo.FilePath = song;*/
                     }
 
                     m_songItems = new ListViewItem();
@@ -2818,7 +2829,16 @@ process.WaitForExit();*/
 
                     for (int i = 0; i < m_songsArr.Count; i++)
                     {
-                        PlayerControl.AllSongs.AddRange(m_songsArr[i].Where(s => s.SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || s.SubItems[2].Text.ToLower().Contains(searchString.ToLower())).ToList());
+
+                        for (int ii = 0; ii < m_songsArr[i].Count; ii++)
+                        {
+                            if (m_songsArr[i][ii].SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || m_songsArr[i][ii].SubItems[2].Text.ToLower().Contains(searchString.ToLower()))
+                            {
+                                PlayerControl.AllSongs.Add(m_songsArr[i][ii]);
+                            }
+                        }
+
+                       // PlayerControl.AllSongs.AddRange(m_songsArr[i].Where(s => s.SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || s.SubItems[2].Text.ToLower().Contains(searchString.ToLower())).ToList());
                     }
                 else
                     PlayerControl.AllSongs.AddRange(m_songsArr[m_selected_treenode]);
@@ -3359,32 +3379,32 @@ process.WaitForExit();*/
                     case 1:
                         SongTitle = regX.Replace(regXpattern[0], "");
                         SongArtist = regX.Replace(regXpattern[0], "");
-                        count++;
+                        //count++;
                         break;
                     case 2:
                         SongTitle = regX.Replace(regXpattern[regXpattern.Length - 1], "");
                         SongArtist = regX.Replace(regXpattern[0], "");
-                        count++;
+                        //count++;
                         break;
                     case 3:
                         SongTitle = regX.Replace(regXpattern[(regXpattern.Length - 1)], "");
                         SongArtist = regX.Replace(regXpattern[(regXpattern.Length - 2)], "");
-                        count++;
+                        //count++;
                         break;
                     case 4:
                         SongTitle = regX.Replace(regXpattern[(regXpattern.Length - 1)], "");
                         SongArtist = regX.Replace(regXpattern[(regXpattern.Length - 2)], "");
-                        count++;
+                        //count++;
                         break;
                     case 5:
                         SongTitle = regX.Replace(regXpattern[(regXpattern.Length - 1)], "");
                         SongArtist = regX.Replace(regXpattern[(regXpattern.Length - 2)], "");
-                        count++;
+                        //count++;
                         break;
                     case 6:
                         SongTitle = regX.Replace(regXpattern[(regXpattern.Length - 1)], "");
                         SongArtist = regX.Replace(regXpattern[(regXpattern.Length - 2)], "");
-                        count++;
+                        //count++;
                         break;
                 }
 
@@ -3572,7 +3592,7 @@ process.WaitForExit();*/
 
         public string GetNowPlaying()
         {
-            string nowPlaying = PlayerControl.SongTitle.Text + " " + PlayerControl.SongArtist.Text;
+            string nowPlaying = PlayerControl.SongTitle.Text + " - " + PlayerControl.SongArtist.Text;
             return nowPlaying = string.IsNullOrEmpty(nowPlaying) ? "" : nowPlaying;
 
         }

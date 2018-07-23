@@ -121,6 +121,8 @@
             this.microphone_setting = new System.Windows.Forms.GroupBox();
             this.comboBoxInputDevice = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.installAndroidbtn = new System.Windows.Forms.Button();
             this.PrefTabControl.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             this.eq_settings.SuspendLayout();
@@ -145,6 +147,7 @@
             this.micTabPage.SuspendLayout();
             this.groupMicrophoneEffects.SuspendLayout();
             this.microphone_setting.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrefTabControl
@@ -162,6 +165,7 @@
             // 
             // generalTabPage
             // 
+            this.generalTabPage.Controls.Add(this.groupBox1);
             this.generalTabPage.Controls.Add(this.eq_settings);
             this.generalTabPage.Controls.Add(this.audio_setting);
             this.generalTabPage.Location = new System.Drawing.Point(4, 22);
@@ -1195,6 +1199,26 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Microphone input";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.installAndroidbtn);
+            this.groupBox1.Location = new System.Drawing.Point(6, 426);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(507, 55);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Mobile Application remote install";
+            // 
+            // installAndroidbtn
+            // 
+            this.installAndroidbtn.Location = new System.Drawing.Point(397, 19);
+            this.installAndroidbtn.Name = "installAndroidbtn";
+            this.installAndroidbtn.Size = new System.Drawing.Size(100, 23);
+            this.installAndroidbtn.TabIndex = 0;
+            this.installAndroidbtn.Text = "Android Install";
+            this.installAndroidbtn.UseVisualStyleBackColor = true;
+            this.installAndroidbtn.Click += new System.EventHandler(this.installAndroidbtn_Click);
+            // 
             // Preferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1238,6 +1262,7 @@
             this.groupMicrophoneEffects.ResumeLayout(false);
             this.microphone_setting.ResumeLayout(false);
             this.microphone_setting.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1336,5 +1361,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel EQpanel;
         private System.Windows.Forms.CheckBox chkBoxEQ;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button installAndroidbtn;
     }
 }

@@ -211,20 +211,6 @@ namespace bossdoyKaraoke_NOW.Models
             }
         }
 
-       /* public void UpdateEQPresets(int preset)
-        {
-            try
-            {
-                ArrBandValue[11].PreSet = preset;
-                // AppSettings.Set("AudioEQPreset", preset.ToString());
-            }
-            catch (Exception ex)
-            {
-                Logger.LogFile(ex.Message, "", "UpdateEQPresets", ex.LineNumber(), "Equalizer Class");
-
-            }
-        }*/
-
         public void UpdateEQBassPreamp(float gain)
         {
 
@@ -236,15 +222,8 @@ namespace bossdoyKaraoke_NOW.Models
                     return;
                 }
 
-                // BASS_BFX_VOLUME preamp = new BASS_BFX_VOLUME();
-
                 ArrBandValue[10].PreAmp = gain;
                 m_dsp_gain.Gain_dBV = gain / 10;
-                // Bass.BASS_FXGetParameters(m_preampHandle, preamp);
-                //  preamp.fVolume = (float)Math.Pow(10, (gain / 10) / 20);
-                //  Bass.BASS_FXSetParameters(m_preampHandle, preamp);
-                //  double dB = 20.0 * Math.Log10((gain / 10) / 1.0);
-                // AppSettings.Set("AudioEQPreamp", gain.ToString());
                 Console.WriteLine(m_dsp_gain.Gain_dBV);
             }
             catch (Exception ex)
@@ -331,43 +310,6 @@ namespace bossdoyKaraoke_NOW.Models
             }
 
             return m_equalizer;
-        }
-
-        /*  public void SetGain(int band, float gain)
-          {
-              var eq = new BASS_DX8_PARAMEQ();
-              BandValue bandValue = m_bands[band];
-              bandValue.Gain = gain;
-
-              if (!m_isEnabled) return;
-
-              int handle = bandValue.Handle;
-
-              if (!Bass.BASS_FXGetParameters(handle, eq)) return;
-
-              eq.fGain = gain;
-              Bass.BASS_FXSetParameters(handle, eq);
-          }
-
-          public float GetGain(int band)
-          {
-              BandValue bandValue = m_bands[band];
-
-              if (!m_isEnabled) return bandValue.Gain;
-
-              var eq = new BASS_DX8_PARAMEQ();
-
-              int handle = bandValue.Handle;
-
-              return Bass.BASS_FXGetParameters(handle, eq) ? eq.fGain : bandValue.Gain;
-          }*/
-
-        private void Deactivate()
-        {
-            if (m_bandValue.Handle == -1) return;
-
-              // Bass.BASS_ChannelRemoveFX(m_bandValue.Handle, t.Handle);
-
         }
 
         public class BandValue

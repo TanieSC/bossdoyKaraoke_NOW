@@ -12,7 +12,7 @@ using DXGI = SharpDX.DXGI;
 
 namespace bossdoyKaraoke_NOW.CDG
 {
-    public class GraphicUtilDX
+    public class GraphicUtilDX : IDisposable
     {
         private static readonly DXGI.Format Format = DXGI.Format.B8G8R8A8_UNorm;
         public static readonly D2D1.PixelFormat D2PixelFormat = new D2D1.PixelFormat(Format, D2D1.AlphaMode.Premultiplied);
@@ -426,11 +426,6 @@ namespace bossdoyKaraoke_NOW.CDG
             m_D2DContext.ResizeScreen2();
         }
 
-        ~GraphicUtilDX()
-        {
-            Dispose(false);
-        }
-
         private void LoadResources()
         {
             m_textBrush = new D2D1.SolidColorBrush(m_D2DContext.d2dContext2, new SharpDX.Color(128, 0, 255));
@@ -474,26 +469,36 @@ namespace bossdoyKaraoke_NOW.CDG
                 m_CDGBitmap.Dispose();
         }
 
-        public void Dispose(bool _bDisposeManagedResources)
+        #region IDisposable Support
+        ~GraphicUtilDX()
         {
-            UnloadResources();
+            Dispose(false);
+        }
 
-            if (m_VideoBitmap != null)
-            {
-                m_VideoBitmap.Dispose();
-            }
-
-            if (m_CDGBitmap != null)
-            {
-                m_CDGBitmap.Dispose();
-            }
-
-            if (_bDisposeManagedResources)
-            {
-                m_D2DContext.Dispose();
-            }
-
+        public void Dispose()
+        {
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool _bDisposeManagedResources)
+        {
+            
+            if (_bDisposeManagedResources)
+            {
+                UnloadResources();
+                m_RenderingSurface.Dispose();
+                m_RenderingSurface2.Dispose();
+                m_D2DContext.Dispose();
+                dataStream.Dispose();
+            }
+
+            m_RenderingSurface = null;
+            m_RenderingSurface2 = null;
+            m_D2DContext = null;
+            dataStream = null;
+        }
+
+        #endregion
     }
 }

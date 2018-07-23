@@ -266,6 +266,7 @@ namespace bossdoyKaraoke_NOW.Models
         {
 
             if (m_list_player.IsPlaying) m_list_player.Stop();
+            if (m_player.IsPlaying) m_player.Stop();
 
             m_media = m_factory.CreateMedia<IMediaFromFile>(filePath);
             m_memRender = m_player.CustomRenderer;
