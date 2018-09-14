@@ -318,6 +318,9 @@ namespace bossdoyKaraoke_NOW.Models
         public static int LoadSaveProgress { get; set; }
         public static SplitContainer splitContainer { get; set; }
 
+
+        //Temporary only getting value from preferences Genaral settings
+        public static string Text_Intro { get; set; }
         //Temporary Solution for Android kfn remote app so we can still use kfn remote on karafun
 
         public static string  GetNowPlaying()

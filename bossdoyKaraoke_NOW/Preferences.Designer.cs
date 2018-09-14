@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Preferences));
             this.PrefTabControl = new System.Windows.Forms.TabControl();
             this.generalTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.installAndroidbtn = new System.Windows.Forms.Button();
             this.eq_settings = new System.Windows.Forms.GroupBox();
             this.EQpanel = new System.Windows.Forms.Panel();
             this.trackBarPreamp = new System.Windows.Forms.TrackBar();
@@ -121,10 +123,12 @@
             this.microphone_setting = new System.Windows.Forms.GroupBox();
             this.comboBoxInputDevice = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.installAndroidbtn = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblIntroText = new System.Windows.Forms.Label();
+            this.txtBoxIntro = new System.Windows.Forms.TextBox();
             this.PrefTabControl.SuspendLayout();
             this.generalTabPage.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.eq_settings.SuspendLayout();
             this.EQpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPreamp)).BeginInit();
@@ -147,7 +151,7 @@
             this.micTabPage.SuspendLayout();
             this.groupMicrophoneEffects.SuspendLayout();
             this.microphone_setting.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrefTabControl
@@ -165,6 +169,7 @@
             // 
             // generalTabPage
             // 
+            this.generalTabPage.Controls.Add(this.groupBox2);
             this.generalTabPage.Controls.Add(this.groupBox1);
             this.generalTabPage.Controls.Add(this.eq_settings);
             this.generalTabPage.Controls.Add(this.audio_setting);
@@ -176,12 +181,32 @@
             this.generalTabPage.Text = "General";
             this.generalTabPage.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.installAndroidbtn);
+            this.groupBox1.Location = new System.Drawing.Point(6, 470);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(507, 55);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Mobile Application remote install";
+            // 
+            // installAndroidbtn
+            // 
+            this.installAndroidbtn.Location = new System.Drawing.Point(397, 19);
+            this.installAndroidbtn.Name = "installAndroidbtn";
+            this.installAndroidbtn.Size = new System.Drawing.Size(100, 23);
+            this.installAndroidbtn.TabIndex = 0;
+            this.installAndroidbtn.Text = "Android Install";
+            this.installAndroidbtn.UseVisualStyleBackColor = true;
+            this.installAndroidbtn.Click += new System.EventHandler(this.installAndroidbtn_Click);
+            // 
             // eq_settings
             // 
             this.eq_settings.Controls.Add(this.EQpanel);
             this.eq_settings.Controls.Add(this.chkBoxEQ);
             this.eq_settings.Controls.Add(this.comboBoxEQPresets);
-            this.eq_settings.Location = new System.Drawing.Point(6, 69);
+            this.eq_settings.Location = new System.Drawing.Point(6, 118);
             this.eq_settings.Name = "eq_settings";
             this.eq_settings.Size = new System.Drawing.Size(507, 351);
             this.eq_settings.TabIndex = 1;
@@ -733,7 +758,7 @@
             // 
             this.audio_setting.Controls.Add(this.label2);
             this.audio_setting.Controls.Add(this.comboBoxOutputDevice);
-            this.audio_setting.Location = new System.Drawing.Point(6, 8);
+            this.audio_setting.Location = new System.Drawing.Point(6, 62);
             this.audio_setting.Name = "audio_setting";
             this.audio_setting.Size = new System.Drawing.Size(507, 55);
             this.audio_setting.TabIndex = 0;
@@ -1199,25 +1224,33 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Microphone input";
             // 
-            // groupBox1
+            // groupBox2
             // 
-            this.groupBox1.Controls.Add(this.installAndroidbtn);
-            this.groupBox1.Location = new System.Drawing.Point(6, 426);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(507, 55);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Mobile Application remote install";
+            this.groupBox2.Controls.Add(this.txtBoxIntro);
+            this.groupBox2.Controls.Add(this.lblIntroText);
+            this.groupBox2.Location = new System.Drawing.Point(6, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(507, 55);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Intro text setting";
             // 
-            // installAndroidbtn
+            // lblIntroText
             // 
-            this.installAndroidbtn.Location = new System.Drawing.Point(397, 19);
-            this.installAndroidbtn.Name = "installAndroidbtn";
-            this.installAndroidbtn.Size = new System.Drawing.Size(100, 23);
-            this.installAndroidbtn.TabIndex = 0;
-            this.installAndroidbtn.Text = "Android Install";
-            this.installAndroidbtn.UseVisualStyleBackColor = true;
-            this.installAndroidbtn.Click += new System.EventHandler(this.installAndroidbtn_Click);
+            this.lblIntroText.AutoSize = true;
+            this.lblIntroText.Location = new System.Drawing.Point(15, 22);
+            this.lblIntroText.Name = "lblIntroText";
+            this.lblIntroText.Size = new System.Drawing.Size(71, 13);
+            this.lblIntroText.TabIndex = 6;
+            this.lblIntroText.Text = "Set Intro Text";
+            // 
+            // txtBoxIntro
+            // 
+            this.txtBoxIntro.Location = new System.Drawing.Point(120, 19);
+            this.txtBoxIntro.Name = "txtBoxIntro";
+            this.txtBoxIntro.Size = new System.Drawing.Size(372, 20);
+            this.txtBoxIntro.TabIndex = 7;
+            this.txtBoxIntro.TextChanged += new System.EventHandler(this.txtBoxIntro_TextChanged);
             // 
             // Preferences
             // 
@@ -1235,6 +1268,7 @@
             this.Load += new System.EventHandler(this.Preferences_Load);
             this.PrefTabControl.ResumeLayout(false);
             this.generalTabPage.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.eq_settings.ResumeLayout(false);
             this.eq_settings.PerformLayout();
             this.EQpanel.ResumeLayout(false);
@@ -1262,7 +1296,8 @@
             this.groupMicrophoneEffects.ResumeLayout(false);
             this.microphone_setting.ResumeLayout(false);
             this.microphone_setting.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1363,5 +1398,8 @@
         private System.Windows.Forms.CheckBox chkBoxEQ;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button installAndroidbtn;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblIntroText;
+        private System.Windows.Forms.TextBox txtBoxIntro;
     }
 }

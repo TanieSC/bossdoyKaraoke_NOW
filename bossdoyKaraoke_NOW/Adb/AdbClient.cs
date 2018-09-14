@@ -54,7 +54,7 @@ namespace bossdoyKaraoke_NOW.Adb
         }
 
         public int InstallApp() {
-            int status = StartADBCommannds("install -r " + apppath, null, null);
+            int status = StartADBCommannds("install -t -r " + apppath, null, null);
             return status;
         }
 

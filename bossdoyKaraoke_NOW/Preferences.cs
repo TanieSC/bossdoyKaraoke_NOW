@@ -1030,6 +1030,11 @@ namespace bossdoyKaraoke_NOW
 
             MessageBox.Show(success, "Mobile App Install", MessageBoxButtons.OK);
         }
+
+        private void txtBoxIntro_TextChanged(object sender, EventArgs e)
+        {
+            PlayerControl.Text_Intro = txtBoxIntro.Text;
+        }
     }
 
     class DeviceInfo

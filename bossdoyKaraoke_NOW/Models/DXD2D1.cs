@@ -29,15 +29,12 @@ namespace bossdoyKaraoke_NOW.Models
              D3D.FeatureLevel.Level_9_1
             };
 
-        public DXD2D1()
+        public DXD2D1() 
         {
             _d3d11Device = new D3D11.Device(D3D.DriverType.Hardware, D3D11.DeviceCreationFlags.BgraSupport, featureLevels);
             _dxgiDevice = _d3d11Device.QueryInterface<D3D11.Device>().QueryInterface<DXGI.Device>();
 
             _d2dDevice = new D2D1.Device(_dxgiDevice);
-
-          //  d2dContext = new D2D1.DeviceContext(_d2dDevice, D2D1.DeviceContextOptions.None);
-           // d2dContextCdgText = new D2D1.DeviceContext(_d2dDevice, D2D1.DeviceContextOptions.None);
         }
 
         public void InitScreen1(IntPtr handle) {

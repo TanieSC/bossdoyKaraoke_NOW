@@ -157,6 +157,7 @@ namespace bossdoyKaraoke_NOW
             if (!File.Exists(iniFileHelper.FilePath))
             {
                 iniFileHelper.Write("Video", "Video Path", string.Empty);
+                iniFileHelper.Write("Intro", "Intro Text", string.Empty);
                 /*iniFileHelper.Write("Equalizer", "Band0", "0.0");
                 iniFileHelper.Write("Equalizer", "Band1", "0.0");
                 iniFileHelper.Write("Equalizer", "Band2", "0.0");
@@ -2827,19 +2828,11 @@ namespace bossdoyKaraoke_NOW
             {
                 if (searchString != "")
 
-                    for (int i = 0; i < m_songsArr.Count; i++)
-                    {
-
-                        for (int ii = 0; ii < m_songsArr[i].Count; ii++)
-                        {
-                            if (m_songsArr[i][ii].SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || m_songsArr[i][ii].SubItems[2].Text.ToLower().Contains(searchString.ToLower()))
-                            {
-                                PlayerControl.AllSongs.Add(m_songsArr[i][ii]);
-                            }
-                        }
-
-                       // PlayerControl.AllSongs.AddRange(m_songsArr[i].Where(s => s.SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || s.SubItems[2].Text.ToLower().Contains(searchString.ToLower())).ToList());
-                    }
+                    PlayerControl.AllSongs.AddRange(m_songsArr.SelectMany(s => s.Where(ss => ss.SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || ss.SubItems[2].Text.ToLower().Contains(searchString.ToLower())).ToList()));
+               // for (int i = 0; i < m_songsArr.Count; i++)
+               //     {
+               //        // PlayerControl.AllSongs.AddRange(m_songsArr[i].Where(s => s.SubItems[1].Text.ToLower().Contains(searchString.ToLower()) || s.SubItems[2].Text.ToLower().Contains(searchString.ToLower())).ToList());
+                //    }
                 else
                     PlayerControl.AllSongs.AddRange(m_songsArr[m_selected_treenode]);
             }
