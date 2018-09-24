@@ -69,6 +69,37 @@ public class CDGFile : IDisposable
 
    public bool MakeTransparent;
 
+  /* public SharpDX.Direct2D1.Bitmap DXRGBImage
+    {
+        get
+        {
+            SharpDX.DataRectangle rec = new SharpDX.DataRectangle();
+            SharpDX.DataStream ds = new SharpDX.DataStream(rec.DataPointer, CDG_FULL_HEIGHT * rec.Pitch, true, false);
+
+            for (int ri = 0; ri <= CDG_FULL_HEIGHT - 1; ri++)
+            {
+                for (int ci = 0; ci <= CDG_FULL_WIDTH - 1; ci++)
+                {
+                    int ARGBInt = (int)m_pSurface.rgbData[ri, ci];
+                    byte[] myByte = new byte[4];
+                    myByte = BitConverter.GetBytes(ARGBInt);
+                    ds.Write(myByte, 0, 4);
+                }
+            }
+
+            SharpDX.WIC.ImagingFactory imagingFactory = new SharpDX.WIC.ImagingFactory();
+            SharpDX.WIC.BitmapDecoder bitmapDecoder = new SharpDX.WIC.BitmapDecoder(imagingFactory, ds, SharpDX.WIC.DecodeOptions.CacheOnDemand);
+            SharpDX.WIC.BitmapFrameDecode frame = bitmapDecoder.GetFrame(0);
+
+            SharpDX.WIC.FormatConverter converter = new SharpDX.WIC.FormatConverter(imagingFactory);
+            converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPRGBA);
+
+            bitmap = SharpDX.Direct2D1.Bitmap.FromWicBitmap(SharpDX.Direct2D1.RenderTarget, converter);
+
+            return ds;
+        }
+    }*/
+
 	public System.Drawing.Image RGBImage
     {
         get

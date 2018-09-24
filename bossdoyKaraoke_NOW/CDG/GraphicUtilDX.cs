@@ -152,7 +152,7 @@ namespace bossdoyKaraoke_NOW.CDG
             return bmp;
         }
 
-        public D2D1.Bitmap ConvertToSlimDXBitmap(D2D1.DeviceContext context, System.Drawing.Bitmap bmp)
+        public D2D1.Bitmap ConvertToSharpDXBitmap(D2D1.DeviceContext context, System.Drawing.Bitmap bmp)
         {
 
             D2D1.Bitmap Image = null;
@@ -186,7 +186,7 @@ namespace bossdoyKaraoke_NOW.CDG
 
                 if (pic1 != null)
                 {
-                    m_VideoBitmap = ConvertToSlimDXBitmap(m_D2DContext.d2dContext, pic1);
+                    m_VideoBitmap = ConvertToSharpDXBitmap(m_D2DContext.d2dContext, pic1);
                     pic1.Dispose();
 
                     int VideoW = (int)m_VideoBitmap.Size.Width;
@@ -235,7 +235,7 @@ namespace bossdoyKaraoke_NOW.CDG
 
                     if (pic2 != null)
                     {
-                        m_CDGBitmap = ConvertToSlimDXBitmap(m_D2DContext.d2dContextCdgText, pic2);
+                        m_CDGBitmap = ConvertToSharpDXBitmap(m_D2DContext.d2dContextCdgText, pic2);
                         pic2.Dispose();
 
                         //float Height = (SurfaceH * 2) / 3f;
@@ -409,7 +409,7 @@ namespace bossdoyKaraoke_NOW.CDG
             brush.Dispose();
             gr.Dispose();
 
-            return ConvertToSlimDXBitmap(m_D2DContext.d2dContext, bm);
+            return ConvertToSharpDXBitmap(m_D2DContext.d2dContext, bm);
 
         }
 
